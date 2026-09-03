@@ -65,14 +65,14 @@ class Process(TimeStampedModel):
     meta_title = models.CharField(max_length=255, blank=True)
     meta_description = models.CharField(max_length=255, blank=True)
     search_vector_en = SearchVectorField(null=True, editable=False)
-    search_vector_ne = SearchVectorField(null=True, editable=False)
+    search_vector_np = SearchVectorField(null=True, editable=False)
 
     class Meta:
         ordering = ["title"]
         verbose_name_plural = "processes"
         indexes = [
             GinIndex(fields=["search_vector_en"]),
-            GinIndex(fields=["search_vector_ne"]),
+            GinIndex(fields=["search_vector_np"]),
         ]
 
     def __str__(self):

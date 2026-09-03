@@ -150,7 +150,7 @@ class ProfileTests(TestCase):
             "/en/accounts/profile/",
             {
                 "preferences-phone_number": "9811111111",
-                "preferences-preferred_language": "ne",
+                "preferences-preferred_language": "np",
                 "profile-display_name": "Test User",
                 "profile-bio": "A bio.",
             },

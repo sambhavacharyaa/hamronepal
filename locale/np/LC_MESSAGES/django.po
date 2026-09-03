@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: HamroNepal 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-03 13:27+0545\n"
+"POT-Creation-Date: 2026-09-03 22:13+0545\n"
 "PO-Revision-Date: 2026-09-01 21:00+0545\n"
 "Last-Translator: HamroNepal\n"
 "Language-Team: Nepali\n"
@@ -293,18 +293,22 @@ msgstr ""
 "यदि तपाईंले HamroNepal मा खाता बनाउनुभएको छैन भने, यो इमेललाई बेवास्ता गर्न "
 "सक्नुहुन्छ।"
 
-#: templates/accounts/login.html:4 templates/accounts/login.html:8
-#: templates/accounts/login.html:12 templates/components/navbar.html:37
-#: templates/components/navbar.html:86
+#: templates/accounts/login.html:4 templates/accounts/login.html:14
+#: templates/accounts/login.html:28 templates/components/navbar.html:43
+#: templates/components/navbar.html:92
 #: templates/processes/process_detail.html:156
 msgid "Log in"
 msgstr "लग इन गर्नुहोस्"
 
-#: templates/accounts/login.html:16
+#: templates/accounts/login.html:15
+msgid "Welcome back. Pick up where you left off."
+msgstr "फेरि स्वागत छ। जहाँबाट छाड्नुभएको थियो त्यहींबाट जारी राख्नुहोस्।"
+
+#: templates/accounts/login.html:33
 msgid "Forgot your password?"
 msgstr "पासवर्ड बिर्सनुभयो?"
 
-#: templates/accounts/login.html:17
+#: templates/accounts/login.html:34
 msgid "Need an account? Register"
 msgstr "खाता चाहिन्छ? दर्ता गर्नुहोस्"
 
@@ -358,46 +362,58 @@ msgstr "आफ्नो पासवर्ड रिसेट गर्नुह
 msgid "Send reset link"
 msgstr "रिसेट लिङ्क पठाउनुहोस्"
 
-#: templates/accounts/profile.html:4 templates/components/navbar.html:27
-#: templates/components/navbar.html:76
-msgid "Profile"
-msgstr "प्रोफाइल"
+#: templates/accounts/profile.html:4 templates/accounts/profile.html:23
+#: templates/components/dashboard/sidebar.html:71
+msgid "Settings"
+msgstr "सेटिङ"
 
-#: templates/accounts/profile.html:8
-msgid "Your profile"
-msgstr "तपाईंको प्रोफाइल"
-
-#: templates/accounts/profile.html:12
+#: templates/accounts/profile.html:27
 msgid "verified"
 msgstr "प्रमाणित"
 
-#: templates/accounts/profile.html:15
+#: templates/accounts/profile.html:30
 msgid "not verified"
 msgstr "प्रमाणित छैन"
 
-#: templates/accounts/profile.html:24
+#: templates/accounts/profile.html:51
+msgid "Preferences"
+msgstr "प्राथमिकताहरू"
+
+#: templates/accounts/profile.html:59 templates/components/navbar.html:33
+#: templates/components/navbar.html:82
+msgid "Profile"
+msgstr "प्रोफाइल"
+
+#: templates/accounts/profile.html:68
 msgid "Save changes"
 msgstr "परिवर्तनहरू सुरक्षित गर्नुहोस्"
 
-#: templates/accounts/profile.html:31 templates/components/navbar.html:32
-#: templates/components/navbar.html:81
+#: templates/accounts/profile.html:75 templates/components/navbar.html:38
+#: templates/components/navbar.html:87
 msgid "Log out"
 msgstr "लग आउट गर्नुहोस्"
 
-#: templates/accounts/register.html:4 templates/accounts/register.html:12
-#: templates/components/navbar.html:40 templates/components/navbar.html:89
+#: templates/accounts/register.html:4 templates/accounts/register.html:32
+#: templates/components/navbar.html:46 templates/components/navbar.html:95
 msgid "Register"
 msgstr "दर्ता गर्नुहोस्"
 
-#: templates/accounts/register.html:8
+#: templates/accounts/register.html:14
 msgid "Create your account"
 msgstr "आफ्नो खाता सिर्जना गर्नुहोस्"
 
-#: templates/accounts/register.html:17
+#: templates/accounts/register.html:15
+msgid ""
+"Track processes, save documents, and get reminders before things expire."
+msgstr ""
+"प्रक्रियाहरू ट्र्याक गर्नुहोस्, कागजातहरू सुरक्षित गर्नुहोस्, र म्याद "
+"सकिनुअघि सम्झनाहरू पाउनुहोस्।"
+
+#: templates/accounts/register.html:38
 msgid "Already have an account? Log in"
 msgstr "पहिले नै खाता छ? लग इन गर्नुहोस्"
 
-#: templates/base.html:6 templates/components/navbar.html:5
+#: templates/base.html:6
 msgid "HamroNepal"
 msgstr "हाम्रोनेपाल"
 
@@ -547,7 +563,7 @@ msgid "Activity"
 msgstr "गतिविधि"
 
 #: templates/components/dashboard/sidebar.html:55
-#: templates/components/navbar.html:14
+#: templates/components/navbar.html:20
 #: templates/dashboard/notifications.html:4
 #: templates/dashboard/notifications.html:9
 msgid "Notifications"
@@ -562,24 +578,20 @@ msgstr "सुरक्षित गरिएका"
 msgid "Account"
 msgstr "खाता"
 
-#: templates/components/dashboard/sidebar.html:71
-msgid "Settings"
-msgstr "सेटिङ"
-
 #: templates/components/footer.html:4
 msgid "HamroNepal. Not an official government service."
 msgstr "हाम्रोनेपाल। यो आधिकारिक सरकारी सेवा होइन।"
 
-#: templates/components/navbar.html:20 templates/components/navbar.html:69
+#: templates/components/navbar.html:26 templates/components/navbar.html:75
 msgid "Browse"
 msgstr "ब्राउज गर्नुहोस्"
 
-#: templates/components/navbar.html:24 templates/components/navbar.html:73
+#: templates/components/navbar.html:30 templates/components/navbar.html:79
 #: templates/core/dashboard.html:4
 msgid "Dashboard"
 msgstr "ड्यासबोर्ड"
 
-#: templates/components/navbar.html:65
+#: templates/components/navbar.html:71
 msgid "Menu"
 msgstr "मेनु"
 
@@ -721,7 +733,6 @@ msgid "Document type"
 msgstr "कागजातको प्रकार"
 
 #: templates/core/dashboard.html:154
-#| msgid "Document title"
 msgid "Document image"
 msgstr "कागजातको तस्बिर"
 

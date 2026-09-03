@@ -29,10 +29,10 @@ def _update_search_vectors(process):
             + SearchVector("summary_en", weight="B", config="english")
             + SearchVector("description_en", weight="C", config="english")
         ),
-        search_vector_ne=(
-            SearchVector("title_ne", weight="A", config="simple")
-            + SearchVector("summary_ne", weight="B", config="simple")
-            + SearchVector("description_ne", weight="C", config="simple")
+        search_vector_np=(
+            SearchVector("title_np", weight="A", config="simple")
+            + SearchVector("summary_np", weight="B", config="simple")
+            + SearchVector("description_np", weight="C", config="simple")
         ),
     )
 

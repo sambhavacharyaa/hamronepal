@@ -1,6 +1,7 @@
 from pathlib import Path
 
 import environ
+from django.conf.locale import LANG_INFO
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
@@ -110,16 +111,23 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en"
 
+LANG_INFO["np"] = {
+    "bidi": False,
+    "code": "np",
+    "name": "Nepali",
+    "name_local": "नेपाली",
+}
+
 LANGUAGES = [
     ("en", "English"),
-    ("ne", "नेपाली"),
+    ("np", "नेपाली"),
 ]
 
 LOCALE_PATHS = [BASE_DIR / "locale"]
 
 MODELTRANSLATION_DEFAULT_LANGUAGE = "en"
-MODELTRANSLATION_LANGUAGES = ("en", "ne")
-MODELTRANSLATION_FALLBACK_LANGUAGES = ("en", "ne")
+MODELTRANSLATION_LANGUAGES = ("en", "np")
+MODELTRANSLATION_FALLBACK_LANGUAGES = ("en", "np")
 
 TIME_ZONE = "Asia/Kathmandu"
 

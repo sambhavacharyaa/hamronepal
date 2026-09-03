@@ -15,7 +15,7 @@ from . import services
 from .models import Process, ProcessCategory, ProcessVariant, UserProcessProgress
 from .seo import build_faq_json_ld, build_howto_json_ld, to_json_ld_script
 
-SEARCH_CONFIG_BY_LANGUAGE = {"en": "english", "ne": "simple"}
+SEARCH_CONFIG_BY_LANGUAGE = {"en": "english", "np": "simple"}
 
 
 def search_view(request):

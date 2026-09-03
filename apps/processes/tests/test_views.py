@@ -182,7 +182,7 @@ class ProcessDetailViewTests(TestCase):
     def test_hreflang_alternates_present(self):
         response = self.client.get(f"/en/processes/{self.process.slug}/")
         self.assertContains(response, 'hreflang="en"')
-        self.assertContains(response, 'hreflang="ne"')
+        self.assertContains(response, 'hreflang="np"')
 
 
 class TrackingFlowTests(TestCase):

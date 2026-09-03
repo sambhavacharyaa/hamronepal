@@ -4,17 +4,35 @@
 {% block title %}{% translate "Log in" %}{% endblock %}
 
 {% block content %}
-<div class="mx-auto max-w-sm">
-    <h1 class="text-2xl font-semibold text-ink">{% translate "Log in" %}</h1>
-    <form method="post" class="mt-6 space-y-1">
-        {% csrf_token %}
-        {{ form.as_p }}
-        {% translate "Log in" as login_label %}
-        {% include "components/ui/button.html" with type="submit" label=login_label extra_class="mt-4 w-full" only %}
-    </form>
-    <div class="mt-4 space-y-1 text-sm text-ink-muted">
-        <p><a href="{% url 'accounts:password_reset' %}" class="text-primary hover:underline">{% translate "Forgot your password?" %}</a></p>
-        <p><a href="{% url 'accounts:register' %}" class="text-primary hover:underline">{% translate "Need an account? Register" %}</a></p>
+<section class="relative flex min-h-[65vh] items-center justify-center py-6">
+    <div class="pointer-events-none absolute inset-x-0 top-0 -z-10 flex justify-center overflow-hidden" aria-hidden="true">
+        <div class="h-[380px] w-[380px] rounded-full bg-primary/15 blur-3xl"></div>
+        <div class="-ml-32 mt-16 h-[300px] w-[300px] rounded-full bg-accent/15 blur-3xl"></div>
     </div>
-</div>
+
+    <div class="w-full max-w-sm rounded-3xl border border-border/70 bg-surface/70 p-8 shadow-lg shadow-ink/5 backdrop-blur-xl">
+        <h1 class="text-2xl font-semibold text-ink">{% translate "Log in" %}</h1>
+        <p class="mt-1 text-sm text-ink-muted">{% translate "Welcome back. Pick up where you left off." %}</p>
+
+        <form method="post" class="mt-6 space-y-4">
+            {% csrf_token %}
+            {% if form.non_field_errors %}
+            <ul class="space-y-0.5 rounded-lg bg-danger/10 p-3 text-xs text-danger">
+                {% for error in form.non_field_errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            {% include "components/ui/form_field.html" with field=form.username only %}
+            {% include "components/ui/form_field.html" with field=form.password only %}
+            {% translate "Log in" as login_label %}
+            {% include "components/ui/button.html" with type="submit" label=login_label extra_class="w-full" only %}
+        </form>
+
+        <div class="mt-5 space-y-1.5 text-center text-sm text-ink-muted">
+            <p><a href="{% url 'accounts:password_reset' %}" class="rounded-sm text-primary hover:underline focus-visible:focus-ring">{% translate "Forgot your password?" %}</a></p>
+            <p><a href="{% url 'accounts:register' %}" class="rounded-sm text-primary hover:underline focus-visible:focus-ring">{% translate "Need an account? Register" %}</a></p>
+        </div>
+    </div>
+</section>
 {% endblock %}

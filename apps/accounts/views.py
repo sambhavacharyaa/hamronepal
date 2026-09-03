@@ -118,5 +118,6 @@ def profile_view(request):
         {
             "preferences_form": preferences_form,
             "profile_form": profile_form,
+            "user_initial": (profile.display_name or request.user.email)[0].upper(),
         },
     )

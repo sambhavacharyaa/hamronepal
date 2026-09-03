@@ -1,8 +1,11 @@
-{% load i18n %}
+{% load i18n static %}
 <header class="sticky top-0 z-30 px-4 pt-4 sm:px-6">
     <nav class="mx-auto flex max-w-7xl items-center justify-between gap-4 rounded-full border border-border/80 bg-surface/80 px-4 py-3 shadow-lg shadow-ink/5 backdrop-blur-md sm:px-6">
-        <a href="{% url 'core:home' %}" class="rounded-sm text-lg font-semibold text-accent focus-visible:focus-ring">
-            {% translate "HamroNepal" %}
+        <a href="{% url 'core:home' %}" class="flex items-center gap-2 rounded-sm focus-visible:focus-ring">
+            <img src="{% static 'img/logo-mark.png' %}" alt="" class="h-7 w-auto shrink-0">
+            <span class="text-lg font-semibold">
+                <span class="text-accent">हाम्रो</span> <span class="text-primary">नेपाल</span>
+            </span>
         </a>
 
         <div class="flex items-center gap-2 sm:gap-4">
@@ -47,7 +50,7 @@
                 {% get_current_language as LANGUAGE_CODE %}
                 {% get_available_languages as LANGUAGES %}
                 {% get_language_info_list for LANGUAGES as languages %}
-                <select name="language" onchange="this.form.submit()"
+                <select name="language" onchange="hamroNepalSwitchLanguage(this)"
                         class="rounded-md border border-outline bg-surface py-1.5 pl-2 pr-6 text-ink focus-visible:focus-ring">
                     {% for language in languages %}
                         <option value="{{ language.code }}" {% if language.code == LANGUAGE_CODE %}selected{% endif %}>
@@ -58,55 +61,111 @@
             </form>
         </div>
 
-        <details class="relative sm:hidden">
-            <summary class="flex h-10 w-10 cursor-pointer list-none items-center justify-center rounded-md border border-border text-ink focus-visible:focus-ring [&::-webkit-details-marker]:hidden">
-                {% include "components/icons/list.html" with extra_class="h-5 w-5 [details[open]_&]:hidden" only %}
-                {% include "components/icons/x.html" with extra_class="hidden h-5 w-5 [details[open]_&]:block" only %}
-                <span class="sr-only">{% translate "Menu" %}</span>
-            </summary>
-            <div class="absolute right-0 top-full z-20 mt-2 w-56 space-y-1 rounded-lg border border-border bg-surface p-3 text-sm shadow-lg">
-                <a href="{% url 'processes:process_list' %}" class="block rounded-md px-3 py-2 text-ink hover:bg-canvas focus-visible:focus-ring">
-                    {% translate "Browse" %}
-                </a>
-                {% if request.user.is_authenticated %}
-                    <a href="{% url 'core:dashboard' %}" class="block rounded-md px-3 py-2 text-ink hover:bg-canvas focus-visible:focus-ring">
-                        {% translate "Dashboard" %}
-                    </a>
-                    <a href="{% url 'accounts:profile' %}" class="block rounded-md px-3 py-2 text-ink hover:bg-canvas focus-visible:focus-ring">
-                        {% translate "Profile" %}
-                    </a>
-                    <form method="post" action="{% url 'accounts:logout' %}">
-                        {% csrf_token %}
-                        <button type="submit" class="block w-full rounded-md px-3 py-2 text-left text-ink hover:bg-canvas focus-visible:focus-ring">
-                            {% translate "Log out" %}
-                        </button>
-                    </form>
-                {% else %}
-                    <a href="{% url 'accounts:login' %}" class="block rounded-md px-3 py-2 text-ink hover:bg-canvas focus-visible:focus-ring">
-                        {% translate "Log in" %}
-                    </a>
-                    <a href="{% url 'accounts:register' %}" class="block rounded-md px-3 py-2 text-ink hover:bg-canvas focus-visible:focus-ring">
-                        {% translate "Register" %}
-                    </a>
-                {% endif %}
-
-                <form action="{% url 'set_language' %}" method="post" class="border-t border-border pt-2">
-                    {% csrf_token %}
-                    <input name="next" type="hidden" value="{{ request.path }}">
-                    {% get_current_language as LANGUAGE_CODE %}
-                    {% get_available_languages as LANGUAGES %}
-                    {% get_language_info_list for LANGUAGES as languages %}
-                    <select name="language" onchange="this.form.submit()"
-                            class="w-full rounded-md border border-outline bg-surface py-1.5 pl-2 pr-6 text-ink focus-visible:focus-ring">
-                        {% for language in languages %}
-                            <option value="{{ language.code }}" {% if language.code == LANGUAGE_CODE %}selected{% endif %}>
-                                {{ language.name_local }}
-                            </option>
-                        {% endfor %}
-                    </select>
-                </form>
-            </div>
-        </details>
+        <button type="button" id="navbar-drawer-open" aria-expanded="false" aria-controls="navbar-drawer"
+                class="flex h-10 w-10 shrink-0 items-center justify-center rounded-md border border-border text-ink focus-visible:focus-ring sm:hidden">
+            {% include "components/icons/list.html" with extra_class="h-5 w-5" only %}
+            <span class="sr-only">{% translate "Menu" %}</span>
+        </button>
         </div>
     </nav>
+
+    <div id="navbar-drawer-backdrop" hidden class="fixed inset-0 z-40 bg-ink/20 backdrop-blur-sm sm:hidden"></div>
+
+    <aside id="navbar-drawer" data-open="false"
+           class="fixed inset-y-0 right-0 z-50 flex w-72 max-w-[85vw] translate-x-full flex-col border-l border-border/80 bg-surface/95 shadow-lg shadow-ink/10 backdrop-blur-xl transition-transform duration-300 ease-out data-[open=true]:translate-x-0 sm:hidden">
+        <div class="flex items-center justify-between gap-2 border-b border-border/60 p-4">
+            <span class="text-base font-semibold">
+                <span class="text-accent">हाम्रो</span> <span class="text-primary">नेपाल</span>
+            </span>
+            <button type="button" id="navbar-drawer-close"
+                    class="rounded-md p-1.5 text-ink-muted hover:text-ink focus-visible:focus-ring">
+                {% include "components/icons/x.html" with extra_class="h-5 w-5" only %}
+                <span class="sr-only">{% translate "Close menu" %}</span>
+            </button>
+        </div>
+
+        <nav class="flex-1 space-y-1 overflow-y-auto p-3 text-sm">
+            <a href="{% url 'processes:process_list' %}" class="block rounded-xl px-3 py-2.5 text-ink hover:bg-primary/5 focus-visible:focus-ring">
+                {% translate "Browse" %}
+            </a>
+            {% if request.user.is_authenticated %}
+                <a href="{% url 'core:dashboard' %}" class="block rounded-xl px-3 py-2.5 text-ink hover:bg-primary/5 focus-visible:focus-ring">
+                    {% translate "Dashboard" %}
+                </a>
+                <a href="{% url 'accounts:profile' %}" class="block rounded-xl px-3 py-2.5 text-ink hover:bg-primary/5 focus-visible:focus-ring">
+                    {% translate "Profile" %}
+                </a>
+                <form method="post" action="{% url 'accounts:logout' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="block w-full rounded-xl px-3 py-2.5 text-left text-ink hover:bg-primary/5 focus-visible:focus-ring">
+                        {% translate "Log out" %}
+                    </button>
+                </form>
+            {% else %}
+                <a href="{% url 'accounts:login' %}" class="block rounded-xl px-3 py-2.5 text-ink hover:bg-primary/5 focus-visible:focus-ring">
+                    {% translate "Log in" %}
+                </a>
+                <a href="{% url 'accounts:register' %}" class="block rounded-xl px-3 py-2.5 text-ink hover:bg-primary/5 focus-visible:focus-ring">
+                    {% translate "Register" %}
+                </a>
+            {% endif %}
+
+            <form action="{% url 'set_language' %}" method="post" class="mt-3 border-t border-border/60 px-3 pt-4">
+                {% csrf_token %}
+                <input name="next" type="hidden" value="{{ request.path }}">
+                {% get_current_language as LANGUAGE_CODE %}
+                {% get_available_languages as LANGUAGES %}
+                {% get_language_info_list for LANGUAGES as languages %}
+                <select name="language" onchange="hamroNepalSwitchLanguage(this)"
+                        class="w-full rounded-md border border-outline bg-surface py-1.5 pl-2 pr-6 text-ink focus-visible:focus-ring">
+                    {% for language in languages %}
+                        <option value="{{ language.code }}" {% if language.code == LANGUAGE_CODE %}selected{% endif %}>
+                            {{ language.name_local }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </form>
+        </nav>
+    </aside>
+
+    <script>
+        function hamroNepalSwitchLanguage(select) {
+            var currentPrefix = "/{{ LANGUAGE_CODE }}/";
+            var path = window.location.pathname;
+            if (path.indexOf(currentPrefix) === 0) {
+                path = "/" + select.value + "/" + path.slice(currentPrefix.length);
+            }
+            var form = select.closest("form");
+            form.querySelector("input[name=next]").value = path + window.location.search + window.location.hash;
+            form.submit();
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            var openButton = document.getElementById("navbar-drawer-open");
+            var closeButton = document.getElementById("navbar-drawer-close");
+            var backdrop = document.getElementById("navbar-drawer-backdrop");
+            var drawer = document.getElementById("navbar-drawer");
+
+            function setDrawerOpen(open) {
+                drawer.dataset.open = open ? "true" : "false";
+                backdrop.hidden = !open;
+                openButton.setAttribute("aria-expanded", open ? "true" : "false");
+            }
+
+            openButton.addEventListener("click", function () {
+                setDrawerOpen(true);
+            });
+            closeButton.addEventListener("click", function () {
+                setDrawerOpen(false);
+            });
+            backdrop.addEventListener("click", function () {
+                setDrawerOpen(false);
+            });
+            document.addEventListener("keydown", function (event) {
+                if (event.key === "Escape") {
+                    setDrawerOpen(false);
+                }
+            });
+        });
+    </script>
 </header>

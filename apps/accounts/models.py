@@ -35,7 +35,7 @@ class UserManager(BaseUserManager):
 class User(AbstractUser):
     class Language(models.TextChoices):
         ENGLISH = "en", "English"
-        NEPALI = "ne", "नेपाली"
+        NEPALI = "np", "नेपाली"
 
     username = None
     email = models.EmailField(unique=True)
