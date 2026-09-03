@@ -1,0 +1,34 @@
+{% load i18n %}
+<div class="rounded-2xl border border-border bg-surface p-4">
+    {% if stats.active_journey_count %}
+    <div class="flex items-center gap-3">
+        <div class="relative flex h-14 w-14 shrink-0 items-center justify-center">
+            <svg viewBox="0 0 64 64" class="h-14 w-14 -rotate-90">
+                <circle cx="32" cy="32" r="28" fill="none" stroke="var(--color-border)" stroke-width="6"></circle>
+                <circle cx="32" cy="32" r="28" fill="none" stroke="var(--color-primary-solid)" stroke-width="6"
+                        stroke-linecap="round"
+                        stroke-dasharray="{{ stats.ring_circumference }}"
+                        style="stroke-dashoffset: {{ stats.ring_dashoffset }};"
+                        class="transition-[stroke-dashoffset] duration-700 ease-out motion-reduce:transition-none"></circle>
+            </svg>
+            <span class="absolute text-sm font-bold text-ink">{{ stats.average_progress_percent }}%</span>
+        </div>
+        <div class="min-w-0">
+            <p class="text-sm font-semibold text-ink">{% translate "Overall progress" %}</p>
+            <p class="truncate text-xs text-ink-muted">
+                {% blocktranslate count counter=stats.active_journey_count %}Across {{ counter }} active journey{% plural %}Across {{ counter }} active journeys{% endblocktranslate %}
+            </p>
+        </div>
+    </div>
+    {% else %}
+    <div class="flex items-center gap-3">
+        <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+            {% include "components/icons/compass.html" with extra_class="h-5 w-5" only %}
+        </span>
+        <div class="min-w-0">
+            <p class="text-sm font-semibold text-ink">{% translate "Overall progress" %}</p>
+            <p class="truncate text-xs text-ink-muted">{% translate "Start your first journey" %}</p>
+        </div>
+    </div>
+    {% endif %}
+</div>

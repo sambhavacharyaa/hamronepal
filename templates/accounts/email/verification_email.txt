@@ -1,0 +1,6 @@
+{% load i18n %}{% blocktranslate %}Hi {{ user }},{% endblocktranslate %}
+
+{% translate "Please verify your email address by visiting the link below:" %}
+{{ verify_url }}
+
+{% translate "If you didn't create an account with HamroNepal, you can ignore this email." %}

@@ -1,0 +1,40 @@
+{% load i18n %}
+<div id="document-{{ document.id }}" class="flex items-center justify-between gap-3 rounded-xl border border-border bg-surface p-4">
+    <div class="flex min-w-0 items-center gap-3">
+        {% if document.image %}
+        <a href="{% url 'dashboard:document_file' pk=document.id %}" target="_blank" rel="noopener"
+           class="block h-10 w-10 shrink-0 overflow-hidden rounded-xl border border-border focus-visible:focus-ring">
+            <img src="{% url 'dashboard:document_file' pk=document.id %}" alt="" class="h-full w-full object-cover">
+        </a>
+        {% else %}
+        <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+            {% include "components/icons/file-text.html" with extra_class="h-4.5 w-4.5" only %}
+        </span>
+        {% endif %}
+        <div class="min-w-0">
+            <p class="text-sm font-medium text-ink">{{ document.title }}</p>
+            <p class="text-xs text-ink-muted">
+                {{ document.get_document_type_display }}
+                {% if document.expiry_date %}
+                    &middot; {% blocktranslate with date=document.expiry_date %}Expires {{ date }}{% endblocktranslate %}
+                {% endif %}
+            </p>
+        </div>
+    </div>
+    <div class="flex shrink-0 items-center gap-2">
+        {% if document.is_expired %}
+            {% translate "Expired" as expired_label %}
+            {% include "components/ui/badge.html" with label=expired_label tone="danger" only %}
+        {% elif document.is_expiring_soon %}
+            {% translate "Expiring soon" as soon_label %}
+            {% include "components/ui/badge.html" with label=soon_label tone="warning" only %}
+        {% endif %}
+        <form hx-post="{% url 'dashboard:delete_document' pk=document.id %}" hx-target="#document-{{ document.id }}" hx-swap="outerHTML"
+              hx-confirm="{% translate 'Remove this document?' %}">
+            {% csrf_token %}
+            <button type="submit" aria-label="{% translate 'Remove document' %}" class="rounded-md p-1 text-ink-muted hover:text-danger focus-visible:focus-ring">
+                {% include "components/icons/x.html" with extra_class="h-4 w-4" only %}
+            </button>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,33 @@
+{% load i18n %}
+<li id="step-{{ step_progress.step.id }}" class="flex items-start gap-3 rounded-md border border-border bg-surface p-3">
+    <form hx-post="{% url 'processes:toggle_step' slug=slug step_id=step_progress.step.id %}"
+          hx-target="#step-{{ step_progress.step.id }}"
+          hx-swap="outerHTML">
+        {% csrf_token %}
+        <button type="submit" aria-label="{% translate 'Toggle complete' %}"
+                class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded border
+                    {% if step_progress.is_completed %}border-primary-solid bg-primary-solid{% else %}border-outline bg-surface{% endif %}">
+            {% if step_progress.is_completed %}
+            <svg viewBox="0 0 20 20" fill="white" class="h-3.5 w-3.5">
+                <path d="M16.7 5.3a1 1 0 0 1 0 1.4l-7.5 7.5a1 1 0 0 1-1.4 0L4.3 10.7a1 1 0 1 1 1.4-1.4l2.8 2.8 6.8-6.8a1 1 0 0 1 1.4 0z"/>
+            </svg>
+            {% endif %}
+        </button>
+    </form>
+    <div class="flex-1">
+        <p class="text-sm font-medium {% if step_progress.is_completed %}text-ink-muted line-through{% else %}text-ink{% endif %}">
+            {{ step_progress.step.order }}. {{ step_progress.step.title }}
+        </p>
+        {% if step_progress.step.description %}
+        <p class="mt-0.5 text-sm text-ink-muted">{{ step_progress.step.description }}</p>
+        {% endif %}
+        <div class="mt-1 flex flex-wrap gap-2 text-xs text-ink-muted">
+            {% if step_progress.step.fee_amount %}
+            <span>{% translate "Fee" %}: NPR {{ step_progress.step.fee_amount }}</span>
+            {% endif %}
+            {% if step_progress.step.office %}
+            <span>{{ step_progress.step.office.name }}</span>
+            {% endif %}
+        </div>
+    </div>
+</li>

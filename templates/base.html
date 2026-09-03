@@ -1,0 +1,54 @@
+{% load i18n static tailwind_tags %}<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}" class="h-full">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{% translate "HamroNepal" %}{% endblock %}</title>
+    {% block meta %}
+    <meta name="description" content="{% translate 'Understand, prepare for, and track everyday processes in Nepal.' %}">
+    {% endblock %}
+    <meta name="theme-color" content="#fdfcfa">
+    {% if LANGUAGE_CODE == "ne" %}
+    <link rel="preload" href="{% static 'fonts/NotoSansDevanagari-Variable.woff2' %}" as="font" type="font/woff2" crossorigin>
+    {% else %}
+    <link rel="preload" href="{% static 'fonts/Geist-Regular.woff2' %}" as="font" type="font/woff2" crossorigin>
+    {% endif %}
+    {% tailwind_css %}
+    <script src="{% static 'vendor/htmx.min.js' %}" defer></script>
+</head>
+<body class="flex h-full min-h-screen flex-col overflow-x-clip bg-canvas text-ink" hx-headers='{"X-Requested-With": "XMLHttpRequest"}'>
+    <a href="#main-content" class="sr-only rounded-md bg-primary-solid px-4 py-2 text-sm font-medium text-white focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50">
+        {% translate "Skip to content" %}
+    </a>
+    {% include "components/navbar.html" %}
+
+    {% if messages %}
+    <div class="mx-auto mt-4 w-full max-w-7xl space-y-2 px-4 sm:px-6">
+        {% for message in messages %}
+        <div class="rounded-md px-4 py-3 text-sm
+            {% if message.tags == 'error' %}bg-danger/10 text-danger
+            {% elif message.tags == 'success' %}bg-success/10 text-success
+            {% else %}bg-border/40 text-ink{% endif %}">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <main id="main-content" class="mx-auto w-full max-w-7xl flex-1 px-4 py-8 sm:px-6">
+        {% block content %}{% endblock %}
+    </main>
+
+    {% include "components/footer.html" %}
+
+    <script>
+        document.body.addEventListener("htmx:configRequest", (event) => {
+            event.detail.headers["X-CSRFToken"] = document.cookie
+                .split("; ")
+                .find((row) => row.startsWith("csrftoken="))
+                ?.split("=")[1];
+        });
+    </script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,17 @@
+{% load i18n %}
+<form id="save-button-{{ process.id }}"
+      hx-post="{% url 'dashboard:toggle_saved' slug=process.slug %}"
+      hx-target="#save-button-{{ process.id }}"
+      hx-swap="outerHTML">
+    {% csrf_token %}
+    {% if is_saved %}{% translate "Unsave this process" as save_label %}{% else %}{% translate "Save this process" as save_label %}{% endif %}
+    <button type="submit" hx-disabled-elt="this" aria-label="{{ save_label }}" aria-pressed="{{ is_saved|yesno:'true,false' }}"
+            class="flex h-9 w-9 items-center justify-center rounded-full border transition disabled:cursor-wait disabled:opacity-50 focus-visible:focus-ring
+                {% if is_saved %}border-primary bg-primary/10 text-primary{% else %}border-border text-ink-muted hover:border-primary hover:text-primary{% endif %}">
+        {% if is_saved %}
+            {% include "components/icons/bookmark-simple-fill.html" with extra_class="h-4.5 w-4.5" only %}
+        {% else %}
+            {% include "components/icons/bookmark-simple.html" with extra_class="h-4.5 w-4.5" only %}
+        {% endif %}
+    </button>
+</form>

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% translate "Browse processes" %}{% endblock %}
+
+{% block content %}
+<div class="mx-auto max-w-4xl">
+    <h1 class="text-2xl font-bold text-ink">{% translate "Browse processes" %}</h1>
+
+    <div class="mt-4 flex flex-wrap gap-2">
+        <a href="{% url 'processes:process_list' %}"
+           class="rounded-full border px-3 py-1.5 text-sm
+               {% if not category_slug %}border-primary bg-primary-subtle text-primary{% else %}border-outline text-ink hover:border-primary{% endif %}">
+            {% translate "All" %}
+        </a>
+        {% for category in categories %}
+        <a href="{% url 'processes:process_list' %}?category={{ category.slug }}"
+           class="rounded-full border px-3 py-1.5 text-sm
+               {% if category.slug == category_slug %}border-primary bg-primary-subtle text-primary{% else %}border-outline text-ink hover:border-primary{% endif %}">
+            {{ category.name }}
+        </a>
+        {% endfor %}
+    </div>
+
+    <div class="mt-6 grid gap-3 sm:grid-cols-2">
+        {% for process in processes %}
+            {% include "components/process_card.html" %}
+        {% empty %}
+        <p class="text-sm text-ink-muted">{% translate "No processes published in this category yet." %}</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

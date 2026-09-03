@@ -1,0 +1,15 @@
+{% load i18n %}
+<form method="get" action="{% url 'processes:search' %}" class="{{ extra_class }}">
+    <label for="q" class="sr-only">{% translate "Search for a process" %}</label>
+    <div class="flex gap-2">
+        <input type="search" id="q" name="q" value="{{ query }}" autocomplete="off" inputmode="search" enterkeyhint="search"
+               placeholder="{% translate 'e.g. renew my license' %}"
+               class="w-full rounded-lg border border-outline px-4 py-3 text-base shadow-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+               hx-get="{% url 'processes:search' %}"
+               hx-trigger="keyup[event.target.value.length >= 3 || event.target.value.length == 0] changed delay:500ms, search"
+               hx-target="#search-results"
+               hx-push-url="false">
+        {% translate "Search" as search_label %}
+        {% include "components/ui/button.html" with type="submit" label=search_label size="lg" extra_class="shrink-0" only %}
+    </div>
+</form>

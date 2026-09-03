@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+<div class="dashboard-shell lg:flex lg:items-start lg:gap-6">
+    {% include "components/dashboard/sidebar.html" %}
+
+    <div class="min-w-0 flex-1">
+        <div class="mb-6 flex items-center gap-3 lg:hidden">
+            <button type="button" id="dashboard-sidebar-open" aria-expanded="false" aria-controls="dashboard-sidebar"
+                    class="flex h-10 w-10 shrink-0 items-center justify-center rounded-md border border-border text-ink focus-visible:focus-ring">
+                {% include "components/icons/list.html" with extra_class="h-5 w-5" only %}
+                <span class="sr-only">{% translate "Open menu" %}</span>
+            </button>
+            <p class="text-sm font-semibold text-ink">{% translate "My Dashboard" %}</p>
+        </div>
+
+        {% block dashboard_content %}{% endblock %}
+    </div>
+</div>
+{% endblock %}

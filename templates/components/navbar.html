@@ -1,0 +1,112 @@
+{% load i18n %}
+<header class="sticky top-0 z-30 px-4 pt-4 sm:px-6">
+    <nav class="mx-auto flex max-w-7xl items-center justify-between gap-4 rounded-full border border-border/80 bg-surface/80 px-4 py-3 shadow-lg shadow-ink/5 backdrop-blur-md sm:px-6">
+        <a href="{% url 'core:home' %}" class="rounded-sm text-lg font-semibold text-accent focus-visible:focus-ring">
+            {% translate "HamroNepal" %}
+        </a>
+
+        <div class="flex items-center gap-2 sm:gap-4">
+        {% if request.user.is_authenticated %}
+            <a href="{% url 'dashboard:notifications' %}"
+               class="relative flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-ink-muted transition hover:bg-primary/5 hover:text-ink focus-visible:focus-ring">
+                {% include "components/icons/bell.html" with extra_class="h-5 w-5" only %}
+                {% include "components/dashboard/notification_badge.html" with badge_id="navbar-notification-badge" notification_count=nav_unread_notification_count position_class="right-0.5 top-0.5" only %}
+                <span class="sr-only">{% translate "Notifications" %}</span>
+            </a>
+        {% endif %}
+
+        <div class="hidden items-center gap-4 text-sm sm:flex">
+            <a href="{% url 'processes:process_list' %}" class="rounded-sm text-ink hover:text-primary focus-visible:focus-ring">
+                {% translate "Browse" %}
+            </a>
+            {% if request.user.is_authenticated %}
+                <a href="{% url 'core:dashboard' %}" class="rounded-sm text-ink hover:text-primary focus-visible:focus-ring">
+                    {% translate "Dashboard" %}
+                </a>
+                <a href="{% url 'accounts:profile' %}" class="rounded-sm text-ink hover:text-primary focus-visible:focus-ring">
+                    {% translate "Profile" %}
+                </a>
+                <form method="post" action="{% url 'accounts:logout' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="rounded-sm text-ink hover:text-primary focus-visible:focus-ring">
+                        {% translate "Log out" %}
+                    </button>
+                </form>
+            {% else %}
+                <a href="{% url 'accounts:login' %}" class="rounded-sm text-ink hover:text-primary focus-visible:focus-ring">
+                    {% translate "Log in" %}
+                </a>
+                <a href="{% url 'accounts:register' %}" class="rounded-sm text-ink hover:text-primary focus-visible:focus-ring">
+                    {% translate "Register" %}
+                </a>
+            {% endif %}
+
+            <form action="{% url 'set_language' %}" method="post" class="flex items-center">
+                {% csrf_token %}
+                <input name="next" type="hidden" value="{{ request.path }}">
+                {% get_current_language as LANGUAGE_CODE %}
+                {% get_available_languages as LANGUAGES %}
+                {% get_language_info_list for LANGUAGES as languages %}
+                <select name="language" onchange="this.form.submit()"
+                        class="rounded-md border border-outline bg-surface py-1.5 pl-2 pr-6 text-ink focus-visible:focus-ring">
+                    {% for language in languages %}
+                        <option value="{{ language.code }}" {% if language.code == LANGUAGE_CODE %}selected{% endif %}>
+                            {{ language.name_local }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </form>
+        </div>
+
+        <details class="relative sm:hidden">
+            <summary class="flex h-10 w-10 cursor-pointer list-none items-center justify-center rounded-md border border-border text-ink focus-visible:focus-ring [&::-webkit-details-marker]:hidden">
+                {% include "components/icons/list.html" with extra_class="h-5 w-5 [details[open]_&]:hidden" only %}
+                {% include "components/icons/x.html" with extra_class="hidden h-5 w-5 [details[open]_&]:block" only %}
+                <span class="sr-only">{% translate "Menu" %}</span>
+            </summary>
+            <div class="absolute right-0 top-full z-20 mt-2 w-56 space-y-1 rounded-lg border border-border bg-surface p-3 text-sm shadow-lg">
+                <a href="{% url 'processes:process_list' %}" class="block rounded-md px-3 py-2 text-ink hover:bg-canvas focus-visible:focus-ring">
+                    {% translate "Browse" %}
+                </a>
+                {% if request.user.is_authenticated %}
+                    <a href="{% url 'core:dashboard' %}" class="block rounded-md px-3 py-2 text-ink hover:bg-canvas focus-visible:focus-ring">
+                        {% translate "Dashboard" %}
+                    </a>
+                    <a href="{% url 'accounts:profile' %}" class="block rounded-md px-3 py-2 text-ink hover:bg-canvas focus-visible:focus-ring">
+                        {% translate "Profile" %}
+                    </a>
+                    <form method="post" action="{% url 'accounts:logout' %}">
+                        {% csrf_token %}
+                        <button type="submit" class="block w-full rounded-md px-3 py-2 text-left text-ink hover:bg-canvas focus-visible:focus-ring">
+                            {% translate "Log out" %}
+                        </button>
+                    </form>
+                {% else %}
+                    <a href="{% url 'accounts:login' %}" class="block rounded-md px-3 py-2 text-ink hover:bg-canvas focus-visible:focus-ring">
+                        {% translate "Log in" %}
+                    </a>
+                    <a href="{% url 'accounts:register' %}" class="block rounded-md px-3 py-2 text-ink hover:bg-canvas focus-visible:focus-ring">
+                        {% translate "Register" %}
+                    </a>
+                {% endif %}
+
+                <form action="{% url 'set_language' %}" method="post" class="border-t border-border pt-2">
+                    {% csrf_token %}
+                    <input name="next" type="hidden" value="{{ request.path }}">
+                    {% get_current_language as LANGUAGE_CODE %}
+                    {% get_available_languages as LANGUAGES %}
+                    {% get_language_info_list for LANGUAGES as languages %}
+                    <select name="language" onchange="this.form.submit()"
+                            class="w-full rounded-md border border-outline bg-surface py-1.5 pl-2 pr-6 text-ink focus-visible:focus-ring">
+                        {% for language in languages %}
+                            <option value="{{ language.code }}" {% if language.code == LANGUAGE_CODE %}selected{% endif %}>
+                                {{ language.name_local }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </form>
+            </div>
+        </details>
+        </div>
+    </nav>
+</header>

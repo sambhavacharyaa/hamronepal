@@ -1,0 +1,6 @@
+<span class="rounded-full px-2.5 py-1 text-xs font-semibold
+    {% if tone == 'warning' %}bg-warning/15 text-warning
+    {% elif tone == 'danger' %}bg-danger/15 text-danger
+    {% elif tone == 'neutral' %}bg-border text-ink-muted
+    {% else %}bg-success/15 text-success{% endif %}
+    {{ extra_class }}">{{ label }}</span>

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% translate "Log in" %}{% endblock %}
+
+{% block content %}
+<div class="mx-auto max-w-sm">
+    <h1 class="text-2xl font-semibold text-ink">{% translate "Log in" %}</h1>
+    <form method="post" class="mt-6 space-y-1">
+        {% csrf_token %}
+        {{ form.as_p }}
+        {% translate "Log in" as login_label %}
+        {% include "components/ui/button.html" with type="submit" label=login_label extra_class="mt-4 w-full" only %}
+    </form>
+    <div class="mt-4 space-y-1 text-sm text-ink-muted">
+        <p><a href="{% url 'accounts:password_reset' %}" class="text-primary hover:underline">{% translate "Forgot your password?" %}</a></p>
+        <p><a href="{% url 'accounts:register' %}" class="text-primary hover:underline">{% translate "Need an account? Register" %}</a></p>
+    </div>
+</div>
+{% endblock %}

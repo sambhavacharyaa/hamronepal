@@ -1,0 +1,163 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{{ process.meta_title|default:process.title }}{% endblock %}
+
+{% block meta %}
+<meta name="description" content="{{ process.meta_description|default:process.summary }}">
+{% for code, url in hreflang_urls.items %}
+<link rel="alternate" hreflang="{{ code }}" href="{{ url }}">
+{% endfor %}
+{% endblock %}
+
+{% block content %}
+{% if howto_json_ld %}
+<script type="application/ld+json">{{ howto_json_ld }}</script>
+{% endif %}
+{% if faq_json_ld %}
+<script type="application/ld+json">{{ faq_json_ld }}</script>
+{% endif %}
+
+<div class="mx-auto max-w-2xl">
+    <div class="flex items-center justify-between gap-2">
+        <span class="text-xs font-medium uppercase tracking-wide text-primary">{{ process.category.name }}</span>
+        <div class="flex items-center gap-2">
+            {% if process.last_verified_at %}
+            {% blocktranslate with date=process.last_verified_at asvar verified_label %}Verified {{ date }}{% endblocktranslate %}
+            {% include "components/ui/badge.html" with label=verified_label only %}
+            {% endif %}
+            {% if request.user.is_authenticated %}
+                {% include "components/dashboard/save_button.html" with process=process is_saved=is_saved only %}
+            {% endif %}
+        </div>
+    </div>
+
+    <h1 class="mt-1 text-2xl font-bold text-ink sm:text-3xl">{{ process.title }}</h1>
+    {% if process.summary %}<p class="mt-3 text-ink-muted">{{ process.summary }}</p>{% endif %}
+
+    <div class="mt-4 flex flex-wrap gap-4 text-sm text-ink-muted">
+        {% if process.responsible_organization %}
+        <span>{% translate "Authority" %}: {{ process.responsible_organization.name }}</span>
+        {% endif %}
+        {% if process.estimated_duration_note %}
+        <span>{% translate "Duration" %}: {{ process.estimated_duration_note }}</span>
+        {% elif process.estimated_duration_min_days %}
+        <span>
+            {% translate "Duration" %}:
+            {% if process.estimated_duration_max_days %}
+                {{ process.estimated_duration_min_days }}-{{ process.estimated_duration_max_days }} {% translate "days" %}
+            {% else %}
+                {{ process.estimated_duration_min_days }} {% translate "days" %}
+            {% endif %}
+        </span>
+        {% endif %}
+        {% if process.total_fee_note %}<span>{% translate "Fees" %}: {{ process.total_fee_note }}</span>{% endif %}
+    </div>
+
+    {% if process.eligibility %}
+    <div class="mt-6">
+        <h2 class="text-lg font-semibold text-ink">{% translate "Eligibility" %}</h2>
+        <p class="mt-2 text-sm text-ink-muted">{{ process.eligibility }}</p>
+    </div>
+    {% endif %}
+
+    {% if steps %}
+    <div class="mt-6">
+        <h2 class="text-lg font-semibold text-ink">{% translate "Steps" %}</h2>
+        <ol class="mt-2 space-y-3">
+            {% for step in steps %}
+            <li class="rounded-lg border border-border bg-surface p-3">
+                <p class="text-sm font-medium text-ink">{{ step.order }}. {{ step.title }}</p>
+                {% if step.description %}<p class="mt-1 text-sm text-ink-muted">{{ step.description }}</p>{% endif %}
+                <div class="mt-1 flex flex-wrap gap-2 text-xs text-ink-muted">
+                    {% if step.variant != "all" %}<span>{{ step.get_variant_display }}</span>{% endif %}
+                    {% if step.fee_amount %}<span>{% translate "Fee" %}: NPR {{ step.fee_amount }}</span>{% endif %}
+                    {% if step.office %}<span>{{ step.office.name }}</span>{% endif %}
+                </div>
+            </li>
+            {% endfor %}
+        </ol>
+    </div>
+    {% endif %}
+
+    {% if requirements %}
+    <div class="mt-6">
+        <h2 class="text-lg font-semibold text-ink">{% translate "Documents & requirements" %}</h2>
+        <ul class="mt-2 space-y-2">
+            {% for requirement in requirements %}
+            <li class="rounded-lg border border-border bg-surface p-3 text-sm">
+                <span class="font-medium text-ink">{{ requirement.name }}</span>
+                {% if not requirement.is_mandatory %}<span class="text-xs text-ink-muted">({% translate "optional" %})</span>{% endif %}
+                {% if requirement.description %}<p class="mt-1 text-ink-muted">{{ requirement.description }}</p>{% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+    {% if faqs %}
+    <div class="mt-6">
+        <h2 class="text-lg font-semibold text-ink">{% translate "Frequently asked questions" %}</h2>
+        <div class="mt-2 space-y-3">
+            {% for faq in faqs %}
+            <div class="rounded-lg border border-border bg-surface p-3">
+                <p class="text-sm font-medium text-ink">{{ faq.question }}</p>
+                <p class="mt-1 text-sm text-ink-muted">{{ faq.answer }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    {% if sources %}
+    <div class="mt-6">
+        <h2 class="text-lg font-semibold text-ink">{% translate "Official sources" %}</h2>
+        <ul class="mt-2 space-y-1 text-sm">
+            {% for source in sources %}
+            <li>
+                <a href="{{ source.url }}" target="_blank" rel="noopener" class="text-primary hover:underline">{{ source.title }}</a>
+                <span class="text-xs text-ink-muted">
+                    ({% blocktranslate with date=source.last_verified_date %}verified {{ date }}{% endblocktranslate %})
+                </span>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+    <div class="mt-8 rounded-lg border border-border bg-surface p-4">
+        {% if progress %}
+            <p class="text-sm text-ink-muted">
+                {% blocktranslate with status=progress.get_status_display %}You're tracking this process. Status: {{ status }}{% endblocktranslate %}
+            </p>
+            {% url 'processes:track_progress' slug=process.slug as track_url %}
+            {% translate "Continue tracking" as continue_label %}
+            {% include "components/ui/button.html" with href=track_url label=continue_label extra_class="mt-3" only %}
+        {% elif request.user.is_authenticated %}
+            <form method="post" action="{% url 'processes:start_tracking' slug=process.slug %}">
+                {% csrf_token %}
+                {% if has_variants %}
+                <p class="text-sm font-medium text-ink">{% translate "Are you applying as an individual or a business?" %}</p>
+                <div class="mt-2 flex gap-4 text-sm">
+                    <label class="flex items-center gap-1.5">
+                        <input type="radio" name="variant" value="individual" required> {% translate "Individual" %}
+                    </label>
+                    <label class="flex items-center gap-1.5">
+                        <input type="radio" name="variant" value="business" required> {% translate "Business" %}
+                    </label>
+                </div>
+                {% endif %}
+                {% translate "Start tracking" as start_label %}
+                {% include "components/ui/button.html" with type="submit" label=start_label extra_class="mt-3" only %}
+            </form>
+        {% else %}
+            <p class="text-sm text-ink-muted">
+                <a href="{% url 'accounts:login' %}?next={{ request.path }}" class="text-primary hover:underline">
+                    {% translate "Log in" %}
+                </a>
+                {% translate "to save this process and track your progress." %}
+            </p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

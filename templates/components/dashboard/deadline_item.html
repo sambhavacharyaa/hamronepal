@@ -1,0 +1,40 @@
+{% load i18n %}
+<div class="flex items-center justify-between gap-3 rounded-xl border border-border bg-surface p-4">
+    <div class="flex items-center gap-3">
+        <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-2xl {% if deadline.is_completed %}bg-success/10 text-success{% elif deadline.is_overdue %}bg-danger/10 text-danger{% elif deadline.days_until <= 7 %}bg-warning/10 text-warning{% else %}bg-primary/10 text-primary{% endif %}">
+            {% if deadline.is_completed %}
+                {% include "components/icons/check-circle.html" with extra_class="h-4.5 w-4.5" only %}
+            {% elif deadline.kind == "document" %}
+                {% include "components/icons/file-text.html" with extra_class="h-4.5 w-4.5" only %}
+            {% else %}
+                {% include "components/icons/clipboard-text.html" with extra_class="h-4.5 w-4.5" only %}
+            {% endif %}
+        </span>
+        <div>
+            {% if deadline.url %}
+                <a href="{{ deadline.url }}" class="rounded-sm text-sm font-medium text-ink hover:text-primary focus-visible:focus-ring">{{ deadline.title }}</a>
+            {% else %}
+                <p class="text-sm font-medium text-ink">{{ deadline.title }}</p>
+            {% endif %}
+            <p class="text-xs text-ink-muted">
+                {% if deadline.is_completed %}
+                    {% if deadline.completed_at %}{% blocktranslate with date=deadline.completed_at|date %}Completed {{ date }}{% endblocktranslate %}{% else %}{% translate "Completed" %}{% endif %}
+                {% elif deadline.is_overdue %}
+                    {% translate "Overdue" %}
+                {% else %}
+                    {{ deadline.date }}
+                {% endif %}
+            </p>
+        </div>
+    </div>
+    {% if deadline.is_completed %}
+        {% translate "Completed" as completed_label %}
+        {% include "components/ui/badge.html" with label=completed_label tone="success" only %}
+    {% elif deadline.is_overdue %}
+        {% translate "Overdue" as overdue_label %}
+        {% include "components/ui/badge.html" with label=overdue_label tone="danger" only %}
+    {% elif deadline.days_until <= 7 %}
+        {% blocktranslate count counter=deadline.days_until asvar soon_label %}{{ counter }} day left{% plural %}{{ counter }} days left{% endblocktranslate %}
+        {% include "components/ui/badge.html" with label=soon_label tone="warning" only %}
+    {% endif %}
+</div>

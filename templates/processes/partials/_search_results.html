@@ -1,0 +1,16 @@
+{% load i18n %}
+{% if results %}
+<div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+    {% for process in results %}
+        {% include "components/process_card.html" %}
+    {% endfor %}
+</div>
+{% elif query %}
+<p class="text-sm text-ink-muted">
+    {% blocktranslate %}No processes found for "{{ query }}" yet.{% endblocktranslate %}
+</p>
+{% else %}
+<p class="text-sm text-ink-muted">
+    {% translate "No processes published yet." %}
+</p>
+{% endif %}

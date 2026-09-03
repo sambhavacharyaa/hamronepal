@@ -1,0 +1,110 @@
+@import "tailwindcss";
+
+/**
+  * A catch-all path to Django template files, JavaScript, and Python files
+  * that contain Tailwind CSS classes and will be scanned by Tailwind to generate the final CSS file.
+  *
+  * If your final CSS file is not being updated after code changes, you may want to broaden or narrow
+  * the scope of this path.
+  */
+@source "../../../**/*.{html,py,js}";
+
+@font-face {
+    font-family: "Geist";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("/static/fonts/Geist-Regular.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Geist";
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url("/static/fonts/Geist-Medium.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Geist";
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url("/static/fonts/Geist-SemiBold.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Geist";
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url("/static/fonts/Geist-Bold.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Noto Sans Devanagari";
+    font-style: normal;
+    font-weight: 400 700;
+    font-display: swap;
+    src: url("/static/fonts/NotoSansDevanagari-Variable.woff2") format("woff2-variations");
+    unicode-range: U+0900-097F, U+1CD0-1CF9, U+200C-200D, U+20A8, U+20B9, U+20F0, U+25CC, U+A830-A839, U+A8E0-A8FF, U+11B00-11B09;
+}
+
+@theme {
+    --font-sans: "Geist", "Noto Sans Devanagari", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans", "Nirmala UI", "Kohinoor Devanagari", Helvetica, Arial, sans-serif;
+
+    --color-canvas: #fdfcfa;
+    --color-surface: #ffffff;
+    --color-border: #ebe9e5;
+    --color-outline: #9b917d;
+    --color-ink: #1d1b16;
+    --color-ink-muted: #6e695e;
+
+    --color-primary: #1b3e6f;
+    --color-primary-solid: #1b3e6f;
+    --color-primary-solid-hover: #153056;
+    --color-primary-subtle: #f4f7fa;
+    --color-accent: #c8102e;
+
+    --color-success: #1f7a4d;
+    --color-warning: #996200;
+    --color-danger: #b3261e;
+
+    --color-brand-50: #f4f7fa;
+    --color-brand-100: #e5ecf5;
+    --color-brand-200: #c1d3ec;
+    --color-brand-300: #8aaee0;
+    --color-brand-400: #4b83d3;
+    --color-brand-500: #2a60ac;
+    --color-brand-600: #1b3e6f;
+    --color-brand-700: #11294b;
+    --color-brand-800: #0a192e;
+    --color-brand-900: #050c15;
+
+    --color-accent-50: #fceef0;
+    --color-accent-100: #f8d8de;
+    --color-accent-400: #ec506a;
+    --color-accent-500: #c8102e;
+    --color-accent-600: #a20d25;
+    --color-accent-700: #83091d;
+}
+
+:root {
+    color-scheme: light;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    html {
+        scroll-behavior: smooth;
+    }
+}
+
+@utility focus-ring {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+@utility nav-active {
+    background-color: color-mix(in oklab, var(--color-primary) 10%, transparent);
+    color: var(--color-primary);
+}

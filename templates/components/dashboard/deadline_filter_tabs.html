@@ -1,0 +1,10 @@
+{% load i18n %}
+<div class="flex flex-wrap gap-2">
+    {% for tab in filter_tabs %}
+    <a href="{{ tab.url }}"
+       class="rounded-full border px-3.5 py-1.5 text-sm font-medium transition focus-visible:focus-ring
+           {% if tab.key == active_filter %}border-primary bg-primary/10 text-primary{% else %}border-border text-ink-muted hover:border-primary/40 hover:text-ink{% endif %}">
+        {{ tab.label }}
+    </a>
+    {% endfor %}
+</div>

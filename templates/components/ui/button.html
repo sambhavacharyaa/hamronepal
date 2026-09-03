@@ -1,0 +1,25 @@
+{% if tone == 'outline' %}
+    {% if href %}
+    <a href="{{ href }}"
+       class="inline-block rounded-full border-2 border-border bg-surface font-semibold text-ink shadow-sm transition hover:-translate-y-0.5 hover:border-primary hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary
+           {% if size == 'sm' %}px-3.5 py-1.5 text-sm{% elif size == 'lg' %}px-6 py-3 text-base{% else %}px-4 py-2 text-base{% endif %}
+           {{ extra_class }}">{{ label }}</a>
+    {% else %}
+    <button type="{{ type|default:'submit' }}"
+            class="rounded-full border-2 border-border bg-surface font-semibold text-ink shadow-sm transition hover:-translate-y-0.5 hover:border-primary hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary
+                {% if size == 'sm' %}px-3.5 py-1.5 text-sm{% elif size == 'lg' %}px-6 py-3 text-base{% else %}px-4 py-2 text-base{% endif %}
+                {{ extra_class }}">{{ label }}</button>
+    {% endif %}
+{% else %}
+    {% if href %}
+    <a href="{{ href }}"
+       class="inline-block rounded-full bg-gradient-to-r from-primary-solid to-primary-solid-hover font-semibold text-white shadow-md shadow-primary/20 transition hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary/30 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary
+           {% if size == 'sm' %}px-3.5 py-1.5 text-sm{% elif size == 'lg' %}px-6 py-3 text-base{% else %}px-4 py-2 text-base{% endif %}
+           {{ extra_class }}">{{ label }}</a>
+    {% else %}
+    <button type="{{ type|default:'submit' }}"
+            class="rounded-full bg-gradient-to-r from-primary-solid to-primary-solid-hover font-semibold text-white shadow-md shadow-primary/20 transition hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary/30 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary
+                {% if size == 'sm' %}px-3.5 py-1.5 text-sm{% elif size == 'lg' %}px-6 py-3 text-base{% else %}px-4 py-2 text-base{% endif %}
+                {{ extra_class }}">{{ label }}</button>
+    {% endif %}
+{% endif %}

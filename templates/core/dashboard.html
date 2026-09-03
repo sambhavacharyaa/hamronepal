@@ -1,0 +1,216 @@
+{% extends "dashboard/_base.html" %}
+{% load i18n %}
+
+{% block title %}{% translate "Dashboard" %}{% endblock %}
+
+{% block dashboard_content %}
+<section id="overview" class="scroll-mt-24">
+    <h1 class="text-2xl font-bold text-balance break-words text-ink sm:text-3xl">
+        {% blocktranslate with name=profile.display_name|default:request.user.email %}Welcome back, {{ name }}{% endblocktranslate %}
+    </h1>
+    <p class="mt-1 text-sm text-ink-muted">
+        {% blocktranslate count counter=active_progress|length %}{{ counter }} active journey{% plural %}{{ counter }} active journeys{% endblocktranslate %}
+        &middot;
+        {% blocktranslate count counter=priority_tasks|length %}{{ counter }} task needs attention{% plural %}{{ counter }} tasks need attention{% endblocktranslate %}
+    </p>
+
+    <div class="mt-6 grid grid-cols-2 gap-3 lg:grid-cols-4">
+        {% include "components/dashboard/progress_ring_card.html" %}
+        {% translate "Pending tasks" as pending_tasks_label %}
+        {% include "components/dashboard/stat_card.html" with icon="clipboard-text" icon_class="bg-warning/10 text-warning" value=stats.pending_task_count label=pending_tasks_label only %}
+        {% translate "Expiring soon" as expiring_soon_label %}
+        {% include "components/dashboard/stat_card.html" with icon="shield-warning" icon_class="bg-danger/10 text-danger" value=stats.expiring_soon_count label=expiring_soon_label only %}
+        {% translate "Completed" as completed_stat_label %}
+        {% include "components/dashboard/stat_card.html" with icon="check-circle" icon_class="bg-success/10 text-success" value=stats.completed_count label=completed_stat_label only %}
+    </div>
+
+    {% if deadlines_preview %}
+    <div class="mt-6 rounded-2xl border border-border bg-surface p-5">
+        <div class="flex items-center justify-between gap-2">
+            <p class="text-xs font-semibold uppercase tracking-wide text-ink-muted">{% translate "Upcoming deadlines" %}</p>
+            <a href="{% url 'dashboard:deadlines' %}" class="rounded-sm text-xs font-medium text-primary hover:underline focus-visible:focus-ring">
+                {% translate "View all" %}
+            </a>
+        </div>
+        <div class="mt-3 space-y-2">
+            {% for deadline in deadlines_preview %}
+                {% include "components/dashboard/deadline_item.html" %}
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    <div class="mt-6 flex flex-wrap gap-3">
+        {% url 'core:home' as home_url %}
+        {% translate "Search a process" as search_action_label %}
+        {% include "components/ui/button.html" with href=home_url|add:"#q" label=search_action_label tone="outline" size="sm" only %}
+        {% translate "Add a task" as task_action_label %}
+        {% include "components/ui/button.html" with href="#actions" label=task_action_label tone="outline" size="sm" only %}
+        {% url 'processes:process_list' as browse_url %}
+        {% translate "Browse processes" as browse_action_label %}
+        {% include "components/ui/button.html" with href=browse_url label=browse_action_label tone="outline" size="sm" only %}
+    </div>
+
+    {% if notifications_preview %}
+    <div class="mt-8">
+        <div class="flex items-center justify-between gap-2">
+            <h2 class="text-sm font-semibold uppercase tracking-wide text-ink-muted">{% translate "Recent notifications" %}</h2>
+            <a href="{% url 'dashboard:notifications' %}" class="rounded-sm text-xs font-medium text-primary hover:underline focus-visible:focus-ring">
+                {% translate "View all" %}
+            </a>
+        </div>
+        <div class="mt-3 space-y-2">
+            {% for notification in notifications_preview %}
+                {% include "components/dashboard/notification_item.html" %}
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    {% if recommended_processes %}
+    <div class="mt-8">
+        <h2 class="text-sm font-semibold uppercase tracking-wide text-ink-muted">{% translate "Recommended next" %}</h2>
+        <div class="mt-3 grid gap-3 sm:grid-cols-3">
+            {% for process in recommended_processes %}
+                {% include "components/process_card.html" %}
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    {% if recently_viewed %}
+    <div class="mt-8">
+        <h2 class="text-sm font-semibold uppercase tracking-wide text-ink-muted">{% translate "Recently viewed" %}</h2>
+        <div class="-mx-4 mt-3 flex snap-x gap-3 overflow-x-auto px-4 pb-2">
+            {% for view in recently_viewed %}
+            <a href="{% url 'processes:process_detail' slug=view.process.slug %}"
+               class="w-56 shrink-0 snap-start rounded-xl border border-border bg-surface p-3 text-sm font-medium text-ink transition hover:border-primary/40 hover:shadow-sm focus-visible:focus-ring">
+                {{ view.process.title }}
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+</section>
+
+<section id="actions" class="mt-16 scroll-mt-24">
+    <h2 class="text-2xl font-bold text-balance text-ink sm:text-3xl">{% translate "Actions" %}</h2>
+
+    <form method="post" action="{% url 'tasks:create' %}" class="mt-4 flex flex-wrap items-end gap-2">
+        {% csrf_token %}
+        <div>
+            <label for="{{ task_form.title.id_for_label }}" class="sr-only">{% translate "Task title" %}</label>
+            {{ task_form.title }}
+        </div>
+        <div>
+            <label for="{{ task_form.due_date.id_for_label }}" class="sr-only">{% translate "Due date" %}</label>
+            {{ task_form.due_date }}
+        </div>
+        {% translate "Add task" as add_task_label %}
+        {% include "components/ui/button.html" with type="submit" label=add_task_label only %}
+    </form>
+
+    {% if priority_tasks %}
+    <ul class="mt-4 space-y-2">
+        {% for task in priority_tasks %}
+            {% include "tasks/partials/_task_item.html" %}
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p class="mt-4 text-sm text-ink-muted">{% translate "Nothing needs your attention right now." %}</p>
+    {% endif %}
+</section>
+
+<section id="journeys" class="mt-16 scroll-mt-24">
+    <h2 class="text-2xl font-bold text-balance text-ink sm:text-3xl">{% translate "Journeys" %}</h2>
+    {% if active_progress %}
+    <div class="mt-4 grid gap-3 sm:grid-cols-2">
+        {% for progress in active_progress %}
+            {% include "components/dashboard/journey_card.html" %}
+        {% endfor %}
+    </div>
+    {% else %}
+    <p class="mt-4 text-sm text-ink-muted">
+        {% translate "You're not tracking any processes yet." %}
+        <a href="{% url 'core:home' %}" class="text-primary hover:underline focus-visible:focus-ring">{% translate "Find one to get started." %}</a>
+    </p>
+    {% endif %}
+</section>
+
+<section id="documents" class="mt-16 scroll-mt-24">
+    <h2 class="text-2xl font-bold text-balance text-ink sm:text-3xl">{% translate "Documents" %}</h2>
+
+    <form method="post" action="{% url 'dashboard:create_document' %}" enctype="multipart/form-data" class="mt-4 flex flex-wrap items-end gap-2">
+        {% csrf_token %}
+        <div>
+            <label for="{{ document_form.title.id_for_label }}" class="sr-only">{% translate "Document title" %}</label>
+            {{ document_form.title }}
+        </div>
+        <div>
+            <label for="{{ document_form.document_type.id_for_label }}" class="sr-only">{% translate "Document type" %}</label>
+            {{ document_form.document_type }}
+        </div>
+        <div>
+            <label for="{{ document_form.image.id_for_label }}" class="sr-only">{% translate "Document image" %}</label>
+            {{ document_form.image }}
+        </div>
+        <div>
+            <label for="{{ document_form.expiry_date.id_for_label }}" class="sr-only">{% translate "Expiry date" %}</label>
+            {{ document_form.expiry_date }}
+        </div>
+        {% translate "Add document" as add_document_label %}
+        {% include "components/ui/button.html" with type="submit" label=add_document_label only %}
+    </form>
+
+    {% if documents %}
+    <div class="mt-4 space-y-2">
+        {% for document in documents %}
+            {% include "components/dashboard/document_item.html" %}
+        {% endfor %}
+    </div>
+    {% else %}
+    <p class="mt-4 text-sm text-ink-muted">{% translate "No documents tracked yet. Add one above to get expiry reminders." %}</p>
+    {% endif %}
+</section>
+
+<section id="saved" class="mt-16 scroll-mt-24">
+    <h2 class="text-2xl font-bold text-balance text-ink sm:text-3xl">{% translate "Saved" %}</h2>
+    {% if saved_processes %}
+    <div class="mt-4 grid gap-3 sm:grid-cols-2">
+        {% for saved in saved_processes %}
+            {% with process=saved.process %}
+                {% include "components/process_card.html" %}
+            {% endwith %}
+        {% endfor %}
+    </div>
+    {% else %}
+    <p class="mt-4 text-sm text-ink-muted">
+        {% translate "Save a process from its page to find it here later." %}
+    </p>
+    {% endif %}
+</section>
+
+<section id="completed" class="mt-16 scroll-mt-24">
+    <h2 class="text-2xl font-bold text-balance text-ink sm:text-3xl">{% translate "Completed" %}</h2>
+    {% if completed_progress %}
+    <div class="mt-4 space-y-2">
+        {% for progress in completed_progress %}
+        <div class="flex items-center justify-between rounded-xl border border-border bg-surface p-4">
+            <div>
+                <p class="text-sm font-medium text-ink">{{ progress.process.title }}</p>
+                {% if progress.completed_at %}
+                <p class="text-xs text-ink-muted">
+                    {% blocktranslate with date=progress.completed_at|date %}Completed {{ date }}{% endblocktranslate %}
+                </p>
+                {% endif %}
+            </div>
+            {% translate "Completed" as completed_badge_label %}
+            {% include "components/ui/badge.html" with label=completed_badge_label only %}
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p class="mt-4 text-sm text-ink-muted">{% translate "Nothing completed yet." %}</p>
+    {% endif %}
+</section>
+{% endblock %}

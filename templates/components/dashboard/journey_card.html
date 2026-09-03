@@ -1,0 +1,19 @@
+{% load i18n %}
+<a href="{% url 'processes:track_progress' slug=progress.process.slug %}"
+   class="block rounded-2xl border border-border bg-surface p-5 shadow-sm transition hover:-translate-y-1 hover:border-primary/40 hover:shadow-xl hover:shadow-primary/10 focus-visible:focus-ring">
+    <div class="flex items-center justify-between gap-2">
+        <span class="text-xs font-medium uppercase tracking-wide text-primary">{{ progress.process.category.name }}</span>
+        {% include "components/ui/badge.html" with label=progress.get_status_display tone="neutral" only %}
+    </div>
+    <p class="mt-2 text-base font-semibold text-ink">{{ progress.process.title }}</p>
+    <div class="mt-3">
+        {% include "components/ui/progress_bar.html" with percent=progress.percent only %}
+        <p class="mt-1.5 text-xs text-ink-muted">
+            {% blocktranslate with percent=progress.percent %}{{ percent }}% complete{% endblocktranslate %}
+            {% if progress.total_count %}
+                &middot;
+                {% blocktranslate with completed=progress.completed_count total=progress.total_count %}{{ completed }} of {{ total }} steps{% endblocktranslate %}
+            {% endif %}
+        </p>
+    </div>
+</a>

@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{{ process.title }}: {% translate "Tracking" %}{% endblock %}
+
+{% block content %}
+<div class="mx-auto max-w-2xl">
+    <a href="{% url 'processes:process_detail' slug=process.slug %}" class="text-sm text-primary hover:underline">
+        &larr; {{ process.title }}
+    </a>
+    <h1 class="mt-2 text-2xl font-bold text-ink">{% translate "Your progress" %}</h1>
+
+    <div class="mt-4">
+        {% include "components/ui/progress_bar.html" with percent=percent size="lg" only %}
+        <p class="mt-1 text-sm text-ink-muted">{{ percent }}% {% translate "of checklist items complete" %}</p>
+    </div>
+
+    <div class="mt-6 rounded-lg border border-border bg-surface p-4">
+        <p class="text-sm font-medium text-ink">{% translate "Status" %}</p>
+        <form method="post" action="{% url 'processes:advance_status' slug=process.slug %}" class="mt-2 flex flex-wrap items-center gap-2">
+            {% csrf_token %}
+            <select name="status" class="rounded-lg border border-outline bg-surface px-3 py-1.5 text-sm text-ink focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary">
+                {% for value, label in status_choices %}
+                <option value="{{ value }}" {% if value == progress.status %}selected{% endif %}>{{ label }}</option>
+                {% endfor %}
+            </select>
+            {% translate "Update status" as update_status_label %}
+            {% include "components/ui/button.html" with type="submit" label=update_status_label size="sm" only %}
+        </form>
+    </div>
+
+    {% if step_progress %}
+    <h2 class="mt-8 text-lg font-semibold text-ink">{% translate "Steps" %}</h2>
+    <ul class="mt-3 space-y-2">
+        {% for item in step_progress %}
+            {% include "processes/partials/_step_item.html" with step_progress=item %}
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    {% if requirement_progress %}
+    <h2 class="mt-8 text-lg font-semibold text-ink">{% translate "Documents & requirements" %}</h2>
+    <ul class="mt-3 space-y-2">
+        {% for item in requirement_progress %}
+            {% include "processes/partials/_requirement_item.html" with requirement_progress=item %}
+        {% endfor %}
+    </ul>
+    {% endif %}
+</div>
+{% endblock %}

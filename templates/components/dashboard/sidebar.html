@@ -1,0 +1,149 @@
+{% load i18n %}
+<div id="dashboard-sidebar-backdrop" hidden class="fixed inset-0 z-30 bg-ink/20 backdrop-blur-sm lg:hidden"></div>
+
+<aside id="dashboard-sidebar" data-mobile-open="false" data-collapsed="false"
+       class="fixed inset-y-0 left-0 z-40 flex w-72 -translate-x-full flex-col border-r border-border/80 bg-surface/80 shadow-lg shadow-ink/5 backdrop-blur-md transition-transform duration-300 ease-out
+           data-[mobile-open=true]:translate-x-0
+           lg:sticky lg:top-24 lg:z-0 lg:h-[calc(100dvh-7rem)] lg:w-64 lg:shrink-0 lg:translate-x-0 lg:rounded-2xl lg:border lg:transition-[width]
+           lg:data-[collapsed=true]:w-20">
+    <div class="flex items-center justify-between gap-2 border-b border-border/60 p-4 lg:[aside[data-collapsed=true]_&]:justify-center">
+        <p class="truncate text-sm font-semibold text-ink lg:[aside[data-collapsed=true]_&]:hidden">
+            {% translate "My Dashboard" %}
+        </p>
+        <button type="button" id="dashboard-sidebar-close" class="rounded-md p-1.5 text-ink-muted hover:text-ink focus-visible:focus-ring lg:hidden">
+            {% include "components/icons/x.html" with extra_class="h-5 w-5" only %}
+            <span class="sr-only">{% translate "Close menu" %}</span>
+        </button>
+        <button type="button" id="dashboard-sidebar-collapse" aria-expanded="true" aria-controls="dashboard-sidebar"
+                class="hidden rounded-md p-1.5 text-ink-muted hover:text-ink focus-visible:focus-ring lg:flex">
+            {% include "components/icons/caret-left.html" with extra_class="h-4 w-4 transition-transform lg:[aside[data-collapsed=true]_&]:rotate-180" only %}
+            <span class="sr-only">{% translate "Collapse sidebar" %}</span>
+        </button>
+    </div>
+
+    <nav class="flex-1 overflow-y-auto p-3">
+        <div>
+            {% translate "Overview" as overview_group_label %}
+            {% include "components/dashboard/nav_section_header.html" with label=overview_group_label only %}
+            <div class="space-y-1">
+                {% translate "Overview" as overview_label %}
+                {% include "components/dashboard/nav_item.html" with target_id="overview" icon="squares-four" label=overview_label active_class="[.dashboard-shell:has(#overview:target)_&]:nav-active" only %}
+            </div>
+        </div>
+
+        <div class="mt-4">
+            {% translate "My life" as my_life_group_label %}
+            {% include "components/dashboard/nav_section_header.html" with label=my_life_group_label only %}
+            <div class="space-y-1">
+                {% translate "Actions" as actions_label %}
+                {% include "components/dashboard/nav_item.html" with target_id="actions" icon="clipboard-text" label=actions_label active_class="[.dashboard-shell:has(#actions:target)_&]:nav-active" only %}
+                {% translate "Journeys" as journeys_label %}
+                {% include "components/dashboard/nav_item.html" with target_id="journeys" icon="compass" label=journeys_label active_class="[.dashboard-shell:has(#journeys:target)_&]:nav-active" only %}
+                {% translate "Documents" as documents_label %}
+                {% include "components/dashboard/nav_item.html" with target_id="documents" icon="file-text" label=documents_label active_class="[.dashboard-shell:has(#documents:target)_&]:nav-active" only %}
+                {% translate "Deadlines" as deadlines_label %}
+                {% url 'dashboard:deadlines' as deadlines_url %}
+                {% include "components/dashboard/nav_item.html" with url=deadlines_url icon="calendar-dot" label=deadlines_label request=request only %}
+            </div>
+        </div>
+
+        <div class="mt-4">
+            {% translate "Activity" as activity_group_label %}
+            {% include "components/dashboard/nav_section_header.html" with label=activity_group_label only %}
+            <div class="space-y-1">
+                <div class="relative">
+                    {% translate "Notifications" as notifications_label %}
+                    {% url 'dashboard:notifications' as notifications_url %}
+                    {% include "components/dashboard/nav_item.html" with url=notifications_url icon="bell" label=notifications_label request=request only %}
+                    {% include "components/dashboard/notification_badge.html" with badge_id="sidebar-notification-badge" notification_count=notification_count position_class="right-3 top-2.5" extra_class="lg:[aside[data-collapsed=true]_&]:right-1.5 lg:[aside[data-collapsed=true]_&]:top-1.5" only %}
+                </div>
+                {% translate "Saved" as saved_label %}
+                {% include "components/dashboard/nav_item.html" with target_id="saved" icon="bookmark-simple" label=saved_label active_class="[.dashboard-shell:has(#saved:target)_&]:nav-active" only %}
+                {% translate "Completed" as completed_label %}
+                {% include "components/dashboard/nav_item.html" with target_id="completed" icon="check-circle" label=completed_label active_class="[.dashboard-shell:has(#completed:target)_&]:nav-active" only %}
+            </div>
+        </div>
+
+        <div class="mt-4">
+            {% translate "Account" as account_group_label %}
+            {% include "components/dashboard/nav_section_header.html" with label=account_group_label only %}
+            <div class="space-y-1">
+                {% translate "Settings" as settings_label %}
+                {% url 'accounts:profile' as settings_url %}
+                {% include "components/dashboard/nav_item.html" with url=settings_url icon="gear-six" label=settings_label request=request only %}
+            </div>
+        </div>
+    </nav>
+
+    <div class="border-t border-border/60 p-4">
+        <a href="{% url 'accounts:profile' %}" class="flex items-center gap-3 rounded-xl p-1 hover:bg-primary/5 focus-visible:focus-ring">
+            {% if profile.avatar %}
+                <img src="{{ profile.avatar.url }}" alt="" class="h-9 w-9 shrink-0 rounded-full object-cover">
+            {% else %}
+                <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary/10 text-sm font-semibold text-primary">
+                    {{ user_initial }}
+                </span>
+            {% endif %}
+            <span class="min-w-0 lg:[aside[data-collapsed=true]_&]:hidden">
+                <span class="block truncate text-sm font-medium text-ink">{{ profile.display_name|default:request.user.email }}</span>
+                <span class="block truncate text-xs text-ink-muted">{{ request.user.email }}</span>
+            </span>
+        </a>
+    </div>
+</aside>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var sidebar = document.getElementById("dashboard-sidebar");
+        var backdrop = document.getElementById("dashboard-sidebar-backdrop");
+        var openButton = document.getElementById("dashboard-sidebar-open");
+        var closeButton = document.getElementById("dashboard-sidebar-close");
+        var collapseButton = document.getElementById("dashboard-sidebar-collapse");
+
+        function setMobileOpen(open) {
+            sidebar.dataset.mobileOpen = open ? "true" : "false";
+            backdrop.hidden = !open;
+            if (openButton) {
+                openButton.setAttribute("aria-expanded", open ? "true" : "false");
+            }
+        }
+
+        function setCollapsed(collapsed) {
+            sidebar.dataset.collapsed = collapsed ? "true" : "false";
+            collapseButton.setAttribute("aria-expanded", collapsed ? "false" : "true");
+            try {
+                localStorage.setItem("dashboardSidebarCollapsed", collapsed ? "1" : "0");
+            } catch (error) {
+                return;
+            }
+        }
+
+        if (openButton) {
+            openButton.addEventListener("click", function () {
+                setMobileOpen(true);
+            });
+        }
+        closeButton.addEventListener("click", function () {
+            setMobileOpen(false);
+        });
+        backdrop.addEventListener("click", function () {
+            setMobileOpen(false);
+        });
+        collapseButton.addEventListener("click", function () {
+            setCollapsed(sidebar.dataset.collapsed !== "true");
+        });
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "Escape") {
+                setMobileOpen(false);
+            }
+        });
+
+        try {
+            if (localStorage.getItem("dashboardSidebarCollapsed") === "1") {
+                setCollapsed(true);
+            }
+        } catch (error) {
+            setCollapsed(false);
+        }
+    });
+</script>

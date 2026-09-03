@@ -1,0 +1,39 @@
+{% extends "dashboard/_base.html" %}
+{% load i18n %}
+
+{% block title %}{% translate "Deadlines" %}{% endblock %}
+
+{% block dashboard_content %}
+<h1 class="text-2xl font-bold text-balance text-ink sm:text-3xl">{% translate "Deadlines" %}</h1>
+<p class="mt-1 text-sm text-ink-muted">
+    {% translate "Every task and document deadline in one place." %}
+</p>
+
+<div class="mt-6">
+    {% include "components/dashboard/deadline_filter_tabs.html" %}
+</div>
+
+{% if deadlines %}
+<div class="mt-4 space-y-2">
+    {% for deadline in deadlines %}
+        {% include "components/dashboard/deadline_item.html" %}
+    {% endfor %}
+</div>
+{% else %}
+<p class="mt-6 text-sm text-ink-muted">
+    {% if active_filter == "overdue" %}
+        {% translate "Nothing overdue. You're on top of things." %}
+    {% elif active_filter == "completed" %}
+        {% translate "Nothing completed yet." %}
+    {% elif active_filter == "this_week" %}
+        {% translate "Nothing due this week." %}
+    {% elif active_filter == "this_month" %}
+        {% translate "Nothing due this month." %}
+    {% elif active_filter == "later" %}
+        {% translate "Nothing further out yet." %}
+    {% else %}
+        {% translate "Nothing upcoming. Add a task or document to get reminders here." %}
+    {% endif %}
+</p>
+{% endif %}
+{% endblock %}

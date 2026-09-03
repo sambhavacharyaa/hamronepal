@@ -1,0 +1,1209 @@
+# Nepali translation for HamroNepal.
+# Copyright (C) 2026 HamroNepal
+# This file is distributed under the same license as the HamroNepal package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: HamroNepal 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-03 13:27+0545\n"
+"PO-Revision-Date: 2026-09-01 21:00+0545\n"
+"Last-Translator: HamroNepal\n"
+"Language-Team: Nepali\n"
+"Language: ne\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: apps/accounts/views.py:25
+msgid "Verify your HamroNepal email"
+msgstr "आफ्नो HamroNepal इमेल प्रमाणित गर्नुहोस्"
+
+#: apps/accounts/views.py:41
+msgid "Account created. Check your email to verify your address."
+msgstr "खाता सिर्जना भयो। आफ्नो ठेगाना प्रमाणित गर्न इमेल जाँच्नुहोस्।"
+
+#: apps/accounts/views.py:59
+msgid "Your email address has been verified."
+msgstr "तपाईंको इमेल ठेगाना प्रमाणित भयो।"
+
+#: apps/accounts/views.py:61
+msgid "This verification link is invalid or has expired."
+msgstr "यो प्रमाणीकरण लिङ्क अमान्य छ वा म्याद सकिएको छ।"
+
+#: apps/accounts/views.py:109
+msgid "Profile updated."
+msgstr "प्रोफाइल अपडेट भयो।"
+
+#: apps/dashboard/models.py:43
+msgid "Citizenship certificate"
+msgstr "नागरिकता प्रमाणपत्र"
+
+#: apps/dashboard/models.py:44
+msgid "Passport"
+msgstr "राहदानी"
+
+#: apps/dashboard/models.py:45
+msgid "Driving license"
+msgstr "सवारी चालक अनुमतिपत्र"
+
+#: apps/dashboard/models.py:46
+msgid "PAN card"
+msgstr "PAN कार्ड"
+
+#: apps/dashboard/models.py:47 apps/organizations/models.py:13
+msgid "Other"
+msgstr "अन्य"
+
+#: apps/dashboard/models.py:69
+msgid "Info"
+msgstr "जानकारी"
+
+#: apps/dashboard/models.py:70
+msgid "Warning"
+msgstr "चेतावनी"
+
+#: apps/dashboard/models.py:71
+msgid "Danger"
+msgstr "खतरा"
+
+#: apps/dashboard/models.py:74
+msgid "Document expiry"
+msgstr "कागजातको म्याद सकिने"
+
+#: apps/dashboard/models.py:75
+msgid "Task due"
+msgstr "कार्यको म्याद"
+
+#: apps/dashboard/models.py:76
+msgid "Process progress"
+msgstr "प्रक्रिया प्रगति"
+
+#: apps/dashboard/models.py:77
+msgid "Process stalled"
+msgstr "प्रक्रिया रोकिएको"
+
+#: apps/dashboard/models.py:78
+msgid "Process update"
+msgstr "प्रक्रिया अपडेट"
+
+#: apps/dashboard/views.py:25
+msgid "Document added."
+msgstr "कागजात थपियो।"
+
+#: apps/dashboard/views.py:27
+msgid "Could not add document. Please check the form."
+msgstr "कागजात थप्न सकिएन। कृपया फारम जाँच्नुहोस्।"
+
+#: apps/dashboard/views.py:62
+msgid "Upcoming"
+msgstr "आगामी"
+
+#: apps/dashboard/views.py:63
+msgid "This week"
+msgstr "यस हप्ता"
+
+#: apps/dashboard/views.py:64
+msgid "This month"
+msgstr "यस महिना"
+
+#: apps/dashboard/views.py:65
+msgid "Later"
+msgstr "पछि"
+
+#: apps/dashboard/views.py:66
+#: templates/components/dashboard/deadline_item.html:23
+#: templates/components/dashboard/deadline_item.html:34
+msgid "Overdue"
+msgstr "म्याद नाघेको"
+
+#: apps/dashboard/views.py:67 apps/processes/models.py:201
+#: templates/components/dashboard/deadline_item.html:21
+#: templates/components/dashboard/deadline_item.html:31
+#: templates/components/dashboard/sidebar.html:62
+#: templates/core/dashboard.html:23 templates/core/dashboard.html:194
+#: templates/core/dashboard.html:207
+msgid "Completed"
+msgstr "सम्पन्न"
+
+#: apps/locations/models.py:35
+msgid "Metropolitan City"
+msgstr "महानगरपालिका"
+
+#: apps/locations/models.py:36
+msgid "Sub-Metropolitan City"
+msgstr "उपमहानगरपालिका"
+
+#: apps/locations/models.py:37 templates/core/home.html:363
+msgid "Municipality"
+msgstr "नगरपालिका"
+
+#: apps/locations/models.py:38
+msgid "Rural Municipality"
+msgstr "गाउँपालिका"
+
+#: apps/organizations/models.py:9
+msgid "Ministry"
+msgstr "मन्त्रालय"
+
+#: apps/organizations/models.py:10
+msgid "Department"
+msgstr "विभाग"
+
+#: apps/organizations/models.py:11
+msgid "Constitutional Body"
+msgstr "संवैधानिक निकाय"
+
+#: apps/organizations/models.py:12
+msgid "Local Government"
+msgstr "स्थानीय सरकार"
+
+#: apps/processes/models.py:11 templates/processes/process_list.html:14
+msgid "All"
+msgstr "सबै"
+
+#: apps/processes/models.py:12 templates/processes/process_detail.html:143
+msgid "Individual"
+msgstr "व्यक्तिगत"
+
+#: apps/processes/models.py:13 templates/processes/process_detail.html:146
+msgid "Business"
+msgstr "व्यवसाय"
+
+#: apps/processes/models.py:33
+msgid "Draft"
+msgstr "मस्यौदा"
+
+#: apps/processes/models.py:34
+msgid "In Review"
+msgstr "समीक्षामा"
+
+#: apps/processes/models.py:35
+msgid "Published"
+msgstr "प्रकाशित"
+
+#: apps/processes/models.py:36
+msgid "Archived"
+msgstr "अभिलेखीकरण गरिएको"
+
+#: apps/processes/models.py:197
+msgid "Not Started"
+msgstr "सुरु नभएको"
+
+#: apps/processes/models.py:198
+msgid "Preparing"
+msgstr "तयारी गर्दै"
+
+#: apps/processes/models.py:199
+msgid "Applied"
+msgstr "आवेदन गरिएको"
+
+#: apps/processes/models.py:200
+msgid "Processing"
+msgstr "प्रशोधनमा"
+
+#: apps/processes/services.py:312
+msgid "I'm starting a business"
+msgstr "म व्यवसाय सुरु गर्दैछु"
+
+#: apps/processes/services.py:313
+msgid "I'm going abroad"
+msgstr "म विदेश जाँदैछु"
+
+#: apps/processes/services.py:314
+msgid "I need a tax ID"
+msgstr "मलाई कर परिचय (PAN) चाहिन्छ"
+
+#: apps/processes/services.py:315
+msgid "I'm renewing my driving license"
+msgstr "म मेरो सवारी चालक अनुमतिपत्र नवीकरण गर्दैछु"
+
+#: apps/processes/services.py:316
+msgid "I'm buying a vehicle"
+msgstr "म सवारी साधन किन्दैछु"
+
+#: apps/processes/services.py:317
+msgid "I'm renting a house"
+msgstr "म घर भाडामा लिँदैछु"
+
+#: apps/processes/views.py:132
+msgid "Please choose individual or business before starting."
+msgstr "सुरु गर्नुअघि व्यक्तिगत वा व्यवसाय छान्नुहोस्।"
+
+#: apps/processes/views.py:194
+msgid "Status updated."
+msgstr "स्थिति अपडेट भयो।"
+
+#: apps/tasks/views.py:21
+msgid "Task added."
+msgstr "कार्य थपियो।"
+
+#: apps/tasks/views.py:23
+msgid "Could not add task. Please check the form."
+msgstr "कार्य थप्न सकिएन। कृपया फारम जाँच्नुहोस्।"
+
+#: templates/404.html:4 templates/404.html:8
+msgid "Page not found"
+msgstr "पृष्ठ फेला परेन"
+
+#: templates/404.html:10
+msgid "The page you're looking for doesn't exist or may have moved."
+msgstr "तपाईंले खोजिरहनुभएको पृष्ठ अवस्थित छैन वा सारिएको हुन सक्छ।"
+
+#: templates/404.html:13
+msgid "Go to homepage"
+msgstr "गृहपृष्ठमा जानुहोस्"
+
+#: templates/accounts/email/password_reset_email.txt:2
+msgid ""
+"You're receiving this email because you requested a password reset for your "
+"HamroNepal account."
+msgstr ""
+"तपाईंले आफ्नो HamroNepal खाताको पासवर्ड रिसेट अनुरोध गर्नुभएकाले यो इमेल "
+"पाउनुभएको हो।"
+
+#: templates/accounts/email/password_reset_email.txt:4
+msgid "Please go to the following page and choose a new password:"
+msgstr "कृपया निम्न पृष्ठमा गई नयाँ पासवर्ड छान्नुहोस्:"
+
+#: templates/accounts/email/password_reset_email.txt:7
+msgid "If you didn't request this, you can ignore this email."
+msgstr ""
+"यदि तपाईंले यो अनुरोध गर्नुभएको छैन भने, यो इमेललाई बेवास्ता गर्न "
+"सक्नुहुन्छ।"
+
+#: templates/accounts/email/password_reset_subject.txt:1
+msgid "Reset your HamroNepal password"
+msgstr "आफ्नो HamroNepal पासवर्ड रिसेट गर्नुहोस्"
+
+#: templates/accounts/email/verification_email.txt:1
+#, python-format
+msgid "Hi %(user)s,"
+msgstr "नमस्ते %(user)s,"
+
+#: templates/accounts/email/verification_email.txt:3
+msgid "Please verify your email address by visiting the link below:"
+msgstr "कृपया तलको लिङ्कमा गई आफ्नो इमेल ठेगाना प्रमाणित गर्नुहोस्:"
+
+#: templates/accounts/email/verification_email.txt:6
+msgid ""
+"If you didn't create an account with HamroNepal, you can ignore this email."
+msgstr ""
+"यदि तपाईंले HamroNepal मा खाता बनाउनुभएको छैन भने, यो इमेललाई बेवास्ता गर्न "
+"सक्नुहुन्छ।"
+
+#: templates/accounts/login.html:4 templates/accounts/login.html:8
+#: templates/accounts/login.html:12 templates/components/navbar.html:37
+#: templates/components/navbar.html:86
+#: templates/processes/process_detail.html:156
+msgid "Log in"
+msgstr "लग इन गर्नुहोस्"
+
+#: templates/accounts/login.html:16
+msgid "Forgot your password?"
+msgstr "पासवर्ड बिर्सनुभयो?"
+
+#: templates/accounts/login.html:17
+msgid "Need an account? Register"
+msgstr "खाता चाहिन्छ? दर्ता गर्नुहोस्"
+
+#: templates/accounts/password_reset_complete.html:4
+#: templates/accounts/password_reset_complete.html:8
+msgid "Password changed"
+msgstr "पासवर्ड परिवर्तन भयो"
+
+#: templates/accounts/password_reset_complete.html:11
+msgid "Log in with your new password"
+msgstr "आफ्नो नयाँ पासवर्डले लग इन गर्नुहोस्"
+
+#: templates/accounts/password_reset_confirm.html:4
+#: templates/accounts/password_reset_confirm.html:8
+msgid "Set a new password"
+msgstr "नयाँ पासवर्ड सेट गर्नुहोस्"
+
+#: templates/accounts/password_reset_confirm.html:13
+msgid "Change password"
+msgstr "पासवर्ड परिवर्तन गर्नुहोस्"
+
+#: templates/accounts/password_reset_confirm.html:17
+msgid "This password reset link is invalid or has expired."
+msgstr "यो पासवर्ड रिसेट लिङ्क अमान्य छ वा म्याद सकिएको छ।"
+
+#: templates/accounts/password_reset_done.html:4
+msgid "Reset link sent"
+msgstr "रिसेट लिङ्क पठाइयो"
+
+#: templates/accounts/password_reset_done.html:8
+msgid "Check your email"
+msgstr "आफ्नो इमेल जाँच्नुहोस्"
+
+#: templates/accounts/password_reset_done.html:10
+msgid ""
+"If an account exists for that address, we've emailed instructions for "
+"resetting your password."
+msgstr ""
+"यदि त्यो ठेगानाको खाता अवस्थित छ भने, हामीले पासवर्ड रिसेट गर्ने निर्देशनहरू"
+" इमेल गरेका छौं।"
+
+#: templates/accounts/password_reset_form.html:4
+msgid "Reset password"
+msgstr "पासवर्ड रिसेट गर्नुहोस्"
+
+#: templates/accounts/password_reset_form.html:8
+msgid "Reset your password"
+msgstr "आफ्नो पासवर्ड रिसेट गर्नुहोस्"
+
+#: templates/accounts/password_reset_form.html:12
+msgid "Send reset link"
+msgstr "रिसेट लिङ्क पठाउनुहोस्"
+
+#: templates/accounts/profile.html:4 templates/components/navbar.html:27
+#: templates/components/navbar.html:76
+msgid "Profile"
+msgstr "प्रोफाइल"
+
+#: templates/accounts/profile.html:8
+msgid "Your profile"
+msgstr "तपाईंको प्रोफाइल"
+
+#: templates/accounts/profile.html:12
+msgid "verified"
+msgstr "प्रमाणित"
+
+#: templates/accounts/profile.html:15
+msgid "not verified"
+msgstr "प्रमाणित छैन"
+
+#: templates/accounts/profile.html:24
+msgid "Save changes"
+msgstr "परिवर्तनहरू सुरक्षित गर्नुहोस्"
+
+#: templates/accounts/profile.html:31 templates/components/navbar.html:32
+#: templates/components/navbar.html:81
+msgid "Log out"
+msgstr "लग आउट गर्नुहोस्"
+
+#: templates/accounts/register.html:4 templates/accounts/register.html:12
+#: templates/components/navbar.html:40 templates/components/navbar.html:89
+msgid "Register"
+msgstr "दर्ता गर्नुहोस्"
+
+#: templates/accounts/register.html:8
+msgid "Create your account"
+msgstr "आफ्नो खाता सिर्जना गर्नुहोस्"
+
+#: templates/accounts/register.html:17
+msgid "Already have an account? Log in"
+msgstr "पहिले नै खाता छ? लग इन गर्नुहोस्"
+
+#: templates/base.html:6 templates/components/navbar.html:5
+msgid "HamroNepal"
+msgstr "हाम्रोनेपाल"
+
+#: templates/base.html:8
+msgid "Understand, prepare for, and track everyday processes in Nepal."
+msgstr ""
+"नेपालका दैनिक प्रक्रियाहरू बुझ्नुहोस्, तयारी गर्नुहोस्, र पछ्याउनुहोस्।"
+
+#: templates/base.html:21
+msgid "Skip to content"
+msgstr "सामग्रीमा जानुहोस्"
+
+#: templates/components/dashboard/deadline_item.html:21
+#: templates/core/dashboard.html:203
+#, python-format
+msgid "Completed %(date)s"
+msgstr "%(date)s मा सम्पन्न"
+
+#: templates/components/dashboard/deadline_item.html:37
+#, python-format
+msgid "%(counter)s day left"
+msgid_plural "%(counter)s days left"
+msgstr[0] "%(counter)s दिन बाँकी"
+msgstr[1] "%(counter)s दिन बाँकी"
+
+#: templates/components/dashboard/document_item.html:19
+#, python-format
+msgid "Expires %(date)s"
+msgstr "%(date)s मा म्याद सकिन्छ"
+
+#: templates/components/dashboard/document_item.html:26
+msgid "Expired"
+msgstr "म्याद सकिएको"
+
+#: templates/components/dashboard/document_item.html:29
+#: templates/core/dashboard.html:21
+msgid "Expiring soon"
+msgstr "चाँडै म्याद सकिने"
+
+#: templates/components/dashboard/document_item.html:33
+msgid "Remove this document?"
+msgstr "यो कागजात हटाउने हो?"
+
+#: templates/components/dashboard/document_item.html:35
+msgid "Remove document"
+msgstr "कागजात हटाउनुहोस्"
+
+#: templates/components/dashboard/journey_card.html:12
+#: templates/core/home.html:243
+#, python-format
+msgid "%(percent)s%% complete"
+msgstr "%(percent)s%% पूरा"
+
+#: templates/components/dashboard/journey_card.html:15
+#, python-format
+msgid "%(completed)s of %(total)s steps"
+msgstr "%(total)s मध्ये %(completed)s चरण"
+
+#: templates/components/dashboard/notification_item.html:14
+msgid "Continue journey"
+msgstr "यात्रा जारी राख्नुहोस्"
+
+#: templates/components/dashboard/notification_item.html:16
+msgid "View task"
+msgstr "कार्य हेर्नुहोस्"
+
+#: templates/components/dashboard/notification_item.html:18
+msgid "View process"
+msgstr "प्रक्रिया हेर्नुहोस्"
+
+#: templates/components/dashboard/notification_item.html:30
+msgid "Mark read"
+msgstr "पढिएको चिन्ह लगाउनुहोस्"
+
+#: templates/components/dashboard/notification_item.html:39
+msgid "Dismiss"
+msgstr "हटाउनुहोस्"
+
+#: templates/components/dashboard/progress_ring_card.html:17
+#: templates/components/dashboard/progress_ring_card.html:29
+msgid "Overall progress"
+msgstr "समग्र प्रगति"
+
+#: templates/components/dashboard/progress_ring_card.html:19
+#, python-format
+msgid "Across %(counter)s active journey"
+msgid_plural "Across %(counter)s active journeys"
+msgstr[0] "%(counter)s सक्रिय यात्रामा"
+msgstr[1] "%(counter)s सक्रिय यात्रामा"
+
+#: templates/components/dashboard/progress_ring_card.html:30
+msgid "Start your first journey"
+msgstr "आफ्नो पहिलो यात्रा सुरु गर्नुहोस्"
+
+#: templates/components/dashboard/save_button.html:7
+msgid "Unsave this process"
+msgstr "यो प्रक्रिया सुरक्षितबाट हटाउनुहोस्"
+
+#: templates/components/dashboard/save_button.html:7
+msgid "Save this process"
+msgstr "यो प्रक्रिया सुरक्षित गर्नुहोस्"
+
+#: templates/components/dashboard/sidebar.html:11
+#: templates/dashboard/_base.html:15
+msgid "My Dashboard"
+msgstr "मेरो ड्यासबोर्ड"
+
+#: templates/components/dashboard/sidebar.html:15
+msgid "Close menu"
+msgstr "मेनु बन्द गर्नुहोस्"
+
+#: templates/components/dashboard/sidebar.html:20
+msgid "Collapse sidebar"
+msgstr "साइडबार सङ्कुचन गर्नुहोस्"
+
+#: templates/components/dashboard/sidebar.html:26
+#: templates/components/dashboard/sidebar.html:29
+msgid "Overview"
+msgstr "सिंहावलोकन"
+
+#: templates/components/dashboard/sidebar.html:35
+msgid "My life"
+msgstr "मेरो जीवन"
+
+#: templates/components/dashboard/sidebar.html:38
+#: templates/core/dashboard.html:97
+msgid "Actions"
+msgstr "कार्यहरू"
+
+#: templates/components/dashboard/sidebar.html:40
+#: templates/core/dashboard.html:125
+msgid "Journeys"
+msgstr "यात्राहरू"
+
+#: templates/components/dashboard/sidebar.html:42
+#: templates/core/dashboard.html:141
+msgid "Documents"
+msgstr "कागजातहरू"
+
+#: templates/components/dashboard/sidebar.html:44
+#: templates/dashboard/deadlines.html:4 templates/dashboard/deadlines.html:7
+msgid "Deadlines"
+msgstr "म्यादहरू"
+
+#: templates/components/dashboard/sidebar.html:51
+msgid "Activity"
+msgstr "गतिविधि"
+
+#: templates/components/dashboard/sidebar.html:55
+#: templates/components/navbar.html:14
+#: templates/dashboard/notifications.html:4
+#: templates/dashboard/notifications.html:9
+msgid "Notifications"
+msgstr "सूचनाहरू"
+
+#: templates/components/dashboard/sidebar.html:60
+#: templates/core/dashboard.html:177
+msgid "Saved"
+msgstr "सुरक्षित गरिएका"
+
+#: templates/components/dashboard/sidebar.html:68
+msgid "Account"
+msgstr "खाता"
+
+#: templates/components/dashboard/sidebar.html:71
+msgid "Settings"
+msgstr "सेटिङ"
+
+#: templates/components/footer.html:4
+msgid "HamroNepal. Not an official government service."
+msgstr "हाम्रोनेपाल। यो आधिकारिक सरकारी सेवा होइन।"
+
+#: templates/components/navbar.html:20 templates/components/navbar.html:69
+msgid "Browse"
+msgstr "ब्राउज गर्नुहोस्"
+
+#: templates/components/navbar.html:24 templates/components/navbar.html:73
+#: templates/core/dashboard.html:4
+msgid "Dashboard"
+msgstr "ड्यासबोर्ड"
+
+#: templates/components/navbar.html:65
+msgid "Menu"
+msgstr "मेनु"
+
+#: templates/components/process_card.html:12
+msgid "Verified"
+msgstr "प्रमाणित"
+
+#: templates/components/process_card.html:40
+#, python-format
+msgid "%(min)s-%(max)s days"
+msgstr "%(min)s-%(max)s दिन"
+
+#: templates/components/process_card.html:42 templates/core/home.html:265
+#, python-format
+msgid "%(counter)s day"
+msgid_plural "%(counter)s days"
+msgstr[0] "%(counter)s दिन"
+msgstr[1] "%(counter)s दिन"
+
+#: templates/components/process_card.html:50
+#, python-format
+msgid "%(counter)s step"
+msgid_plural "%(counter)s steps"
+msgstr[0] "%(counter)s चरण"
+msgstr[1] "%(counter)s चरण"
+
+#: templates/components/process_card.html:53
+#, python-format
+msgid "%(counter)s document"
+msgid_plural "%(counter)s documents"
+msgstr[0] "%(counter)s कागजात"
+msgstr[1] "%(counter)s कागजात"
+
+#: templates/components/process_card.html:63
+#: templates/components/process_card.html:71
+#, python-format
+msgid "Last verified %(date)s"
+msgstr "पछिल्लो पटक प्रमाणित %(date)s"
+
+#: templates/components/search_box.html:3
+msgid "Search for a process"
+msgstr "प्रक्रिया खोज्नुहोस्"
+
+#: templates/components/search_box.html:6
+msgid "e.g. renew my license"
+msgstr "जस्तै: मेरो अनुमतिपत्र नवीकरण गर्नुहोस्"
+
+#: templates/components/search_box.html:12
+#: templates/processes/search_results.html:5
+msgid "Search"
+msgstr "खोज"
+
+#: templates/core/dashboard.html:9
+#, python-format
+msgid "Welcome back, %(name)s"
+msgstr "फेरि स्वागत छ, %(name)s"
+
+#: templates/core/dashboard.html:12
+#, python-format
+msgid "%(counter)s active journey"
+msgid_plural "%(counter)s active journeys"
+msgstr[0] "%(counter)s सक्रिय यात्रा"
+msgstr[1] "%(counter)s सक्रिय यात्रा"
+
+#: templates/core/dashboard.html:14
+#, python-format
+msgid "%(counter)s task needs attention"
+msgid_plural "%(counter)s tasks need attention"
+msgstr[0] "%(counter)s कार्यमा ध्यान चाहिन्छ"
+msgstr[1] "%(counter)s कार्यमा ध्यान चाहिन्छ"
+
+#: templates/core/dashboard.html:19
+msgid "Pending tasks"
+msgstr "बाँकी कार्यहरू"
+
+#: templates/core/dashboard.html:30
+msgid "Upcoming deadlines"
+msgstr "आगामी म्यादहरू"
+
+#: templates/core/dashboard.html:32 templates/core/dashboard.html:59
+msgid "View all"
+msgstr "सबै हेर्नुहोस्"
+
+#: templates/core/dashboard.html:45
+msgid "Search a process"
+msgstr "प्रक्रिया खोज्नुहोस्"
+
+#: templates/core/dashboard.html:47
+msgid "Add a task"
+msgstr "कार्य थप्नुहोस्"
+
+#: templates/core/dashboard.html:50 templates/processes/process_list.html:4
+#: templates/processes/process_list.html:8
+msgid "Browse processes"
+msgstr "प्रक्रियाहरू ब्राउज गर्नुहोस्"
+
+#: templates/core/dashboard.html:57
+msgid "Recent notifications"
+msgstr "हालैका सूचनाहरू"
+
+#: templates/core/dashboard.html:72
+msgid "Recommended next"
+msgstr "अर्को सिफारिस"
+
+#: templates/core/dashboard.html:83
+msgid "Recently viewed"
+msgstr "भर्खरै हेरिएका"
+
+#: templates/core/dashboard.html:102
+msgid "Task title"
+msgstr "कार्यको शीर्षक"
+
+#: templates/core/dashboard.html:106
+msgid "Due date"
+msgstr "म्याद मिति"
+
+#: templates/core/dashboard.html:109
+msgid "Add task"
+msgstr "कार्य थप्नुहोस्"
+
+#: templates/core/dashboard.html:120
+msgid "Nothing needs your attention right now."
+msgstr "अहिले तपाईंको ध्यान चाहिने केही छैन।"
+
+#: templates/core/dashboard.html:134
+msgid "You're not tracking any processes yet."
+msgstr "तपाईंले अहिलेसम्म कुनै प्रक्रिया ट्र्याक गरिरहनुभएको छैन।"
+
+#: templates/core/dashboard.html:135
+msgid "Find one to get started."
+msgstr "सुरु गर्न एउटा खोज्नुहोस्।"
+
+#: templates/core/dashboard.html:146
+msgid "Document title"
+msgstr "कागजातको शीर्षक"
+
+#: templates/core/dashboard.html:150
+msgid "Document type"
+msgstr "कागजातको प्रकार"
+
+#: templates/core/dashboard.html:154
+#| msgid "Document title"
+msgid "Document image"
+msgstr "कागजातको तस्बिर"
+
+#: templates/core/dashboard.html:158
+msgid "Expiry date"
+msgstr "म्याद सकिने मिति"
+
+#: templates/core/dashboard.html:161
+msgid "Add document"
+msgstr "कागजात थप्नुहोस्"
+
+#: templates/core/dashboard.html:172
+msgid "No documents tracked yet. Add one above to get expiry reminders."
+msgstr ""
+"हालसम्म कुनै कागजात ट्र्याक गरिएको छैन। म्याद सम्झना पाउन माथि एउटा "
+"थप्नुहोस्।"
+
+#: templates/core/dashboard.html:188
+msgid "Save a process from its page to find it here later."
+msgstr "यहाँ पछि फेला पार्न कुनै प्रक्रिया यसको पृष्ठबाट सुरक्षित गर्नुहोस्।"
+
+#: templates/core/dashboard.html:213 templates/dashboard/deadlines.html:27
+msgid "Nothing completed yet."
+msgstr "हालसम्म केही सम्पन्न भएको छैन।"
+
+#: templates/core/home.html:4
+msgid "HamroNepal: Nepal's government processes, explained"
+msgstr "HamroNepal: नेपालका सरकारी प्रक्रियाहरू, सजिलो भाषामा"
+
+#: templates/core/home.html:7
+msgid ""
+"Search Nepal government processes: company registration, PAN, passport, "
+"driving license. Every step cited to an official source, with a verification"
+" date."
+msgstr ""
+"नेपालका सरकारी प्रक्रिया खोज्नुहोस्: कम्पनी दर्ता, PAN, राहदानी, सवारी चालक "
+"अनुमतिपत्र। प्रत्येक चरण आधिकारिक स्रोतमा उल्लेखित छ, प्रमाणीकरण मितिसहित।"
+
+#: templates/core/home.html:18
+msgid "Continue where you left off"
+msgstr "जहाँबाट छाडेको थियो त्यहीँबाट जारी राख्नुहोस्"
+
+#: templates/core/home.html:39
+msgid "Verified against official sources"
+msgstr "आधिकारिक स्रोतहरूसँग प्रमाणित"
+
+#: templates/core/home.html:42
+msgid "Whatever you need to get done in Nepal,"
+msgstr "नेपालमा तपाईंलाई जे गर्न आवश्यक भए पनि,"
+
+#: templates/core/home.html:43
+msgid "start here."
+msgstr "यहींबाट सुरु गर्नुहोस्।"
+
+#: templates/core/home.html:46
+msgid ""
+"Search any government process. See real steps, real fees, and an official "
+"source, every time."
+msgstr ""
+"कुनै पनि सरकारी प्रक्रिया खोज्नुहोस्। हरेक पटक वास्तविक चरणहरू, वास्तविक "
+"शुल्क, र आधिकारिक स्रोत हेर्नुहोस्।"
+
+#: templates/core/home.html:54
+msgid "Browse all processes"
+msgstr "सबै प्रक्रियाहरू ब्राउज गर्नुहोस्"
+
+#: templates/core/home.html:60
+#, python-format
+msgid ""
+"%(counter)s process today, each checked against an official government "
+"source."
+msgid_plural ""
+"%(counter)s processes today, each checked against an official government "
+"source."
+msgstr[0] ""
+"आज %(counter)s प्रक्रिया उपलब्ध छ, प्रत्येक आधिकारिक सरकारी स्रोतमा "
+"जाँचिएको।"
+msgstr[1] ""
+"आज %(counter)s प्रक्रियाहरू उपलब्ध छन्, प्रत्येक आधिकारिक सरकारी स्रोतमा "
+"जाँचिएको।"
+
+#: templates/core/home.html:70
+#, python-format
+msgid "Checked %(counter)s day ago"
+msgid_plural "Checked %(counter)s days ago"
+msgstr[0] "%(counter)s दिन अघि जाँचिएको"
+msgstr[1] "%(counter)s दिन अघि जाँचिएको"
+
+#: templates/core/home.html:77
+#, python-format
+msgid "%(counter)s process tracked live"
+msgid_plural "%(counter)s processes tracked live"
+msgstr[0] "%(counter)s प्रक्रिया प्रत्यक्ष ट्र्याक भइरहेको"
+msgstr[1] "%(counter)s प्रक्रियाहरू प्रत्यक्ष ट्र्याक भइरहेका"
+
+#: templates/core/home.html:87
+msgid "Live from HamroNepal"
+msgstr "HamroNepal बाट प्रत्यक्ष"
+
+#: templates/core/home.html:100
+msgid "Start with what you're trying to do"
+msgstr "तपाईं के गर्न खोज्दै हुनुहुन्छ त्यहींबाट सुरु गर्नुहोस्"
+
+#: templates/core/home.html:112 templates/core/home.html:136
+#, python-format
+msgid "%(counter)s process"
+msgid_plural "%(counter)s processes"
+msgstr[0] "%(counter)s प्रक्रिया"
+msgstr[1] "%(counter)s प्रक्रिया"
+
+#: templates/core/home.html:114
+msgid "Not covered yet"
+msgstr "अहिलेसम्म समावेश गरिएको छैन"
+
+#: templates/core/home.html:125
+msgid "Browse by category"
+msgstr "श्रेणी अनुसार ब्राउज गर्नुहोस्"
+
+#: templates/core/home.html:146
+msgid "Processes"
+msgstr "प्रक्रियाहरू"
+
+#: templates/core/home.html:153
+msgid "How HamroNepal works"
+msgstr "HamroNepal कसरी काम गर्छ"
+
+#: templates/core/home.html:162
+msgid "Discover"
+msgstr "पत्ता लगाउनुहोस्"
+
+#: templates/core/home.html:163
+msgid ""
+"Search in plain language and find the real process, not a list of "
+"departments."
+msgstr ""
+"सामान्य भाषामा खोज्नुहोस् र विभागहरूको सूची होइन, वास्तविक प्रक्रिया फेला "
+"पार्नुहोस्।"
+
+#: templates/core/home.html:171
+msgid "Understand"
+msgstr "बुझ्नुहोस्"
+
+#: templates/core/home.html:172
+msgid "See every step, every document, and every fee, before you begin."
+msgstr "सुरु गर्नुअघि नै हरेक चरण, हरेक कागजात, र हरेक शुल्क हेर्नुहोस्।"
+
+#: templates/core/home.html:180
+msgid "Prepare"
+msgstr "तयारी गर्नुहोस्"
+
+#: templates/core/home.html:181
+msgid "Check off requirements one by one, so nothing is missing on the day."
+msgstr "आवश्यकताहरू एक एक गरी जाँच्नुहोस्, ताकि दिनमा केही पनि छुट्न नपाओस्।"
+
+#: templates/core/home.html:189
+msgid "Complete"
+msgstr "पूरा गर्नुहोस्"
+
+#: templates/core/home.html:190
+msgid "Move through applied, processing, and done, at your own pace."
+msgstr "आफ्नै गतिमा आवेदन गरिएको, प्रशोधनमा, र सम्पन्न चरणहरू पार गर्नुहोस्।"
+
+#: templates/core/home.html:198
+msgid "Track"
+msgstr "ट्र्याक गर्नुहोस्"
+
+#: templates/core/home.html:199
+msgid "Come back anytime and pick up exactly where you left off."
+msgstr ""
+"जुनसुकै बेला फर्केर आउनुहोस् र ठ्याक्कै जहाँबाट छाड्नुभएको थियो त्यहींबाट "
+"जारी राख्नुहोस्।"
+
+#: templates/core/home.html:208
+msgid "See it in action"
+msgstr "प्रयोगमा हेर्नुहोस्"
+
+#: templates/core/home.html:209
+msgid "One process, start to finish"
+msgstr "एउटा प्रक्रिया, सुरुदेखि अन्त्यसम्म"
+
+#: templates/core/home.html:211
+#, python-format
+msgid ""
+"A real walkthrough of %(title)s, the way it actually looks inside "
+"HamroNepal."
+msgstr ""
+"%(title)s को वास्तविक झलक, HamroNepal भित्र यो जस्तो देखिन्छ ठ्याक्कै "
+"त्यस्तै।"
+
+#: templates/core/home.html:216
+msgid "Requirements"
+msgstr "आवश्यकताहरू"
+
+#: templates/core/home.html:229 templates/processes/process_detail.html:66
+#: templates/processes/track_progress.html:33
+msgid "Steps"
+msgstr "चरणहरू"
+
+#: templates/core/home.html:248
+msgid "What's next:"
+msgstr "अब के गर्ने:"
+
+#: templates/core/home.html:258
+msgid "Verification"
+msgstr "प्रमाणीकरण"
+
+#: templates/core/home.html:259
+msgid "Every process is checked against an official source"
+msgstr "हरेक प्रक्रिया आधिकारिक स्रोतसँग जाँचिन्छ"
+
+#: templates/core/home.html:268
+msgid ""
+"since the oldest source on this site was last checked against the "
+"government."
+msgstr ""
+"यो साइटको सबैभन्दा पुरानो स्रोत सरकारी वेबसाइटसँग अन्तिम पटक जाँचिएको "
+"समयदेखि।"
+
+#: templates/core/home.html:271
+msgid "No sources checked yet."
+msgstr "हालसम्म कुनै स्रोत जाँचिएको छैन।"
+
+#: templates/core/home.html:279
+msgid ""
+"A process cannot be published here without a cited government source and a "
+"verification date. That is enforced in the code, not a policy document."
+msgstr ""
+"यहाँ कुनै पनि प्रक्रिया उल्लेखित सरकारी स्रोत र प्रमाणीकरण मितिविना प्रकाशित"
+" हुन सक्दैन। यो नीति कागजातमा होइन, कोडमै लागू गरिएको छ।"
+
+#: templates/core/home.html:286
+msgid "Source receipt"
+msgstr "स्रोत रसिद"
+
+#: templates/core/home.html:288 templates/processes/process_detail.html:26
+#, python-format
+msgid "Verified %(date)s"
+msgstr "%(date)s मा प्रमाणित"
+
+#: templates/core/home.html:300
+msgid ""
+"HamroNepal is not a government office. The government's own site is always "
+"the final authority, and we link to it on every step."
+msgstr ""
+"HamroNepal कुनै सरकारी कार्यालय होइन। सरकारको आफ्नै वेबसाइट सधैं अन्तिम "
+"आधिकारिक स्रोत हो, र हामी प्रत्येक चरणमा त्यहीँ लिङ्क गर्छौं।"
+
+#: templates/core/home.html:309
+msgid ""
+"We will never ask for your OTP or citizenship number, and we never charge "
+"for a government service."
+msgstr ""
+"हामी तपाईंको OTP वा नागरिकता नम्बर कहिल्यै माग्दैनौं, र सरकारी सेवाको लागि "
+"कहिल्यै शुल्क लिँदैनौं।"
+
+#: templates/core/home.html:316
+msgid ""
+"No ads, no lead generation, no consultancy referrals. Nothing on this page "
+"is trying to sell you anything."
+msgstr ""
+"कुनै विज्ञापन छैन, कुनै लिड जेनेरेसन छैन, कुनै परामर्शदाता रेफरल छैन। यस "
+"पृष्ठमा कुनै पनि चिज तपाईंलाई बेच्ने प्रयास गरिएको छैन।"
+
+#: templates/core/home.html:324
+msgid "What it's actually like"
+msgstr "यो वास्तवमा कस्तो हुन्छ"
+
+#: templates/core/home.html:331
+#, python-format
+msgid "On %(process)s"
+msgstr "%(process)s मा"
+
+#: templates/core/home.html:339
+msgid ""
+"Nobody has shared their experience yet. Be the first to tell others what it "
+"was actually like."
+msgstr ""
+"अहिलेसम्म कसैले आफ्नो अनुभव साझा गरेको छैन। यो वास्तवमा कस्तो थियो भनेर "
+"अरूलाई बताउने पहिलो व्यक्ति बन्नुहोस्।"
+
+#: templates/core/home.html:346
+msgid "Requirements can depend on where you live"
+msgstr "आवश्यकताहरू तपाईं कहाँ बस्नुहुन्छ भन्नेमा निर्भर हुन सक्छ"
+
+#: templates/core/home.html:348
+#, python-format
+msgid ""
+"HamroNepal already knows Nepal's %(provinces)s provinces and %(districts)s "
+"districts. Municipality and ward level detail is rolling out next."
+msgstr ""
+"HamroNepal लाई नेपालका %(provinces)s प्रदेश र %(districts)s जिल्ला पहिले नै "
+"थाहा छ। नगरपालिका र वडा तहको विवरण छिट्टै थपिँदैछ।"
+
+#: templates/core/home.html:354
+msgid "Province"
+msgstr "प्रदेश"
+
+#: templates/core/home.html:359
+msgid "District"
+msgstr "जिल्ला"
+
+#: templates/core/home.html:367
+msgid "Ward"
+msgstr "वडा"
+
+#: templates/core/home.html:373
+#, python-format
+msgid "For example: %(d1)s district sits in %(p1)s."
+msgstr "उदाहरणका लागि: %(d1)s जिल्ला %(p1)s मा पर्छ।"
+
+#: templates/core/home.html:384
+msgid "Start with what you need to get done."
+msgstr "तपाईंलाई जे गर्न आवश्यक छ त्यहींबाट सुरु गर्नुहोस्।"
+
+#: templates/core/home.html:387
+msgid "Search now"
+msgstr "अहिले नै खोज्नुहोस्"
+
+#: templates/dashboard/_base.html:13
+msgid "Open menu"
+msgstr "मेनु खोल्नुहोस्"
+
+#: templates/dashboard/deadlines.html:9
+msgid "Every task and document deadline in one place."
+msgstr "सबै कार्य र कागजातका म्यादहरू एकै ठाउँमा।"
+
+#: templates/dashboard/deadlines.html:25
+msgid "Nothing overdue. You're on top of things."
+msgstr "कुनै पनि म्याद नाघेको छैन। तपाईं सबै कुरामा अगाडि हुनुहुन्छ।"
+
+#: templates/dashboard/deadlines.html:29
+msgid "Nothing due this week."
+msgstr "यस हप्ता कुनै म्याद छैन।"
+
+#: templates/dashboard/deadlines.html:31
+msgid "Nothing due this month."
+msgstr "यस महिना कुनै म्याद छैन।"
+
+#: templates/dashboard/deadlines.html:33
+msgid "Nothing further out yet."
+msgstr "हाल पछिको कुनै म्याद छैन।"
+
+#: templates/dashboard/deadlines.html:35
+msgid "Nothing upcoming. Add a task or document to get reminders here."
+msgstr "हाल कुनै आगामी म्याद छैन। यहाँ सम्झना पाउन कार्य वा कागजात थप्नुहोस्।"
+
+#: templates/dashboard/notifications.html:11
+msgid "Deadlines, journey progress, and updates to processes you follow."
+msgstr ""
+"म्यादहरू, यात्रा प्रगति, र तपाईंले पछ्याइरहनुभएका प्रक्रियाहरूका अपडेटहरू।"
+
+#: templates/dashboard/notifications.html:17
+msgid "Mark all read"
+msgstr "सबै पढिएको चिन्ह लगाउनुहोस्"
+
+#: templates/dashboard/notifications.html:30
+msgid "You're all caught up."
+msgstr "तपाईं सबै कुरामा अद्यावधिक हुनुहुन्छ।"
+
+#: templates/processes/partials/_requirement_item.html:7
+#: templates/processes/partials/_step_item.html:7
+#: templates/tasks/partials/_task_item.html:5
+msgid "Toggle complete"
+msgstr "पूरा भएको टगल गर्नुहोस्"
+
+#: templates/processes/partials/_requirement_item.html:21
+#: templates/processes/process_detail.html:90
+msgid "optional"
+msgstr "वैकल्पिक"
+
+#: templates/processes/partials/_search_results.html:10
+#, python-format
+msgid "No processes found for \"%(query)s\" yet."
+msgstr "\"%(query)s\" का लागि हालसम्म कुनै प्रक्रिया फेला परेन।"
+
+#: templates/processes/partials/_search_results.html:14
+msgid "No processes published yet."
+msgstr "हालसम्म कुनै प्रक्रिया प्रकाशित छैन।"
+
+#: templates/processes/partials/_step_item.html:26
+#: templates/processes/process_detail.html:74
+msgid "Fee"
+msgstr "शुल्क"
+
+#: templates/processes/process_detail.html:40
+msgid "Authority"
+msgstr "निकाय"
+
+#: templates/processes/process_detail.html:43
+#: templates/processes/process_detail.html:46
+msgid "Duration"
+msgstr "अवधि"
+
+#: templates/processes/process_detail.html:48
+#: templates/processes/process_detail.html:50
+msgid "days"
+msgstr "दिन"
+
+#: templates/processes/process_detail.html:54
+msgid "Fees"
+msgstr "शुल्कहरू"
+
+#: templates/processes/process_detail.html:59
+msgid "Eligibility"
+msgstr "योग्यता"
+
+#: templates/processes/process_detail.html:85
+#: templates/processes/track_progress.html:42
+msgid "Documents & requirements"
+msgstr "कागजातहरू र आवश्यकताहरू"
+
+#: templates/processes/process_detail.html:100
+msgid "Frequently asked questions"
+msgstr "बारम्बार सोधिने प्रश्नहरू"
+
+#: templates/processes/process_detail.html:114
+msgid "Official sources"
+msgstr "आधिकारिक स्रोतहरू"
+
+#: templates/processes/process_detail.html:120
+#, python-format
+msgid "verified %(date)s"
+msgstr "%(date)s मा प्रमाणित"
+
+#: templates/processes/process_detail.html:131
+#, python-format
+msgid "You're tracking this process. Status: %(status)s"
+msgstr "तपाईं यो प्रक्रिया ट्र्याक गरिरहनुभएको छ। स्थिति: %(status)s"
+
+#: templates/processes/process_detail.html:134
+msgid "Continue tracking"
+msgstr "ट्र्याकिङ जारी राख्नुहोस्"
+
+#: templates/processes/process_detail.html:140
+msgid "Are you applying as an individual or a business?"
+msgstr "के तपाईं व्यक्तिगत रूपमा वा व्यवसायको रूपमा आवेदन गर्दै हुनुहुन्छ?"
+
+#: templates/processes/process_detail.html:150
+msgid "Start tracking"
+msgstr "ट्र्याकिङ सुरु गर्नुहोस्"
+
+#: templates/processes/process_detail.html:158
+msgid "to save this process and track your progress."
+msgstr "यो प्रक्रिया सुरक्षित गर्न र आफ्नो प्रगति ट्र्याक गर्न।"
+
+#: templates/processes/process_list.html:29
+msgid "No processes published in this category yet."
+msgstr "यस श्रेणीमा हालसम्म कुनै प्रक्रिया प्रकाशित छैन।"
+
+#: templates/processes/search_results.html:5
+#, python-format
+msgid "Search: %(query)s"
+msgstr "खोज: %(query)s"
+
+#: templates/processes/track_progress.html:4
+msgid "Tracking"
+msgstr "ट्र्याकिङ"
+
+#: templates/processes/track_progress.html:11
+msgid "Your progress"
+msgstr "तपाईंको प्रगति"
+
+#: templates/processes/track_progress.html:15
+msgid "of checklist items complete"
+msgstr "जाँचसूची वस्तुहरू पूरा भयो"
+
+#: templates/processes/track_progress.html:19
+msgid "Status"
+msgstr "स्थिति"
+
+#: templates/processes/track_progress.html:27
+msgid "Update status"
+msgstr "स्थिति अपडेट गर्नुहोस्"
+
+#: templates/tasks/partials/_task_item.html:20
+msgid "Due"
+msgstr "म्याद"
+
+#: templates/tasks/partials/_task_item.html:24
+msgid "Delete this task?"
+msgstr "यो कार्य मेटाउने हो?"
+
+#: templates/tasks/partials/_task_item.html:26
+msgid "Delete task"
+msgstr "कार्य मेटाउनुहोस्"

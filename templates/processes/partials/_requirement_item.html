@@ -1,0 +1,28 @@
+{% load i18n %}
+<li id="requirement-{{ requirement_progress.requirement.id }}" class="flex items-start gap-3 rounded-md border border-border bg-surface p-3">
+    <form hx-post="{% url 'processes:toggle_requirement' slug=slug requirement_id=requirement_progress.requirement.id %}"
+          hx-target="#requirement-{{ requirement_progress.requirement.id }}"
+          hx-swap="outerHTML">
+        {% csrf_token %}
+        <button type="submit" aria-label="{% translate 'Toggle complete' %}"
+                class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded border
+                    {% if requirement_progress.is_completed %}border-primary-solid bg-primary-solid{% else %}border-outline bg-surface{% endif %}">
+            {% if requirement_progress.is_completed %}
+            <svg viewBox="0 0 20 20" fill="white" class="h-3.5 w-3.5">
+                <path d="M16.7 5.3a1 1 0 0 1 0 1.4l-7.5 7.5a1 1 0 0 1-1.4 0L4.3 10.7a1 1 0 1 1 1.4-1.4l2.8 2.8 6.8-6.8a1 1 0 0 1 1.4 0z"/>
+            </svg>
+            {% endif %}
+        </button>
+    </form>
+    <div class="flex-1">
+        <p class="text-sm font-medium {% if requirement_progress.is_completed %}text-ink-muted line-through{% else %}text-ink{% endif %}">
+            {{ requirement_progress.requirement.name }}
+            {% if not requirement_progress.requirement.is_mandatory %}
+            <span class="ml-1 text-xs font-normal text-ink-muted">({% translate "optional" %})</span>
+            {% endif %}
+        </p>
+        {% if requirement_progress.requirement.description %}
+        <p class="mt-0.5 text-sm text-ink-muted">{{ requirement_progress.requirement.description }}</p>
+        {% endif %}
+    </div>
+</li>

@@ -1,0 +1,32 @@
+{% extends "dashboard/_base.html" %}
+{% load i18n %}
+
+{% block title %}{% translate "Notifications" %}{% endblock %}
+
+{% block dashboard_content %}
+<div class="flex flex-wrap items-center justify-between gap-3">
+    <div>
+        <h1 class="text-2xl font-bold text-balance text-ink sm:text-3xl">{% translate "Notifications" %}</h1>
+        <p class="mt-1 text-sm text-ink-muted">
+            {% translate "Deadlines, journey progress, and updates to processes you follow." %}
+        </p>
+    </div>
+    {% if has_unread %}
+    <form method="post" action="{% url 'dashboard:mark_all_read' %}">
+        {% csrf_token %}
+        {% translate "Mark all read" as mark_all_label %}
+        {% include "components/ui/button.html" with type="submit" label=mark_all_label tone="outline" size="sm" only %}
+    </form>
+    {% endif %}
+</div>
+
+{% if notifications %}
+<div class="mt-6 space-y-2">
+    {% for notification in notifications %}
+        {% include "components/dashboard/notification_item.html" %}
+    {% endfor %}
+</div>
+{% else %}
+<p class="mt-6 text-sm text-ink-muted">{% translate "You're all caught up." %}</p>
+{% endif %}
+{% endblock %}

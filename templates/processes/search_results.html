@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}
+    {% if query %}{% blocktranslate %}Search: {{ query }}{% endblocktranslate %}{% else %}{% translate "Search" %}{% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="mx-auto max-w-2xl">
+    {% include "components/search_box.html" with query=query only %}
+
+    <div id="search-results" class="mt-6" aria-live="polite">
+        {% include "processes/partials/_search_results.html" %}
+    </div>
+</div>
+{% endblock %}
