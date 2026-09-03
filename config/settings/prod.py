@@ -5,6 +5,15 @@ DEBUG = False
 
 ALLOWED_HOSTS = env.list("ALLOWED_HOSTS")
 
+# Redis isn't available on this host's cPanel account, so fall back to an
+# in-process local-memory cache. Not shared across worker processes, but
+# avoids a hard dependency on infra we don't have here.
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
+    }
+}
+
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 SECURE_SSL_REDIRECT = env.bool("SECURE_SSL_REDIRECT", default=True)
 SESSION_COOKIE_SECURE = True
