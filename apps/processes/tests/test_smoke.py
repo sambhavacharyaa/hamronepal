@@ -11,7 +11,6 @@ from .factories import ProcessFactory, ProcessRequirementFactory, ProcessSourceF
 
 @override_settings(
     CACHES={"default": {"BACKEND": "django.core.cache.backends.locmem.LocMemCache"}},
-    MAILERS={"default": {"BACKEND": "django.core.mail.backends.locmem.EmailBackend"}},
 )
 class AnonymousToCompletedSmokeTest(TestCase):
     def setUp(self):

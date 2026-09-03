@@ -10,7 +10,6 @@ from apps.accounts.models import User
 from .factories import UserFactory
 
 LOCMEM_CACHE = {"default": {"BACKEND": "django.core.cache.backends.locmem.LocMemCache"}}
-LOCMEM_MAILERS = {"default": {"BACKEND": "django.core.mail.backends.locmem.EmailBackend"}}
 
 
 def _extract_url(body):
@@ -19,7 +18,7 @@ def _extract_url(body):
     return match.group(0)
 
 
-@override_settings(CACHES=LOCMEM_CACHE, MAILERS=LOCMEM_MAILERS)
+@override_settings(CACHES=LOCMEM_CACHE)
 class RegistrationTests(TestCase):
     def setUp(self):
         cache.clear()
@@ -98,7 +97,7 @@ class LoginTests(TestCase):
         self.assertEqual(response.status_code, 403)
 
 
-@override_settings(CACHES=LOCMEM_CACHE, MAILERS=LOCMEM_MAILERS)
+@override_settings(CACHES=LOCMEM_CACHE)
 class PasswordResetTests(TestCase):
     def setUp(self):
         cache.clear()

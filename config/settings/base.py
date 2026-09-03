@@ -148,9 +148,8 @@ CACHES = {
 }
 
 
-MAILERS = {
-    "default": {
-        "BACKEND": "django.core.mail.backends.console.EmailBackend",
-    },
-}
+# Note: this is Django's real email setting (read by send_mail/EmailMessage,
+# including User.email_user() used for verification/password-reset emails).
+# prod.py overrides it to a real SMTP backend.
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL", default="noreply@hamronepal.com")
