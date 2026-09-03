@@ -13,3 +13,4 @@ pytailwindcss==0.3.1
 redis==8.1.0
 sqlparse==0.6.0
 typing_extensions==4.16.0
+whitenoise==6.12.0
