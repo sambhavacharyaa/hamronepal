@@ -1,6 +1,13 @@
 {% load i18n %}
 <footer class="border-t border-border bg-surface">
     <div class="mx-auto max-w-7xl px-4 py-8 text-sm text-ink-muted sm:px-6">
-        <p>&copy; {% now "Y" %} {% translate "HamroNepal. Not an official government service." %}</p>
+        <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+            <a href="{% url 'core:privacy_policy' %}" class="hover:text-primary hover:underline focus-visible:focus-ring">{% translate "Privacy Policy" %}</a>
+            <a href="{% url 'core:terms' %}" class="hover:text-primary hover:underline focus-visible:focus-ring">{% translate "Terms and Conditions" %}</a>
+            <a href="{% url 'core:cookie_policy' %}" class="hover:text-primary hover:underline focus-visible:focus-ring">{% translate "Cookie Policy" %}</a>
+            <a href="{% url 'core:refund_policy' %}" class="hover:text-primary hover:underline focus-visible:focus-ring">{% translate "Refund Policy" %}</a>
+            <a href="mailto:contact@hamronepal.com" class="hover:text-primary hover:underline focus-visible:focus-ring">contact@hamronepal.com</a>
+        </div>
+        <p class="mt-4">&copy; {% now "Y" %} {% translate "HamroNepal. Not an official government service." %}</p>
     </div>
 </footer>

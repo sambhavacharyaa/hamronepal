@@ -54,6 +54,22 @@ def robots_txt_view(request):
     return HttpResponse("\n".join(lines), content_type="text/plain")
 
 
+def privacy_policy_view(request):
+    return render(request, "core/legal/privacy_policy.html")
+
+
+def terms_view(request):
+    return render(request, "core/legal/terms.html")
+
+
+def cookie_policy_view(request):
+    return render(request, "core/legal/cookie_policy.html")
+
+
+def refund_policy_view(request):
+    return render(request, "core/legal/refund_policy.html")
+
+
 @login_required
 def dashboard_view(request):
     dashboard_services.sync_notifications(request.user)

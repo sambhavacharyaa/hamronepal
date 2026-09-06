@@ -1,0 +1,77 @@
+{% extends "core/legal/_base.html" %}
+{% load i18n %}
+
+{% block title %}{% translate "Terms and Conditions" %}{% endblock %}
+{% block legal_title %}{% translate "Terms and Conditions" %}{% endblock %}
+
+{% block legal_content %}
+<section>
+    <h2>{% translate "Acceptance of these terms" %}</h2>
+    <p>{% translate "By creating an account or using HamroNepal, you agree to these terms. If you do not agree, please do not use the site." %}</p>
+</section>
+
+<section>
+    <h2>{% translate "What HamroNepal is" %}</h2>
+    <p>{% translate "HamroNepal is a free, independent, unofficial resource that explains government processes in Nepal and lets you track your own progress through them, and a separate section for exploring travel destinations in Nepal. HamroNepal is not a government office, is not affiliated with the Government of Nepal, and does not submit applications, collect government fees, or make decisions on your behalf. Every process page links to the relevant official government source, which is always the final authority." %}</p>
+</section>
+
+<section>
+    <h2>{% translate "No fees for using this site" %}</h2>
+    <p>{% translate "HamroNepal does not charge you anything to use the site. If a government process involves an official fee, you pay that fee directly to the relevant government office or its own payment system, never through HamroNepal." %}</p>
+</section>
+
+<section>
+    <h2>{% translate "Your account" %}</h2>
+    <ul>
+        <li>{% translate "You must be at least 16 years old to create an account." %}</li>
+        <li>{% translate "You are responsible for keeping your password secure and for all activity under your account." %}</li>
+        <li>{% translate "You must give us an accurate email address, since it is used to verify your account and for password resets." %}</li>
+    </ul>
+</section>
+
+<section>
+    <h2>{% translate "Acceptable use" %}</h2>
+    <p>{% translate "You agree not to:" %}</p>
+    <ul>
+        <li>{% translate "Use the site for any unlawful purpose." %}</li>
+        <li>{% translate "Attempt to gain unauthorized access to another user's account or data." %}</li>
+        <li>{% translate "Upload content that is unlawful, or that you do not have the right to upload." %}</li>
+        <li>{% translate "Interfere with the normal operation of the site, including through automated scraping at a scale that disrupts the service." %}</li>
+    </ul>
+</section>
+
+<section>
+    <h2>{% translate "Content you submit" %}</h2>
+    <p>{% translate "Documents you upload to your own dashboard remain yours; they are private to your account and are never published. If you submit a public experience or comment about a process, you are responsible for what you write, and we may remove content that is false, abusive, or unlawful. Published experiences require our review before they appear publicly." %}</p>
+</section>
+
+<section>
+    <h2>{% translate "No warranty" %}</h2>
+    <p>{% translate "We work to keep process information accurate and cite an official source with a verification date on every process, but government requirements, fees, and procedures can change without notice. HamroNepal is provided “as is”, without warranty of any kind, and you should always confirm current requirements with the official government source linked on each process page before relying on them." %}</p>
+</section>
+
+<section>
+    <h2>{% translate "Limitation of liability" %}</h2>
+    <p>{% translate "To the fullest extent permitted by law, HamroNepal and its operator are not liable for any loss or damage arising from your use of the site, including reliance on information that later turns out to be outdated or inaccurate. Nothing in these terms limits liability that cannot be limited under applicable law." %}</p>
+</section>
+
+<section>
+    <h2>{% translate "Suspending or ending accounts" %}</h2>
+    <p>{% translate "We may suspend or terminate an account that violates these terms. You may stop using the site, or ask us to delete your account, at any time." %}</p>
+</section>
+
+<section>
+    <h2>{% translate "Changes to these terms" %}</h2>
+    <p>{% translate "If we make a meaningful change to these terms, we will update the date at the top of this page." %}</p>
+</section>
+
+<section>
+    <h2>{% translate "Governing law" %}</h2>
+    <p>{% translate "These terms are governed by the laws of Nepal." %}</p>
+</section>
+
+<section>
+    <h2>{% translate "Contact us" %}</h2>
+    <p>{% translate "Questions about these terms can be sent to" %} <a href="mailto:contact@hamronepal.com">contact@hamronepal.com</a>.</p>
+</section>
+{% endblock %}

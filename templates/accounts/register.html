@@ -29,6 +29,25 @@
                 {% include "components/ui/form_field.html" with field=form.password1 only %}
                 {% include "components/ui/form_field.html" with field=form.password2 only %}
             </div>
+            <div>
+                <label for="{{ form.agree_to_terms.id_for_label }}" class="flex items-start gap-2 text-sm text-ink-muted">
+                    <input type="checkbox" name="{{ form.agree_to_terms.html_name }}" id="{{ form.agree_to_terms.id_for_label }}"
+                           {% if form.agree_to_terms.value %}checked{% endif %} required
+                           class="mt-0.5 h-4 w-4 shrink-0 rounded border-outline text-primary accent-primary focus-visible:focus-ring">
+                    <span>
+                        {% url 'core:terms' as terms_url %}
+                        {% url 'core:privacy_policy' as privacy_url %}
+                        {% blocktranslate %}I agree to the <a href="{{ terms_url }}" class="text-primary hover:underline" target="_blank" rel="noopener">Terms</a> and <a href="{{ privacy_url }}" class="text-primary hover:underline" target="_blank" rel="noopener">Privacy Policy</a>.{% endblocktranslate %}
+                    </span>
+                </label>
+                {% if form.agree_to_terms.errors %}
+                <ul class="mt-1.5 space-y-0.5 text-xs text-danger">
+                    {% for error in form.agree_to_terms.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
             {% translate "Register" as register_label %}
             {% include "components/ui/button.html" with type="submit" label=register_label extra_class="w-full" only %}
         </form>

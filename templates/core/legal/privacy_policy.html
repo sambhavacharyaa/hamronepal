@@ -1,0 +1,98 @@
+{% extends "core/legal/_base.html" %}
+{% load i18n %}
+
+{% block title %}{% translate "Privacy Policy" %}{% endblock %}
+{% block legal_title %}{% translate "Privacy Policy" %}{% endblock %}
+
+{% block legal_content %}
+<section>
+    <p class="rounded-lg border border-warning/40 bg-warning/10 px-4 py-3 text-sm text-warning">
+        {% translate "HamroNepal is currently run by an individual operator. A formal legal entity name has not yet been confirmed for this policy." %}
+    </p>
+</section>
+
+<section>
+    <h2>{% translate "Who this policy covers" %}</h2>
+    <p>
+        {% blocktranslate %}HamroNepal ("we", "us") is an independent, unofficial resource that helps people in Nepal understand and track government processes, and explore travel destinations. This policy explains what information we collect through hamronepal.com, why we collect it, and what choices you have. HamroNepal is not a government office, and using this site does not create any relationship with the Government of Nepal.{% endblocktranslate %}
+    </p>
+</section>
+
+<section>
+    <h2>{% translate "Information we collect" %}</h2>
+    <p>{% translate "We only collect information you give us directly, or that is created by your own use of the site:" %}</p>
+    <ul>
+        <li>{% translate "Account information: your email address and password (stored as a secure hash, never in plain text). A phone number is optional." %}</li>
+        <li>{% translate "Profile information you choose to add: a display name, a short bio, a profile photo, and your municipality." %}</li>
+        <li>{% translate "Documents you choose to upload to your dashboard (for example, scans used to track a process). These are stored privately and are never made public or shared." %}</li>
+        <li>{% translate "Your own activity on the site: tasks and deadlines you create, processes and destinations you save, and trips you plan." %}</li>
+        <li>{% translate "Basic technical data every web server logs, such as your IP address and browser type, kept only in standard server logs." %}</li>
+    </ul>
+    <p>{% translate "We do not ask for, and you should never need to give us, your citizenship number, passport number, or any government login credentials." %}</p>
+</section>
+
+<section>
+    <h2>{% translate "Cookies" %}</h2>
+    <p>
+        {% url 'core:cookie_policy' as cookie_policy_url %}
+        {% blocktranslate %}We use a small number of strictly necessary cookies to keep you signed in, protect your account, and remember your language choice. We do not use advertising or tracking cookies, and we do not run any analytics scripts. See our <a href="{{ cookie_policy_url }}">Cookie Policy</a> for the full list.{% endblocktranslate %}
+    </p>
+</section>
+
+<section>
+    <h2>{% translate "How we use your information" %}</h2>
+    <ul>
+        <li>{% translate "To create and secure your account, and to sign you in." %}</li>
+        <li>{% translate "To operate the features you use: tracking processes, storing your documents, reminding you before deadlines, and planning trips." %}</li>
+        <li>{% translate "To send account-related emails: verifying your address, password resets, and deadline reminders you can control from your dashboard." %}</li>
+        <li>{% translate "To keep the site secure and prevent abuse." %}</li>
+    </ul>
+    <p>{% translate "We do not use your information for advertising, and we do not build behavioral profiles about you." %}</p>
+</section>
+
+<section>
+    <h2>{% translate "How we share your information" %}</h2>
+    <p>
+        {% blocktranslate %}We do not sell your information, and we do not share it with advertisers or data brokers. We share information only with the service providers strictly necessary to run the site, such as our email delivery provider (used only to send you the account emails described above), and our hosting provider. We may disclose information if required by law or to protect the security of the site and its users.{% endblocktranslate %}
+    </p>
+</section>
+
+<section>
+    <h2>{% translate "Data security" %}</h2>
+    <ul>
+        <li>{% translate "Passwords are never stored in plain text." %}</li>
+        <li>{% translate "The site is served over HTTPS, and session and login cookies are marked secure." %}</li>
+        <li>{% translate "Documents you upload are stored in private storage that only your own account can access, not a public folder." %}</li>
+    </ul>
+    <p>{% translate "No system is perfectly secure, and we cannot guarantee absolute security, but we take reasonable, real technical steps to protect your information." %}</p>
+</section>
+
+<section>
+    <h2>{% translate "How long we keep your information" %}</h2>
+    <p>{% translate "We keep your account information for as long as your account is active. If you ask us to delete your account, we will delete your personal information within a reasonable time, except where we are required to keep certain records by law." %}</p>
+</section>
+
+<section>
+    <h2>{% translate "Your rights and choices" %}</h2>
+    <ul>
+        <li>{% translate "You can view and update your profile information at any time from your account settings." %}</li>
+        <li>{% translate "You can delete individual documents, tasks, saved places, and trips yourself from your dashboard." %}</li>
+        <li>{% translate "To request a copy of your data, or to delete your account entirely, email us at" %} <a href="mailto:contact@hamronepal.com">contact@hamronepal.com</a> {% translate "and we will handle your request promptly." %}</li>
+    </ul>
+</section>
+
+<section>
+    <h2>{% translate "Children's privacy" %}</h2>
+    <p>{% translate "HamroNepal is not directed at children, and you must be at least 16 years old to create an account. We do not knowingly collect information from children under 16." %}</p>
+</section>
+
+<section>
+    <h2>{% translate "Changes to this policy" %}</h2>
+    <p>{% translate "If we make a meaningful change to this policy, we will update the date at the top of this page." %}</p>
+</section>
+
+<section>
+    <h2>{% translate "Contact us" %}</h2>
+    <p>{% translate "Questions about this policy, or requests about your data, can be sent to" %} <a href="mailto:contact@hamronepal.com">contact@hamronepal.com</a>.</p>
+</section>
+{% endblock %}

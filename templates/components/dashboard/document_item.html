@@ -4,7 +4,7 @@
         {% if document.image %}
         <a href="{% url 'dashboard:document_file' pk=document.id %}" target="_blank" rel="noopener"
            class="block h-10 w-10 shrink-0 overflow-hidden rounded-xl border border-border focus-visible:focus-ring">
-            <img src="{% url 'dashboard:document_file' pk=document.id %}" alt="" class="h-full w-full object-cover">
+            <img src="{% url 'dashboard:document_file' pk=document.id %}" alt="{{ document.title }}" class="h-full w-full object-cover">
         </a>
         {% else %}
         <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">

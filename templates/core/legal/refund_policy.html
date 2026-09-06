@@ -1,0 +1,27 @@
+{% extends "core/legal/_base.html" %}
+{% load i18n %}
+
+{% block title %}{% translate "Refund Policy" %}{% endblock %}
+{% block legal_title %}{% translate "Refund Policy" %}{% endblock %}
+
+{% block legal_content %}
+<section>
+    <h2>{% translate "HamroNepal does not charge for anything" %}</h2>
+    <p>{% translate "Every feature on HamroNepal, from tracking a government process to planning a trip, is free to use. We do not sell subscriptions, one-time purchases, or any paid feature, so there is no payment made to HamroNepal to refund." %}</p>
+</section>
+
+<section>
+    <h2>{% translate "Government fees" %}</h2>
+    <p>{% translate "Some government processes shown on HamroNepal involve an official fee. That fee is always paid directly to the relevant government office or its own payment system, not to HamroNepal, and we never see or handle that payment. Refunds for a government fee are decided entirely by that government office under its own rules — HamroNepal has no ability to issue or influence such a refund." %}</p>
+</section>
+
+<section>
+    <h2>{% translate "If this changes" %}</h2>
+    <p>{% translate "If we ever introduce a paid feature in the future, we will publish a real refund policy for it here before it launches." %}</p>
+</section>
+
+<section>
+    <h2>{% translate "Contact us" %}</h2>
+    <p>{% translate "Questions about this policy can be sent to" %} <a href="mailto:contact@hamronepal.com">contact@hamronepal.com</a>.</p>
+</section>
+{% endblock %}

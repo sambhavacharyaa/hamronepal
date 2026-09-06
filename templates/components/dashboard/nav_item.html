@@ -1,11 +1,11 @@
 {% if url %}
-<a href="{{ url }}"
+<a href="{{ url }}" aria-label="{{ label }}"
    class="group relative z-10 flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-ink-muted transition hover:bg-primary/5 hover:text-ink focus-visible:focus-ring {% if request.path == url %}nav-active{% endif %}">
     {% include "components/icons/"|add:icon|add:".html" with extra_class="h-5 w-5 shrink-0" only %}
     <span class="truncate lg:[aside[data-collapsed=true]_&]:hidden">{{ label }}</span>
 </a>
 {% else %}
-<a href="{% url 'core:dashboard' %}#{{ target_id }}"
+<a href="{% url 'core:dashboard' %}#{{ target_id }}" aria-label="{{ label }}"
    class="group relative z-10 flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-ink-muted transition hover:bg-primary/5 hover:text-ink focus-visible:focus-ring {{ active_class }}">
     {% include "components/icons/"|add:icon|add:".html" with extra_class="h-5 w-5 shrink-0" only %}
     <span class="truncate lg:[aside[data-collapsed=true]_&]:hidden">{{ label }}</span>
