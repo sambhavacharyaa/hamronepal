@@ -40,7 +40,12 @@ class AnonymousToCompletedSmokeTest(TestCase):
         # 3. Register.
         response = client.post(
             "/en/accounts/register/",
-            {"email": "traveler@example.com", "password1": "S0meStrongPass!", "password2": "S0meStrongPass!"},
+            {
+                "email": "traveler@example.com",
+                "password1": "S0meStrongPass!",
+                "password2": "S0meStrongPass!",
+                "agree_to_terms": "on",
+            },
         )
         self.assertRedirects(response, reverse("core:dashboard"))
         self.assertEqual(len(mail.outbox), 1)

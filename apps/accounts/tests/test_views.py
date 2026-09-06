@@ -18,6 +18,17 @@ def _extract_url(body):
     return match.group(0)
 
 
+def _register_payload(**overrides):
+    payload = {
+        "email": "newuser@example.com",
+        "password1": "S0meStrongPass!",
+        "password2": "S0meStrongPass!",
+        "agree_to_terms": "on",
+    }
+    payload.update(overrides)
+    return payload
+
+
 @override_settings(CACHES=LOCMEM_CACHE)
 class RegistrationTests(TestCase):
     def setUp(self):
@@ -30,24 +41,26 @@ class RegistrationTests(TestCase):
     def test_register_creates_user_logs_in_and_sends_verification_email(self):
         response = self.client.post(
             "/en/accounts/register/",
-            {
-                "email": "newuser@example.com",
-                "phone_number": "9800000000",
-                "password1": "S0meStrongPass!",
-                "password2": "S0meStrongPass!",
-            },
+            _register_payload(email="newuser@example.com", phone_number="9800000000"),
         )
 
         self.assertRedirects(response, reverse("core:dashboard"))
         user = User.objects.get(email="newuser@example.com")
         self.assertFalse(user.email_verified)
+        self.assertIsNotNone(user.terms_accepted_at)
         self.assertEqual(len(mail.outbox), 1)
 
+    def test_register_requires_agreeing_to_terms(self):
+        payload = _register_payload(email="noconsent@example.com")
+        del payload["agree_to_terms"]
+
+        response = self.client.post("/en/accounts/register/", payload)
+
+        self.assertEqual(response.status_code, 200)
+        self.assertFalse(User.objects.filter(email="noconsent@example.com").exists())
+
     def test_verification_link_marks_user_verified_and_is_idempotent(self):
-        self.client.post(
-            "/en/accounts/register/",
-            {"email": "verify@example.com", "password1": "S0meStrongPass!", "password2": "S0meStrongPass!"},
-        )
+        self.client.post("/en/accounts/register/", _register_payload(email="verify@example.com"))
         user = User.objects.get(email="verify@example.com")
         verify_path = _extract_url(mail.outbox[0].body).split("testserver", 1)[1]
         self.client.logout()
@@ -56,7 +69,6 @@ class RegistrationTests(TestCase):
         user.refresh_from_db()
         self.assertTrue(user.email_verified)
 
-        # Visiting again should not error, and stays verified.
         self.client.get(verify_path)
         user.refresh_from_db()
         self.assertTrue(user.email_verified)
@@ -65,7 +77,7 @@ class RegistrationTests(TestCase):
         for i in range(11):
             response = self.client.post(
                 "/en/accounts/register/",
-                {"email": f"rl{i}@example.com", "password1": "S0meStrongPass!", "password2": "S0meStrongPass!"},
+                _register_payload(email=f"rl{i}@example.com"),
             )
         self.assertEqual(response.status_code, 403)
 

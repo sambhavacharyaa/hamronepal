@@ -42,6 +42,7 @@ class User(AbstractUser):
     phone_number = models.CharField(max_length=20, blank=True)
     preferred_language = models.CharField(max_length=2, choices=Language.choices, default=Language.ENGLISH)
     email_verified = models.BooleanField(default=False)
+    terms_accepted_at = models.DateTimeField(null=True, blank=True)
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []

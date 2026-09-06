@@ -104,6 +104,38 @@ class HomeViewTests(TestCase):
         self.assertContains(response, "checked against an official source")
 
 
+class LegalPageViewTests(TestCase):
+    def test_privacy_policy_renders(self):
+        response = self.client.get("/en/privacy/")
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Privacy Policy")
+        self.assertContains(response, "contact@hamronepal.com")
+
+    def test_terms_renders(self):
+        response = self.client.get("/en/terms/")
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Terms and Conditions")
+
+    def test_cookie_policy_lists_the_real_cookies(self):
+        response = self.client.get("/en/cookies/")
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "sessionid")
+        self.assertContains(response, "csrftoken")
+        self.assertContains(response, "django_language")
+
+    def test_refund_policy_renders(self):
+        response = self.client.get("/en/refunds/")
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Refund Policy")
+
+    def test_footer_links_to_all_legal_pages(self):
+        response = self.client.get("/en/")
+        self.assertContains(response, 'href="/en/privacy/"')
+        self.assertContains(response, 'href="/en/terms/"')
+        self.assertContains(response, 'href="/en/cookies/"')
+        self.assertContains(response, 'href="/en/refunds/"')
+
+
 class DashboardViewTests(TestCase):
     def setUp(self):
         self.user = UserFactory()

@@ -1,0 +1,59 @@
+{% extends "core/legal/_base.html" %}
+{% load i18n %}
+
+{% block title %}{% translate "Cookie Policy" %}{% endblock %}
+{% block legal_title %}{% translate "Cookie Policy" %}{% endblock %}
+
+{% block legal_content %}
+<section>
+    <h2>{% translate "The short version" %}</h2>
+    <p>{% translate "HamroNepal only uses cookies that are strictly necessary to make the site work: keeping you signed in, protecting your account, and remembering your language choice. We do not use advertising cookies, tracking cookies, or any third-party analytics, so we don't show a cookie consent banner — there is nothing non-essential to ask your permission for. You can still control cookies through your browser settings at any time." %}</p>
+</section>
+
+<section>
+    <h2>{% translate "Cookies we use" %}</h2>
+    <div class="mt-3 overflow-x-auto rounded-lg border border-border">
+        <table class="w-full min-w-[500px] border-collapse text-left text-sm">
+            <thead>
+                <tr class="border-b border-border bg-primary-subtle text-xs font-semibold uppercase tracking-wide text-ink-muted">
+                    <th class="px-4 py-2">{% translate "Cookie" %}</th>
+                    <th class="px-4 py-2">{% translate "Purpose" %}</th>
+                    <th class="px-4 py-2">{% translate "Duration" %}</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-border text-ink-muted">
+                <tr>
+                    <td class="px-4 py-2 font-mono text-xs">sessionid</td>
+                    <td class="px-4 py-2">{% translate "Keeps you signed in between page visits." %}</td>
+                    <td class="px-4 py-2">{% translate "Expires when your browser session ends." %}</td>
+                </tr>
+                <tr>
+                    <td class="px-4 py-2 font-mono text-xs">csrftoken</td>
+                    <td class="px-4 py-2">{% translate "Protects your account and forms from cross-site request forgery." %}</td>
+                    <td class="px-4 py-2">{% translate "About one year." %}</td>
+                </tr>
+                <tr>
+                    <td class="px-4 py-2 font-mono text-xs">django_language</td>
+                    <td class="px-4 py-2">{% translate "Remembers whether you chose English or Nepali." %}</td>
+                    <td class="px-4 py-2">{% translate "About one year." %}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<section>
+    <h2>{% translate "What we don't use" %}</h2>
+    <p>{% translate "We don't run Google Analytics, advertising pixels, or any other third-party tracking script. Fonts and other assets on this site are hosted by us directly, not loaded from a third-party CDN, so visiting HamroNepal doesn't send your browser data to outside companies." %}</p>
+</section>
+
+<section>
+    <h2>{% translate "Controlling cookies" %}</h2>
+    <p>{% translate "Every browser lets you block or delete cookies in its settings. Since our cookies are what keep you signed in, blocking them will sign you out and stop the language preference from being remembered, but the public parts of the site will still work." %}</p>
+</section>
+
+<section>
+    <h2>{% translate "Contact us" %}</h2>
+    <p>{% translate "Questions about this policy can be sent to" %} <a href="mailto:contact@hamronepal.com">contact@hamronepal.com</a>.</p>
+</section>
+{% endblock %}

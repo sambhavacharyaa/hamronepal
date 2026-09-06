@@ -29,7 +29,12 @@ class AnonymousToTripPlanningSmokeTest(TestCase):
 
         response = client.post(
             "/en/accounts/register/",
-            {"email": "traveler@example.com", "password1": "S0meStrongPass!", "password2": "S0meStrongPass!"},
+            {
+                "email": "traveler@example.com",
+                "password1": "S0meStrongPass!",
+                "password2": "S0meStrongPass!",
+                "agree_to_terms": "on",
+            },
         )
         self.assertEqual(response.status_code, 302)
         self.assertEqual(len(mail.outbox), 1)

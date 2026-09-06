@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: HamroNepal 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-06 17:32+0545\n"
+"POT-Creation-Date: 2026-09-06 19:58+0545\n"
 "PO-Revision-Date: 2026-09-01 21:00+0545\n"
 "Last-Translator: HamroNepal\n"
 "Language-Team: Nepali\n"
@@ -16,23 +16,27 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: apps/accounts/views.py:25
+#: apps/accounts/forms.py:15
+msgid "You must agree to the Terms and Privacy Policy to create an account."
+msgstr "खाता सिर्जना गर्न तपाईंले सर्तहरू र गोपनीयता नीतिमा सहमत हुनुपर्छ।"
+
+#: apps/accounts/views.py:26
 msgid "Verify your HamroNepal email"
 msgstr "आफ्नो HamroNepal इमेल प्रमाणित गर्नुहोस्"
 
-#: apps/accounts/views.py:41
+#: apps/accounts/views.py:44
 msgid "Account created. Check your email to verify your address."
 msgstr "खाता सिर्जना भयो। आफ्नो ठेगाना प्रमाणित गर्न इमेल जाँच्नुहोस्।"
 
-#: apps/accounts/views.py:59
+#: apps/accounts/views.py:62
 msgid "Your email address has been verified."
 msgstr "तपाईंको इमेल ठेगाना प्रमाणित भयो।"
 
-#: apps/accounts/views.py:61
+#: apps/accounts/views.py:64
 msgid "This verification link is invalid or has expired."
 msgstr "यो प्रमाणीकरण लिङ्क अमान्य छ वा म्याद सकिएको छ।"
 
-#: apps/accounts/views.py:109
+#: apps/accounts/views.py:112
 msgid "Profile updated."
 msgstr "प्रोफाइल अपडेट भयो।"
 
@@ -407,38 +411,42 @@ msgstr "आफ्नो पासवर्ड रिसेट गर्नुह
 msgid "Send reset link"
 msgstr "रिसेट लिङ्क पठाउनुहोस्"
 
-#: templates/accounts/profile.html:4 templates/accounts/profile.html:23
+#: templates/accounts/profile.html:4 templates/accounts/profile.html:24
 #: templates/components/dashboard/sidebar.html:71
 msgid "Settings"
 msgstr "सेटिङ"
 
-#: templates/accounts/profile.html:27
+#: templates/accounts/profile.html:16
+msgid "Your profile photo"
+msgstr "तपाईंको प्रोफाइल फोटो"
+
+#: templates/accounts/profile.html:28
 msgid "verified"
 msgstr "प्रमाणित"
 
-#: templates/accounts/profile.html:30
+#: templates/accounts/profile.html:31
 msgid "not verified"
 msgstr "प्रमाणित छैन"
 
-#: templates/accounts/profile.html:51
+#: templates/accounts/profile.html:52
 msgid "Preferences"
 msgstr "प्राथमिकताहरू"
 
-#: templates/accounts/profile.html:59 templates/components/navbar.html:33
+#: templates/accounts/profile.html:60 templates/components/navbar.html:33
 #: templates/components/navbar.html:102
 msgid "Profile"
 msgstr "प्रोफाइल"
 
-#: templates/accounts/profile.html:68
+#: templates/accounts/profile.html:69
 msgid "Save changes"
 msgstr "परिवर्तनहरू सुरक्षित गर्नुहोस्"
 
-#: templates/accounts/profile.html:75 templates/components/navbar.html:38
+#: templates/accounts/profile.html:76 templates/components/navbar.html:38
 #: templates/components/navbar.html:107
 msgid "Log out"
 msgstr "लग आउट गर्नुहोस्"
 
-#: templates/accounts/register.html:4 templates/accounts/register.html:32
+#: templates/accounts/register.html:4 templates/accounts/register.html:51
 #: templates/components/navbar.html:46 templates/components/navbar.html:115
 msgid "Register"
 msgstr "दर्ता गर्नुहोस्"
@@ -454,7 +462,20 @@ msgstr ""
 "प्रक्रियाहरू ट्र्याक गर्नुहोस्, कागजातहरू सुरक्षित गर्नुहोस्, र म्याद "
 "सकिनुअघि सम्झनाहरू पाउनुहोस्।"
 
-#: templates/accounts/register.html:38
+#: templates/accounts/register.html:40
+#, python-format
+msgid ""
+"I agree to the <a href=\"%(terms_url)s\" class=\"text-primary "
+"hover:underline\" target=\"_blank\" rel=\"noopener\">Terms</a> and <a "
+"href=\"%(privacy_url)s\" class=\"text-primary hover:underline\" "
+"target=\"_blank\" rel=\"noopener\">Privacy Policy</a>."
+msgstr ""
+"म <a href=\"%(terms_url)s\" class=\"text-primary hover:underline\" "
+"target=\"_blank\" rel=\"noopener\">सर्तहरू</a> र <a href=\"%(privacy_url)s\""
+" class=\"text-primary hover:underline\" target=\"_blank\" "
+"rel=\"noopener\">गोपनीयता नीति</a> मा सहमत छु।"
+
+#: templates/accounts/register.html:57
 msgid "Already have an account? Log in"
 msgstr "पहिले नै खाता छ? लग इन गर्नुहोस्"
 
@@ -632,7 +653,34 @@ msgstr "सुरक्षित गरिएका"
 msgid "Account"
 msgstr "खाता"
 
-#: templates/components/footer.html:4
+#: templates/components/dashboard/sidebar.html:79
+msgid "Profile settings"
+msgstr "प्रोफाइल सेटिङहरू"
+
+#: templates/components/footer.html:5
+#: templates/core/legal/privacy_policy.html:4
+#: templates/core/legal/privacy_policy.html:5
+msgid "Privacy Policy"
+msgstr "गोपनीयता नीति"
+
+#: templates/components/footer.html:6 templates/core/legal/terms.html:4
+#: templates/core/legal/terms.html:5
+msgid "Terms and Conditions"
+msgstr "सर्त र नियमहरू"
+
+#: templates/components/footer.html:7
+#: templates/core/legal/cookie_policy.html:4
+#: templates/core/legal/cookie_policy.html:5
+msgid "Cookie Policy"
+msgstr "कुकी नीति"
+
+#: templates/components/footer.html:8
+#: templates/core/legal/refund_policy.html:4
+#: templates/core/legal/refund_policy.html:5
+msgid "Refund Policy"
+msgstr "फिर्ता नीति"
+
+#: templates/components/footer.html:11
 msgid "HamroNepal. Not an official government service."
 msgstr "हाम्रोनेपाल। यो आधिकारिक सरकारी सेवा होइन।"
 
@@ -1146,6 +1194,633 @@ msgstr "तपाईंलाई जे गर्न आवश्यक छ त�
 msgid "Search now"
 msgstr "अहिले नै खोज्नुहोस्"
 
+#: templates/core/legal/_base.html:7
+msgid "Last updated"
+msgstr "अन्तिम अपडेट"
+
+#: templates/core/legal/cookie_policy.html:9
+msgid "The short version"
+msgstr "छोटो सारांश"
+
+#: templates/core/legal/cookie_policy.html:10
+msgid ""
+"HamroNepal only uses cookies that are strictly necessary to make the site "
+"work: keeping you signed in, protecting your account, and remembering your "
+"language choice. We do not use advertising cookies, tracking cookies, or any"
+" third-party analytics, so we don't show a cookie consent banner — there is "
+"nothing non-essential to ask your permission for. You can still control "
+"cookies through your browser settings at any time."
+msgstr ""
+"HamroNepal ले साइट चलाउन अत्यावश्यक कुकीहरू मात्र प्रयोग गर्छ: तपाईंलाई साइन"
+" इन राख्ने, तपाईंको खाता सुरक्षित गर्ने, र तपाईंको भाषा रोजाइ सम्झने। हामी "
+"विज्ञापन कुकी, ट्र्याकिङ कुकी, वा कुनै तेस्रो-पक्ष एनालिटिक्स प्रयोग "
+"गर्दैनौं, त्यसैले हामी कुकी सहमति ब्यानर देखाउँदैनौं — अनुमति माग्नुपर्ने "
+"गैर-अत्यावश्यक केही छैन। तपाईं जुनसुकै बेला आफ्नो ब्राउजर सेटिङबाट कुकी "
+"नियन्त्रण गर्न सक्नुहुन्छ।"
+
+#: templates/core/legal/cookie_policy.html:14
+msgid "Cookies we use"
+msgstr "हामीले प्रयोग गर्ने कुकीहरू"
+
+#: templates/core/legal/cookie_policy.html:19
+msgid "Cookie"
+msgstr "कुकी"
+
+#: templates/core/legal/cookie_policy.html:20
+msgid "Purpose"
+msgstr "उद्देश्य"
+
+#: templates/core/legal/cookie_policy.html:21
+#: templates/processes/process_detail.html:43
+#: templates/processes/process_detail.html:46
+msgid "Duration"
+msgstr "अवधि"
+
+#: templates/core/legal/cookie_policy.html:27
+msgid "Keeps you signed in between page visits."
+msgstr "तपाईंलाई पृष्ठहरू बीच साइन इन राख्छ।"
+
+#: templates/core/legal/cookie_policy.html:28
+msgid "Expires when your browser session ends."
+msgstr "तपाईंको ब्राउजर सत्र समाप्त हुँदा समाप्त हुन्छ।"
+
+#: templates/core/legal/cookie_policy.html:32
+msgid "Protects your account and forms from cross-site request forgery."
+msgstr ""
+"तपाईंको खाता र फारमहरूलाई क्रस-साइट रिक्वेस्ट फोर्जरीबाट सुरक्षा गर्छ।"
+
+#: templates/core/legal/cookie_policy.html:33
+#: templates/core/legal/cookie_policy.html:38
+msgid "About one year."
+msgstr "लगभग एक वर्ष।"
+
+#: templates/core/legal/cookie_policy.html:37
+msgid "Remembers whether you chose English or Nepali."
+msgstr "तपाईंले अङ्ग्रेजी वा नेपाली मध्ये कुन रोज्नुभयो भनी सम्झन्छ।"
+
+#: templates/core/legal/cookie_policy.html:46
+msgid "What we don't use"
+msgstr "हामीले प्रयोग नगर्ने कुराहरू"
+
+#: templates/core/legal/cookie_policy.html:47
+msgid ""
+"We don't run Google Analytics, advertising pixels, or any other third-party "
+"tracking script. Fonts and other assets on this site are hosted by us "
+"directly, not loaded from a third-party CDN, so visiting HamroNepal doesn't "
+"send your browser data to outside companies."
+msgstr ""
+"हामी Google Analytics, विज्ञापन पिक्सेल, वा अन्य कुनै तेस्रो-पक्ष ट्र्याकिङ "
+"स्क्रिप्ट चलाउँदैनौं। यस साइटका फन्ट र अन्य एसेटहरू हामी आफैंले होस्ट "
+"गर्छौं, तेस्रो-पक्ष CDN बाट लोड गरिँदैन, त्यसैले HamroNepal भ्रमण गर्दा "
+"तपाईंको ब्राउजर डेटा बाहिरी कम्पनीहरूमा जाँदैन।"
+
+#: templates/core/legal/cookie_policy.html:51
+msgid "Controlling cookies"
+msgstr "कुकी नियन्त्रण गर्ने"
+
+#: templates/core/legal/cookie_policy.html:52
+msgid ""
+"Every browser lets you block or delete cookies in its settings. Since our "
+"cookies are what keep you signed in, blocking them will sign you out and "
+"stop the language preference from being remembered, but the public parts of "
+"the site will still work."
+msgstr ""
+"हरेक ब्राउजरले आफ्नो सेटिङमा कुकी ब्लक वा मेटाउन दिन्छ। हाम्रा कुकीहरूले नै "
+"तपाईंलाई साइन इन राख्ने भएकाले, तिनलाई ब्लक गर्दा तपाईं साइन आउट हुनुहुनेछ र"
+" भाषा रोजाइ सम्झिने छैन, तर साइटका सार्वजनिक भागहरू भने चलिरहनेछन्।"
+
+#: templates/core/legal/cookie_policy.html:56
+#: templates/core/legal/privacy_policy.html:95
+#: templates/core/legal/refund_policy.html:24
+#: templates/core/legal/terms.html:74
+msgid "Contact us"
+msgstr "हामीलाई सम्पर्क गर्नुहोस्"
+
+#: templates/core/legal/cookie_policy.html:57
+#: templates/core/legal/refund_policy.html:25
+msgid "Questions about this policy can be sent to"
+msgstr "यो नीतिका बारेमा प्रश्नहरू यहाँ पठाउन सकिन्छ"
+
+#: templates/core/legal/privacy_policy.html:10
+msgid ""
+"HamroNepal is currently run by an individual operator. A formal legal entity"
+" name has not yet been confirmed for this policy."
+msgstr ""
+"HamroNepal हाल एक व्यक्तिगत सञ्चालकद्वारा चलाइन्छ। यस नीतिका लागि औपचारिक "
+"कानूनी संस्थाको नाम अझै पुष्टि गरिएको छैन।"
+
+#: templates/core/legal/privacy_policy.html:15
+msgid "Who this policy covers"
+msgstr "यो नीतिले के समेट्छ"
+
+#: templates/core/legal/privacy_policy.html:17
+msgid ""
+"HamroNepal (\"we\", \"us\") is an independent, unofficial resource that "
+"helps people in Nepal understand and track government processes, and explore"
+" travel destinations. This policy explains what information we collect "
+"through hamronepal.com, why we collect it, and what choices you have. "
+"HamroNepal is not a government office, and using this site does not create "
+"any relationship with the Government of Nepal."
+msgstr ""
+"HamroNepal (\"हामी\") नेपालका मानिसहरूलाई सरकारी प्रक्रियाहरू बुझ्न र "
+"ट्र्याक गर्न, र यात्रा गन्तव्यहरू अन्वेषण गर्न मद्दत गर्ने एक स्वतन्त्र, "
+"अनौपचारिक स्रोत हो। यस नीतिले hamronepal.com मार्फत हामीले सङ्कलन गर्ने "
+"जानकारी, किन सङ्कलन गर्छौं, र तपाईंसँग के विकल्पहरू छन् भनी व्याख्या गर्छ। "
+"HamroNepal कुनै सरकारी कार्यालय होइन, र यो साइट प्रयोग गर्दा नेपाल सरकारसँग "
+"कुनै सम्बन्ध स्थापित हुँदैन।"
+
+#: templates/core/legal/privacy_policy.html:22
+msgid "Information we collect"
+msgstr "हामीले सङ्कलन गर्ने जानकारी"
+
+#: templates/core/legal/privacy_policy.html:23
+msgid ""
+"We only collect information you give us directly, or that is created by your"
+" own use of the site:"
+msgstr ""
+"हामी तपाईंले सिधै हामीलाई दिनुभएको, वा तपाईंको आफ्नै साइट प्रयोगबाट सिर्जना "
+"भएको जानकारी मात्र सङ्कलन गर्छौं:"
+
+#: templates/core/legal/privacy_policy.html:25
+msgid ""
+"Account information: your email address and password (stored as a secure "
+"hash, never in plain text). A phone number is optional."
+msgstr ""
+"खाता जानकारी: तपाईंको इमेल ठेगाना र पासवर्ड (सुरक्षित ह्यासको रूपमा राखिन्छ,"
+" कहिल्यै सादा पाठमा होइन)। फोन नम्बर वैकल्पिक हो।"
+
+#: templates/core/legal/privacy_policy.html:26
+msgid ""
+"Profile information you choose to add: a display name, a short bio, a "
+"profile photo, and your municipality."
+msgstr ""
+"तपाईंले थप्ने प्रोफाइल जानकारी: प्रदर्शन नाम, छोटो परिचय, प्रोफाइल फोटो, र "
+"तपाईंको नगरपालिका।"
+
+#: templates/core/legal/privacy_policy.html:27
+msgid ""
+"Documents you choose to upload to your dashboard (for example, scans used to"
+" track a process). These are stored privately and are never made public or "
+"shared."
+msgstr ""
+"तपाईंले आफ्नो ड्यासबोर्डमा अपलोड गर्ने कागजातहरू (जस्तै, प्रक्रिया ट्र्याक "
+"गर्न प्रयोग हुने स्क्यानहरू)। यी निजी रूपमा भण्डारण गरिन्छन् र कहिल्यै "
+"सार्वजनिक वा साझा गरिँदैनन्।"
+
+#: templates/core/legal/privacy_policy.html:28
+msgid ""
+"Your own activity on the site: tasks and deadlines you create, processes and"
+" destinations you save, and trips you plan."
+msgstr ""
+"साइटमा तपाईंको आफ्नै गतिविधि: तपाईंले सिर्जना गर्ने कार्य र समयसीमा, तपाईंले"
+" सुरक्षित गर्ने प्रक्रिया र गन्तव्यहरू, र तपाईंले योजना बनाउने यात्राहरू।"
+
+#: templates/core/legal/privacy_policy.html:29
+msgid ""
+"Basic technical data every web server logs, such as your IP address and "
+"browser type, kept only in standard server logs."
+msgstr ""
+"हरेक वेब सर्भरले लग गर्ने आधारभूत प्राविधिक डेटा, जस्तै तपाईंको IP ठेगाना र "
+"ब्राउजर प्रकार, केवल मानक सर्भर लगमा राखिन्छ।"
+
+#: templates/core/legal/privacy_policy.html:31
+msgid ""
+"We do not ask for, and you should never need to give us, your citizenship "
+"number, passport number, or any government login credentials."
+msgstr ""
+"हामी तपाईंको नागरिकता नम्बर, राहदानी नम्बर, वा कुनै सरकारी लगइन प्रमाणहरू "
+"माग्दैनौं, र तपाईंले हामीलाई ती दिनुपर्ने कहिल्यै हुँदैन।"
+
+#: templates/core/legal/privacy_policy.html:35
+msgid "Cookies"
+msgstr "कुकीहरू"
+
+#: templates/core/legal/privacy_policy.html:38
+#, python-format
+msgid ""
+"We use a small number of strictly necessary cookies to keep you signed in, "
+"protect your account, and remember your language choice. We do not use "
+"advertising or tracking cookies, and we do not run any analytics scripts. "
+"See our <a href=\"%(cookie_policy_url)s\">Cookie Policy</a> for the full "
+"list."
+msgstr ""
+"हामी तपाईंलाई साइन इन राख्न, तपाईंको खाता सुरक्षित गर्न, र तपाईंको भाषा "
+"रोजाइ सम्झन थोरै अत्यावश्यक कुकीहरू मात्र प्रयोग गर्छौं। हामी विज्ञापन वा "
+"ट्र्याकिङ कुकी प्रयोग गर्दैनौं, र कुनै एनालिटिक्स स्क्रिप्ट पनि चलाउँदैनौं। "
+"पूरा सूचीका लागि हाम्रो <a href=\"%(cookie_policy_url)s\">कुकी नीति</a> "
+"हेर्नुहोस्।"
+
+#: templates/core/legal/privacy_policy.html:43
+msgid "How we use your information"
+msgstr "हामी तपाईंको जानकारी कसरी प्रयोग गर्छौं"
+
+#: templates/core/legal/privacy_policy.html:45
+msgid "To create and secure your account, and to sign you in."
+msgstr "तपाईंको खाता सिर्जना र सुरक्षित गर्न, र तपाईंलाई साइन इन गराउन।"
+
+#: templates/core/legal/privacy_policy.html:46
+msgid ""
+"To operate the features you use: tracking processes, storing your documents,"
+" reminding you before deadlines, and planning trips."
+msgstr ""
+"तपाईंले प्रयोग गर्ने सुविधाहरू सञ्चालन गर्न: प्रक्रिया ट्र्याक गर्ने, "
+"तपाईंको कागजात भण्डारण गर्ने, समयसीमा अघि सम्झाउने, र यात्रा योजना बनाउने।"
+
+#: templates/core/legal/privacy_policy.html:47
+msgid ""
+"To send account-related emails: verifying your address, password resets, and"
+" deadline reminders you can control from your dashboard."
+msgstr ""
+"खातासँग सम्बन्धित इमेलहरू पठाउन: तपाईंको ठेगाना प्रमाणीकरण, पासवर्ड रिसेट, र"
+" तपाईंले आफ्नो ड्यासबोर्डबाट नियन्त्रण गर्न सक्ने समयसीमा सम्झना।"
+
+#: templates/core/legal/privacy_policy.html:48
+msgid "To keep the site secure and prevent abuse."
+msgstr "साइटलाई सुरक्षित राख्न र दुरुपयोग रोक्न।"
+
+#: templates/core/legal/privacy_policy.html:50
+msgid ""
+"We do not use your information for advertising, and we do not build "
+"behavioral profiles about you."
+msgstr ""
+"हामी तपाईंको जानकारी विज्ञापनका लागि प्रयोग गर्दैनौं, र तपाईंको बारेमा "
+"व्यवहारगत प्रोफाइल पनि बनाउँदैनौं।"
+
+#: templates/core/legal/privacy_policy.html:54
+msgid "How we share your information"
+msgstr "हामी तपाईंको जानकारी कसरी साझा गर्छौं"
+
+#: templates/core/legal/privacy_policy.html:56
+msgid ""
+"We do not sell your information, and we do not share it with advertisers or "
+"data brokers. We share information only with the service providers strictly "
+"necessary to run the site, such as our email delivery provider (used only to"
+" send you the account emails described above), and our hosting provider. We "
+"may disclose information if required by law or to protect the security of "
+"the site and its users."
+msgstr ""
+"हामी तपाईंको जानकारी बेच्दैनौं, र विज्ञापनदाता वा डेटा ब्रोकरहरूसँग साझा "
+"गर्दैनौं। हामी साइट चलाउन अत्यावश्यक सेवा प्रदायकहरूसँग मात्र जानकारी साझा "
+"गर्छौं, जस्तै हाम्रो इमेल डेलिभरी प्रदायक (माथि उल्लेखित खाता इमेलहरू पठाउन "
+"मात्र प्रयोग हुने), र हाम्रो होस्टिङ प्रदायक। कानूनद्वारा आवश्यक भएमा वा "
+"साइट र प्रयोगकर्ताहरूको सुरक्षाका लागि हामीले जानकारी खुलासा गर्न सक्छौं।"
+
+#: templates/core/legal/privacy_policy.html:61
+msgid "Data security"
+msgstr "डेटा सुरक्षा"
+
+#: templates/core/legal/privacy_policy.html:63
+msgid "Passwords are never stored in plain text."
+msgstr "पासवर्डहरू कहिल्यै सादा पाठमा भण्डारण गरिँदैनन्।"
+
+#: templates/core/legal/privacy_policy.html:64
+msgid ""
+"The site is served over HTTPS, and session and login cookies are marked "
+"secure."
+msgstr ""
+"साइट HTTPS मार्फत सेवा गरिन्छ, र सत्र र लगइन कुकीहरू सुरक्षित चिन्हित छन्।"
+
+#: templates/core/legal/privacy_policy.html:65
+msgid ""
+"Documents you upload are stored in private storage that only your own "
+"account can access, not a public folder."
+msgstr ""
+"तपाईंले अपलोड गर्ने कागजातहरू निजी भण्डारणमा राखिन्छन् जुन तपाईंको आफ्नै "
+"खाताले मात्र पहुँच गर्न सक्छ, कुनै सार्वजनिक फोल्डरमा होइन।"
+
+#: templates/core/legal/privacy_policy.html:67
+msgid ""
+"No system is perfectly secure, and we cannot guarantee absolute security, "
+"but we take reasonable, real technical steps to protect your information."
+msgstr ""
+"कुनै पनि प्रणाली पूर्णतया सुरक्षित हुँदैन, र हामी पूर्ण सुरक्षाको ग्यारेन्टी"
+" दिन सक्दैनौं, तर तपाईंको जानकारी सुरक्षित गर्न हामी उचित, वास्तविक "
+"प्राविधिक कदमहरू चाल्छौं।"
+
+#: templates/core/legal/privacy_policy.html:71
+msgid "How long we keep your information"
+msgstr "हामी तपाईंको जानकारी कति समय राख्छौं"
+
+#: templates/core/legal/privacy_policy.html:72
+msgid ""
+"We keep your account information for as long as your account is active. If "
+"you ask us to delete your account, we will delete your personal information "
+"within a reasonable time, except where we are required to keep certain "
+"records by law."
+msgstr ""
+"तपाईंको खाता सक्रिय रहेसम्म हामी तपाईंको खाता जानकारी राख्छौं। यदि तपाईंले "
+"हामीलाई आफ्नो खाता मेटाउन भन्नुभयो भने, कानूनले केही अभिलेख राख्न आवश्यक "
+"पारेको अवस्था बाहेक, हामी तपाईंको व्यक्तिगत जानकारी उचित समयभित्र मेटाउँछौं।"
+
+#: templates/core/legal/privacy_policy.html:76
+msgid "Your rights and choices"
+msgstr "तपाईंका अधिकार र विकल्पहरू"
+
+#: templates/core/legal/privacy_policy.html:78
+msgid ""
+"You can view and update your profile information at any time from your "
+"account settings."
+msgstr ""
+"तपाईं जुनसुकै बेला आफ्नो खाता सेटिङबाट प्रोफाइल जानकारी हेर्न र अद्यावधिक "
+"गर्न सक्नुहुन्छ।"
+
+#: templates/core/legal/privacy_policy.html:79
+msgid ""
+"You can delete individual documents, tasks, saved places, and trips yourself"
+" from your dashboard."
+msgstr ""
+"तपाईं आफ्नो ड्यासबोर्डबाट व्यक्तिगत कागजात, कार्य, सुरक्षित ठाउँ, र "
+"यात्राहरू आफैं मेटाउन सक्नुहुन्छ।"
+
+#: templates/core/legal/privacy_policy.html:80
+msgid ""
+"To request a copy of your data, or to delete your account entirely, email us"
+" at"
+msgstr ""
+"आफ्नो डेटाको प्रतिलिपि माग्न, वा आफ्नो खाता पूर्ण रूपमा मेटाउन, हामीलाई यहाँ"
+" इमेल गर्नुहोस्"
+
+#: templates/core/legal/privacy_policy.html:80
+msgid "and we will handle your request promptly."
+msgstr "र हामी तपाईंको अनुरोध चाँडै सम्बोधन गर्नेछौं।"
+
+#: templates/core/legal/privacy_policy.html:85
+msgid "Children's privacy"
+msgstr "बालबालिकाको गोपनीयता"
+
+#: templates/core/legal/privacy_policy.html:86
+msgid ""
+"HamroNepal is not directed at children, and you must be at least 16 years "
+"old to create an account. We do not knowingly collect information from "
+"children under 16."
+msgstr ""
+"HamroNepal बालबालिकाका लागि लक्षित छैन, र खाता सिर्जना गर्न तपाईं कम्तीमा १६"
+" वर्ष उमेरको हुनुपर्छ। हामी जानीजानी १६ वर्षभन्दा कम उमेरका बालबालिकाबाट "
+"जानकारी सङ्कलन गर्दैनौं।"
+
+#: templates/core/legal/privacy_policy.html:90
+msgid "Changes to this policy"
+msgstr "यस नीतिमा परिवर्तन"
+
+#: templates/core/legal/privacy_policy.html:91
+msgid ""
+"If we make a meaningful change to this policy, we will update the date at "
+"the top of this page."
+msgstr ""
+"यदि हामीले यस नीतिमा महत्त्वपूर्ण परिवर्तन गर्यौं भने, हामी यस पृष्ठको "
+"माथिको मिति अद्यावधिक गर्नेछौं।"
+
+#: templates/core/legal/privacy_policy.html:96
+msgid ""
+"Questions about this policy, or requests about your data, can be sent to"
+msgstr ""
+"यस नीतिका बारेमा प्रश्नहरू, वा तपाईंको डेटाका बारेमा अनुरोधहरू, यहाँ पठाउन "
+"सकिन्छ"
+
+#: templates/core/legal/refund_policy.html:9
+msgid "HamroNepal does not charge for anything"
+msgstr "HamroNepal ले कुनै पनि कुराको शुल्क लिँदैन"
+
+#: templates/core/legal/refund_policy.html:10
+msgid ""
+"Every feature on HamroNepal, from tracking a government process to planning "
+"a trip, is free to use. We do not sell subscriptions, one-time purchases, or"
+" any paid feature, so there is no payment made to HamroNepal to refund."
+msgstr ""
+"सरकारी प्रक्रिया ट्र्याक गर्नेदेखि यात्रा योजना बनाउनेसम्म, HamroNepal का "
+"हरेक सुविधा प्रयोग गर्न निःशुल्क छन्। हामी सदस्यता, एकल खरिद, वा कुनै पनि "
+"सशुल्क सुविधा बेच्दैनौं, त्यसैले HamroNepal लाई फिर्ता गर्नुपर्ने कुनै "
+"भुक्तानी हुँदैन।"
+
+#: templates/core/legal/refund_policy.html:14
+msgid "Government fees"
+msgstr "सरकारी शुल्क"
+
+#: templates/core/legal/refund_policy.html:15
+msgid ""
+"Some government processes shown on HamroNepal involve an official fee. That "
+"fee is always paid directly to the relevant government office or its own "
+"payment system, not to HamroNepal, and we never see or handle that payment. "
+"Refunds for a government fee are decided entirely by that government office "
+"under its own rules — HamroNepal has no ability to issue or influence such a"
+" refund."
+msgstr ""
+"HamroNepal मा देखाइएका केही सरकारी प्रक्रियाहरूमा आधिकारिक शुल्क लाग्छ। त्यो"
+" शुल्क सधैं सम्बन्धित सरकारी कार्यालय वा त्यसको आफ्नै भुक्तानी प्रणालीमा "
+"सिधै तिरिन्छ, HamroNepal लाई होइन, र हामी त्यो भुक्तानी कहिल्यै देख्दैनौं वा"
+" ह्यान्डल गर्दैनौं। सरकारी शुल्कको फिर्ता पूर्ण रूपमा त्यो सरकारी कार्यालयले"
+" आफ्नै नियमअन्तर्गत निर्णय गर्छ — HamroNepal सँग त्यस्तो फिर्ता जारी वा "
+"प्रभाव पार्ने कुनै क्षमता छैन।"
+
+#: templates/core/legal/refund_policy.html:19
+msgid "If this changes"
+msgstr "यदि यो परिवर्तन भयो भने"
+
+#: templates/core/legal/refund_policy.html:20
+msgid ""
+"If we ever introduce a paid feature in the future, we will publish a real "
+"refund policy for it here before it launches."
+msgstr ""
+"यदि भविष्यमा हामीले कुनै सशुल्क सुविधा ल्यायौं भने, त्यो सुरु हुनुअघि हामी "
+"यहाँ त्यसको लागि वास्तविक फिर्ता नीति प्रकाशित गर्नेछौं।"
+
+#: templates/core/legal/terms.html:9
+msgid "Acceptance of these terms"
+msgstr "यी सर्तहरूको स्वीकृति"
+
+#: templates/core/legal/terms.html:10
+msgid ""
+"By creating an account or using HamroNepal, you agree to these terms. If you"
+" do not agree, please do not use the site."
+msgstr ""
+"खाता सिर्जना गरेर वा HamroNepal प्रयोग गरेर, तपाईं यी सर्तहरूमा सहमत "
+"हुनुहुन्छ। यदि तपाईं सहमत हुनुहुन्न भने, कृपया साइट प्रयोग नगर्नुहोस्।"
+
+#: templates/core/legal/terms.html:14
+msgid "What HamroNepal is"
+msgstr "HamroNepal के हो"
+
+#: templates/core/legal/terms.html:15
+msgid ""
+"HamroNepal is a free, independent, unofficial resource that explains "
+"government processes in Nepal and lets you track your own progress through "
+"them, and a separate section for exploring travel destinations in Nepal. "
+"HamroNepal is not a government office, is not affiliated with the Government"
+" of Nepal, and does not submit applications, collect government fees, or "
+"make decisions on your behalf. Every process page links to the relevant "
+"official government source, which is always the final authority."
+msgstr ""
+"HamroNepal नेपालका सरकारी प्रक्रियाहरू व्याख्या गर्ने र तपाईंलाई तिनीहरूमा "
+"आफ्नै प्रगति ट्र्याक गर्न दिने एक निःशुल्क, स्वतन्त्र, अनौपचारिक स्रोत हो, र"
+" नेपालका यात्रा गन्तव्यहरू अन्वेषण गर्नका लागि छुट्टै खण्ड पनि हो। "
+"HamroNepal कुनै सरकारी कार्यालय होइन, नेपाल सरकारसँग सम्बद्ध छैन, र तपाईंको "
+"तर्फबाट आवेदन पेस गर्दैन, सरकारी शुल्क सङ्कलन गर्दैन, वा निर्णय लिँदैन। हरेक"
+" प्रक्रिया पृष्ठले सम्बन्धित आधिकारिक सरकारी स्रोतमा लिङ्क गर्छ, जुन सधैं "
+"अन्तिम आधिकारिक स्रोत हो।"
+
+#: templates/core/legal/terms.html:19
+msgid "No fees for using this site"
+msgstr "यो साइट प्रयोग गर्न कुनै शुल्क छैन"
+
+#: templates/core/legal/terms.html:20
+msgid ""
+"HamroNepal does not charge you anything to use the site. If a government "
+"process involves an official fee, you pay that fee directly to the relevant "
+"government office or its own payment system, never through HamroNepal."
+msgstr ""
+"HamroNepal ले साइट प्रयोग गर्न तपाईंसँग कुनै शुल्क लिँदैन। यदि कुनै सरकारी "
+"प्रक्रियामा आधिकारिक शुल्क लाग्छ भने, तपाईंले त्यो शुल्क सम्बन्धित सरकारी "
+"कार्यालय वा त्यसको आफ्नै भुक्तानी प्रणालीमा सिधै तिर्नुहुन्छ, कहिल्यै "
+"HamroNepal मार्फत होइन।"
+
+#: templates/core/legal/terms.html:24
+msgid "Your account"
+msgstr "तपाईंको खाता"
+
+#: templates/core/legal/terms.html:26
+msgid "You must be at least 16 years old to create an account."
+msgstr "खाता सिर्जना गर्न तपाईं कम्तीमा १६ वर्ष उमेरको हुनुपर्छ।"
+
+#: templates/core/legal/terms.html:27
+msgid ""
+"You are responsible for keeping your password secure and for all activity "
+"under your account."
+msgstr ""
+"आफ्नो पासवर्ड सुरक्षित राख्ने र आफ्नो खाताअन्तर्गत हुने सबै गतिविधिको "
+"जिम्मेवारी तपाईंको हो।"
+
+#: templates/core/legal/terms.html:28
+msgid ""
+"You must give us an accurate email address, since it is used to verify your "
+"account and for password resets."
+msgstr ""
+"तपाईंले हामीलाई सही इमेल ठेगाना दिनुपर्छ, किनभने यो तपाईंको खाता प्रमाणीकरण "
+"र पासवर्ड रिसेटका लागि प्रयोग हुन्छ।"
+
+#: templates/core/legal/terms.html:33
+msgid "Acceptable use"
+msgstr "स्वीकार्य प्रयोग"
+
+#: templates/core/legal/terms.html:34
+msgid "You agree not to:"
+msgstr "तपाईं निम्न नगर्न सहमत हुनुहुन्छ:"
+
+#: templates/core/legal/terms.html:36
+msgid "Use the site for any unlawful purpose."
+msgstr "साइटलाई कुनै गैरकानूनी उद्देश्यका लागि प्रयोग गर्नु।"
+
+#: templates/core/legal/terms.html:37
+msgid "Attempt to gain unauthorized access to another user's account or data."
+msgstr ""
+"अर्को प्रयोगकर्ताको खाता वा डेटामा अनधिकृत पहुँच प्राप्त गर्ने प्रयास गर्नु।"
+
+#: templates/core/legal/terms.html:38
+msgid ""
+"Upload content that is unlawful, or that you do not have the right to "
+"upload."
+msgstr "गैरकानूनी सामग्री, वा अपलोड गर्ने अधिकार नभएको सामग्री अपलोड गर्नु।"
+
+#: templates/core/legal/terms.html:39
+msgid ""
+"Interfere with the normal operation of the site, including through automated"
+" scraping at a scale that disrupts the service."
+msgstr ""
+"साइटको सामान्य सञ्चालनमा हस्तक्षेप गर्नु, सेवामा अवरोध पुर्याउने हदसम्मको "
+"स्वचालित स्क्र्यापिङ सहित।"
+
+#: templates/core/legal/terms.html:44
+msgid "Content you submit"
+msgstr "तपाईंले पेस गर्ने सामग्री"
+
+#: templates/core/legal/terms.html:45
+msgid ""
+"Documents you upload to your own dashboard remain yours; they are private to"
+" your account and are never published. If you submit a public experience or "
+"comment about a process, you are responsible for what you write, and we may "
+"remove content that is false, abusive, or unlawful. Published experiences "
+"require our review before they appear publicly."
+msgstr ""
+"तपाईंले आफ्नो ड्यासबोर्डमा अपलोड गर्ने कागजातहरू तपाईंकै रहन्छन्; ती तपाईंको"
+" खातामा निजी हुन्छन् र कहिल्यै प्रकाशित गरिँदैनन्। यदि तपाईंले कुनै "
+"प्रक्रियाका बारेमा सार्वजनिक अनुभव वा टिप्पणी पेस गर्नुभयो भने, तपाईंले "
+"लेख्नुभएको कुराको जिम्मेवारी तपाईंकै हो, र हामीले झुटो, अपमानजनक, वा "
+"गैरकानूनी सामग्री हटाउन सक्छौं। प्रकाशित अनुभवहरू सार्वजनिक रूपमा देखिनुअघि "
+"हाम्रो समीक्षा आवश्यक पर्छ।"
+
+#: templates/core/legal/terms.html:49
+msgid "No warranty"
+msgstr "कुनै वारेन्टी छैन"
+
+#: templates/core/legal/terms.html:50
+msgid ""
+"We work to keep process information accurate and cite an official source "
+"with a verification date on every process, but government requirements, "
+"fees, and procedures can change without notice. HamroNepal is provided “as "
+"is”, without warranty of any kind, and you should always confirm current "
+"requirements with the official government source linked on each process page"
+" before relying on them."
+msgstr ""
+"हामी प्रक्रिया जानकारी सही राख्न र हरेक प्रक्रियामा प्रमाणीकरण मितिसहित "
+"आधिकारिक स्रोत उल्लेख गर्न काम गर्छौं, तर सरकारी आवश्यकता, शुल्क, र "
+"प्रक्रियाहरू सूचनाविना परिवर्तन हुन सक्छन्। HamroNepal कुनै पनि किसिमको "
+"वारेन्टीविना, “जस्तो छ त्यस्तै” उपलब्ध गराइन्छ, र भर पर्नुअघि तपाईंले सधैं "
+"हरेक प्रक्रिया पृष्ठमा लिङ्क गरिएको आधिकारिक सरकारी स्रोतसँग हालको आवश्यकता "
+"पुष्टि गर्नुपर्छ।"
+
+#: templates/core/legal/terms.html:54
+msgid "Limitation of liability"
+msgstr "दायित्वको सीमितता"
+
+#: templates/core/legal/terms.html:55
+msgid ""
+"To the fullest extent permitted by law, HamroNepal and its operator are not "
+"liable for any loss or damage arising from your use of the site, including "
+"reliance on information that later turns out to be outdated or inaccurate. "
+"Nothing in these terms limits liability that cannot be limited under "
+"applicable law."
+msgstr ""
+"कानूनले अनुमति दिने हदसम्म, तपाईंको साइट प्रयोगबाट उत्पन्न हुने कुनै पनि "
+"हानि वा नोक्सानीका लागि, पछि पुरानो वा गलत साबित हुने जानकारीमा भर "
+"परेकोसमेत, HamroNepal र यसको सञ्चालक जिम्मेवार हुनेछैनन्। यी सर्तहरूमा कुनै "
+"पनि कुराले लागू कानूनअन्तर्गत सीमित गर्न नमिल्ने दायित्व सीमित गर्दैन।"
+
+#: templates/core/legal/terms.html:59
+msgid "Suspending or ending accounts"
+msgstr "खाता निलम्बन वा अन्त्य गर्ने"
+
+#: templates/core/legal/terms.html:60
+msgid ""
+"We may suspend or terminate an account that violates these terms. You may "
+"stop using the site, or ask us to delete your account, at any time."
+msgstr ""
+"यी सर्तहरू उल्लङ्घन गर्ने खातालाई हामीले निलम्बन वा अन्त्य गर्न सक्छौं। "
+"तपाईं जुनसुकै बेला साइट प्रयोग रोक्न, वा हामीलाई आफ्नो खाता मेटाउन भन्न "
+"सक्नुहुन्छ।"
+
+#: templates/core/legal/terms.html:64
+msgid "Changes to these terms"
+msgstr "यी सर्तहरूमा परिवर्तन"
+
+#: templates/core/legal/terms.html:65
+msgid ""
+"If we make a meaningful change to these terms, we will update the date at "
+"the top of this page."
+msgstr ""
+"यदि हामीले यी सर्तहरूमा महत्त्वपूर्ण परिवर्तन गर्यौं भने, हामी यस पृष्ठको "
+"माथिको मिति अद्यावधिक गर्नेछौं।"
+
+#: templates/core/legal/terms.html:69
+msgid "Governing law"
+msgstr "लागू हुने कानून"
+
+#: templates/core/legal/terms.html:70
+msgid "These terms are governed by the laws of Nepal."
+msgstr "यी सर्तहरू नेपालको कानूनद्वारा नियन्त्रित हुन्छन्।"
+
+#: templates/core/legal/terms.html:75
+msgid "Questions about these terms can be sent to"
+msgstr "यी सर्तहरूका बारेमा प्रश्नहरू यहाँ पठाउन सकिन्छ"
+
 #: templates/dashboard/_base.html:13
 msgid "Open menu"
 msgstr "मेनु खोल्नुहोस्"
@@ -1215,11 +1890,6 @@ msgstr "शुल्क"
 #: templates/processes/process_detail.html:40
 msgid "Authority"
 msgstr "निकाय"
-
-#: templates/processes/process_detail.html:43
-#: templates/processes/process_detail.html:46
-msgid "Duration"
-msgstr "अवधि"
 
 #: templates/processes/process_detail.html:48
 #: templates/processes/process_detail.html:50

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+<article class="mx-auto max-w-3xl">
+    <h1 class="text-3xl font-bold text-ink">{% block legal_title %}{% endblock %}</h1>
+    <p class="mt-2 text-sm text-ink-muted">{% translate "Last updated" %}: {% now "F j, Y" %}</p>
+
+    <div class="mt-8 space-y-8 text-sm leading-relaxed text-ink [&_h2]:text-lg [&_h2]:font-semibold [&_h2]:text-ink [&_p]:mt-3 [&_p]:text-ink-muted [&_ul]:mt-3 [&_ul]:list-disc [&_ul]:space-y-1.5 [&_ul]:pl-5 [&_ul]:text-ink-muted [&_a]:text-primary [&_a]:hover:underline">
+        {% block legal_content %}{% endblock %}
+    </div>
+</article>
+{% endblock %}
