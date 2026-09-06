@@ -7,9 +7,11 @@ from django.urls import include, path
 
 from apps.core.views import robots_txt_view
 from apps.processes.sitemaps import ProcessSitemap, StaticViewSitemap
+from apps.tourism.sitemaps import DestinationSitemap
 
 sitemaps = {
     "processes": ProcessSitemap,
+    "tourism": DestinationSitemap,
     "static": StaticViewSitemap,
 }
 
@@ -31,6 +33,7 @@ if settings.DEBUG:
 urlpatterns += i18n_patterns(
     path("", include("apps.core.urls")),
     path("", include("apps.processes.urls")),
+    path("tourism/", include("apps.tourism.urls")),
     path("accounts/", include("apps.accounts.urls")),
     path("tasks/", include("apps.tasks.urls")),
     path("dashboard/", include("apps.dashboard.urls")),

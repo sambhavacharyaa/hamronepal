@@ -1,0 +1,22 @@
+{% load i18n %}
+<li class="flex items-center gap-3 rounded-xl border border-border bg-surface p-3">
+    <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary/10 text-sm font-semibold text-primary">
+        {{ forloop.counter }}
+    </span>
+    <div class="min-w-0 flex-1">
+        <a href="{% url 'tourism:destination_detail' slug=stop.destination.slug %}" class="text-sm font-medium text-ink hover:text-primary focus-visible:focus-ring">
+            {{ stop.destination.title }}
+        </a>
+        <p class="text-xs text-ink-muted">
+            {{ stop.destination.region }}
+            {% if stop.day_number %}&middot; {% blocktranslate with day=stop.day_number %}Day {{ day }}{% endblocktranslate %}{% endif %}
+        </p>
+    </div>
+    <form hx-post="{% url 'tourism:trip_remove_destination' trip_pk=trip.id pk=stop.id %}"
+          hx-target="#trip-itinerary" hx-swap="outerHTML">
+        {% csrf_token %}
+        <button type="submit" aria-label="{% translate 'Remove from trip' %}" class="rounded-md p-1 text-ink-muted hover:text-danger focus-visible:focus-ring">
+            {% include "components/icons/x.html" with extra_class="h-4 w-4" only %}
+        </button>
+    </form>
+</li>

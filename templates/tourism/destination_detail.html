@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{{ destination.meta_title|default:destination.title }}{% endblock %}
+
+{% block meta %}
+<meta name="description" content="{{ destination.meta_description|default:destination.summary }}">
+{% for code, url in hreflang_urls.items %}
+<link rel="alternate" hreflang="{{ code }}" href="{{ url }}">
+{% endfor %}
+{% endblock %}
+
+{% block content %}
+<script type="application/ld+json">{{ destination_json_ld }}</script>
+
+<div class="relative -mx-4 -mt-8 overflow-hidden rounded-b-3xl {{ tint }} px-4 pb-10 pt-10 text-white sm:-mx-6 sm:px-6 sm:pb-14 sm:pt-14">
+    <div class="mx-auto flex max-w-4xl items-start justify-between gap-4">
+        <div>
+            <span class="text-xs font-semibold uppercase tracking-wide text-white/80">{{ destination.region }}</span>
+            <h1 class="mt-1 text-3xl font-bold text-balance sm:text-4xl">{{ destination.title }}</h1>
+            {% if destination.summary %}<p class="mt-3 max-w-xl text-pretty text-white/85">{{ destination.summary }}</p>{% endif %}
+        </div>
+        {% if request.user.is_authenticated %}
+            {% include "components/tourism/save_button.html" with destination=destination is_saved=is_saved %}
+        {% endif %}
+    </div>
+</div>
+
+<div class="mx-auto mt-8 max-w-4xl">
+    <div class="flex flex-wrap gap-4 text-sm text-ink-muted">
+        <span>{% translate "Category" %}: {{ destination.category.name }}</span>
+        {% if destination.best_season %}<span>{% translate "Best season" %}: {{ destination.get_best_season_display }}</span>{% endif %}
+        {% if destination.budget_note %}<span>{% translate "Budget" %}: {{ destination.budget_note }}</span>{% endif %}
+    </div>
+
+    {% if destination.description %}
+    <div class="mt-6">
+        <p class="text-pretty text-ink">{{ destination.description }}</p>
+    </div>
+    {% endif %}
+
+    {% if highlights %}
+    <div class="mt-8">
+        {% translate "Things to do" as things_to_do_label %}
+        <h2 class="text-lg font-semibold text-ink">{{ destination.highlights_intro|default:things_to_do_label }}</h2>
+        <div class="mt-3 grid gap-3 sm:grid-cols-2">
+            {% for highlight in highlights %}
+            <div class="rounded-xl border border-border bg-surface p-4">
+                <span class="text-xs font-semibold uppercase tracking-wide text-primary">{{ highlight.get_kind_display }}</span>
+                <p class="mt-1 text-sm font-medium text-ink">{{ highlight.title }}</p>
+                {% if highlight.description %}<p class="mt-1 text-sm text-ink-muted">{{ highlight.description }}</p>{% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    {% if related_processes %}
+    <div class="mt-8">
+        <h2 class="text-lg font-semibold text-ink">{% translate "Travel requirements" %}</h2>
+        <p class="mt-1 text-sm text-ink-muted">{% translate "What you may need to arrange before you go." %}</p>
+        <div class="mt-3 space-y-2">
+            {% for process in related_processes %}
+            <a href="{% url 'processes:process_detail' slug=process.slug %}"
+               class="block rounded-xl border border-border bg-surface p-4 text-sm font-medium text-ink transition hover:border-primary/40 hover:shadow-sm focus-visible:focus-ring">
+                {{ process.title }}
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    {% if destination.source_url %}
+    <div class="mt-8 text-sm text-ink-muted">
+        {% if destination.last_verified_at %}
+        {% blocktranslate with date=destination.last_verified_at %}Last verified {{ date }}{% endblocktranslate %}
+        &middot;
+        {% endif %}
+        {% translate "Source" as source_label %}
+        <a href="{{ destination.source_url }}" target="_blank" rel="noopener" class="text-primary hover:underline">
+            {{ destination.source_note|default:source_label }}
+        </a>
+    </div>
+    {% endif %}
+
+    {% if request.user.is_authenticated and user_trips %}
+    <div class="mt-8 rounded-2xl border border-border bg-surface p-5">
+        <h2 class="text-sm font-semibold text-ink">{% translate "Add to a trip" %}</h2>
+        <div class="mt-3 flex flex-wrap gap-2">
+            {% for trip in user_trips %}
+            <form method="post" action="{% url 'tourism:trip_add_destination' pk=trip.id destination_slug=destination.slug %}">
+                {% csrf_token %}
+                {% include "components/ui/button.html" with type="submit" label=trip.title tone="outline" size="sm" %}
+            </form>
+            {% endfor %}
+        </div>
+    </div>
+    {% elif request.user.is_authenticated %}
+    <div class="mt-8 rounded-2xl border border-border bg-surface p-5 text-sm text-ink-muted">
+        {% url 'tourism:trip_list' as trips_url %}
+        {% translate "You don't have a trip yet." %}
+        <a href="{{ trips_url }}" class="text-primary hover:underline">{% translate "Start one" %}</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% load i18n %}
+<form id="save-place-{{ destination.id }}"
+      hx-post="{% url 'tourism:toggle_saved' slug=destination.slug %}"
+      hx-target="#save-place-{{ destination.id }}"
+      hx-swap="outerHTML">
+    {% csrf_token %}
+    {% if is_saved %}{% translate "Remove from saved places" as save_label %}{% else %}{% translate "Save this place" as save_label %}{% endif %}
+    <button type="submit" hx-disabled-elt="this" aria-label="{{ save_label }}" aria-pressed="{{ is_saved|yesno:'true,false' }}"
+            class="flex h-9 w-9 items-center justify-center rounded-full border transition disabled:cursor-wait disabled:opacity-50 focus-visible:focus-ring
+                {% if is_saved %}border-primary bg-primary/10 text-primary{% else %}border-white/60 bg-ink/20 text-white backdrop-blur-sm hover:border-white{% endif %}">
+        {% if is_saved %}
+            {% include "components/icons/bookmark-simple-fill.html" with extra_class="h-4.5 w-4.5" only %}
+        {% else %}
+            {% include "components/icons/bookmark-simple.html" with extra_class="h-4.5 w-4.5" only %}
+        {% endif %}
+    </button>
+</form>

@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% translate "Destinations" %}{% endblock %}
+
+{% block content %}
+{% include "tourism/_subnav.html" %}
+
+<h1 class="text-2xl font-bold text-balance text-ink sm:text-3xl">{% translate "Destinations" %}</h1>
+
+<form method="get" class="mt-5 flex max-w-md gap-2">
+    <label for="tourism-list-q" class="sr-only">{% translate "Search destinations" %}</label>
+    <input type="search" id="tourism-list-q" name="q" value="{{ query }}" autocomplete="off"
+           placeholder="{% translate 'Search destinations' %}"
+           class="w-full rounded-full border border-outline bg-surface px-4 py-2.5 text-sm shadow-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary">
+    {% if category_slug %}<input type="hidden" name="category" value="{{ category_slug }}">{% endif %}
+    {% translate "Search" as search_label %}
+    {% include "components/ui/button.html" with type="submit" label=search_label size="sm" tone="outline" only %}
+</form>
+
+<div class="mt-4 flex flex-wrap gap-2">
+    <a href="{% url 'tourism:destination_list' %}{% if query %}?q={{ query }}{% endif %}"
+       class="rounded-full border px-3 py-1.5 text-sm
+           {% if not category_slug %}border-primary bg-primary-subtle text-primary{% else %}border-outline text-ink hover:border-primary{% endif %}">
+        {% translate "All" %}
+    </a>
+    {% for category in categories %}
+    <a href="{% url 'tourism:destination_list' %}?category={{ category.slug }}{% if query %}&q={{ query }}{% endif %}"
+       class="rounded-full border px-3 py-1.5 text-sm
+           {% if category.slug == category_slug %}border-primary bg-primary-subtle text-primary{% else %}border-outline text-ink hover:border-primary{% endif %}">
+        {{ category.name }}
+    </a>
+    {% endfor %}
+</div>
+
+<div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    {% for destination in results %}
+        {% include "components/tourism/destination_card.html" with destination=destination %}
+    {% empty %}
+    <p class="text-sm text-ink-muted">{% translate "No destinations found." %}</p>
+    {% endfor %}
+</div>
+{% endblock %}

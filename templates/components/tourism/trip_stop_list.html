@@ -1,0 +1,12 @@
+{% load i18n %}
+<div id="trip-stops">
+    {% if stops %}
+    <ol class="space-y-2">
+        {% for stop in stops %}
+            {% include "components/tourism/trip_stop_item.html" with stop=stop trip=trip only %}
+        {% endfor %}
+    </ol>
+    {% else %}
+    <p class="text-sm text-ink-muted">{% translate "No stops yet. Add a destination below to start your itinerary." %}</p>
+    {% endif %}
+</div>

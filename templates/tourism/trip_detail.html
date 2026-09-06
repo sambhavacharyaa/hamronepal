@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{{ trip.title }}{% endblock %}
+
+{% block content %}
+{% include "tourism/_subnav.html" %}
+
+<div class="flex flex-wrap items-start justify-between gap-4">
+    <div>
+        <h1 class="text-2xl font-bold text-balance text-ink sm:text-3xl">{{ trip.title }}</h1>
+        {% if trip.start_date %}
+        <p class="mt-1 text-sm text-ink-muted">{{ trip.start_date }}{% if trip.end_date %} - {{ trip.end_date }}{% endif %}</p>
+        {% endif %}
+    </div>
+    <form method="post" action="{% url 'tourism:trip_delete' pk=trip.pk %}"
+          onsubmit="return confirm('{% translate "Delete this trip?" %}')">
+        {% csrf_token %}
+        {% translate "Delete trip" as delete_trip_label %}
+        {% include "components/ui/button.html" with type="submit" label=delete_trip_label tone="outline" size="sm" %}
+    </form>
+</div>
+
+<div class="mt-8">
+    {% include "components/tourism/trip_itinerary_section.html" with trip=trip stops=stops available_destinations=available_destinations %}
+</div>
+{% endblock %}
