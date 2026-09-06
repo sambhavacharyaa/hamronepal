@@ -19,7 +19,10 @@ staticfiles/
 
 # Tailwind / node
 theme/static_src/node_modules/
-theme/static/css/dist/
+# theme/static/css/dist/styles.css is committed on purpose: the production
+# host's /tmp is noexec, which breaks the Bun-based standalone tailwindcss
+# binary at build time. Build it locally with `python manage.py tailwind
+# build` and commit the result instead of building on the server.
 
 # Editors / OS
 .DS_Store
