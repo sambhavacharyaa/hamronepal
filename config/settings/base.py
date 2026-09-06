@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     "apps.locations",
     "apps.organizations",
     "apps.processes",
+    "apps.tourism",
     "apps.tasks",
     "apps.dashboard",
     "tailwind",

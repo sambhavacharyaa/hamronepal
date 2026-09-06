@@ -1,0 +1,142 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% translate "Explore Nepal" %}{% endblock %}
+
+{% block meta %}
+<meta name="description" content="{% translate 'Discover Nepal, plan your route, and organize your trip in one place, from heritage cities to Himalayan trails.' %}">
+{% endblock %}
+
+{% block content %}
+<section class="relative -mx-4 -mt-8 overflow-hidden px-4 pb-16 pt-16 sm:-mx-6 sm:px-6 sm:pt-20">
+    <div class="pointer-events-none absolute inset-0 -z-10 overflow-hidden bg-gradient-to-b from-brand-50 to-canvas" aria-hidden="true">
+        <div class="absolute -left-24 top-0 h-[420px] w-[420px] rounded-full bg-brand-400/20 blur-3xl"></div>
+        <div class="absolute right-0 top-40 h-[360px] w-[360px] rounded-full bg-accent-400/15 blur-3xl"></div>
+        <svg class="absolute inset-x-0 bottom-0 h-64 w-full text-brand-700/10" viewBox="0 0 1200 260" preserveAspectRatio="none" fill="none">
+            <path d="M0,180 C200,120 280,220 480,150 C680,80 780,200 1000,140 C1100,110 1150,150 1200,120" stroke="currentColor" stroke-width="2"></path>
+            <path d="M0,220 C220,170 320,240 520,190 C720,140 820,230 1020,180 C1120,155 1160,190 1200,170" stroke="currentColor" stroke-width="2"></path>
+            <path d="M0,250 C240,210 340,255 540,220 C740,185 840,250 1040,215 C1130,198 1170,220 1200,205" stroke="currentColor" stroke-width="2"></path>
+        </svg>
+    </div>
+
+    <div class="max-w-2xl">
+        <span class="inline-flex items-center gap-1.5 rounded-full border border-primary/20 bg-surface/70 px-3 py-1 text-xs font-semibold text-primary shadow-sm backdrop-blur-sm">
+            {% include "components/icons/compass.html" with extra_class="h-3.5 w-3.5" only %}
+            {% translate "Discover, plan, and organize your trip" %}
+        </span>
+        <h1 class="mt-5 text-4xl font-bold text-balance text-ink sm:text-5xl lg:text-6xl">
+            {% translate "Nepal, mapped for how you actually travel." %}
+        </h1>
+        <p class="mt-4 max-w-lg text-pretty text-lg text-ink-muted">
+            {% translate "Real destinations, real travel information, and a place to build your own itinerary, start to finish." %}
+        </p>
+
+        <form method="get" action="{% url 'tourism:destination_list' %}" class="mt-8 flex max-w-lg gap-2">
+            <label for="tourism-q" class="sr-only">{% translate "Search destinations" %}</label>
+            <input type="search" id="tourism-q" name="q" autocomplete="off"
+                   placeholder="{% translate 'e.g. Pokhara, lakes, heritage sites' %}"
+                   class="w-full rounded-full border border-outline bg-surface px-5 py-3 text-base shadow-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary">
+            {% translate "Search" as search_label %}
+            {% include "components/ui/button.html" with type="submit" label=search_label size="lg" extra_class="shrink-0" only %}
+        </form>
+    </div>
+</section>
+
+{% if categories %}
+<section class="mt-16">
+    <h2 class="text-2xl font-bold text-balance text-ink sm:text-3xl">{% translate "Explore by experience" %}</h2>
+    <div class="-mx-4 mt-5 flex snap-x gap-3 overflow-x-auto px-4 pb-2 sm:-mx-6 sm:px-6">
+        {% for entry in categories %}
+        <a href="{{ entry.url }}"
+           class="group relative flex h-40 w-64 shrink-0 snap-start flex-col justify-end overflow-hidden rounded-3xl p-5 text-white shadow-sm transition hover:-translate-y-1 hover:shadow-xl focus-visible:focus-ring {{ entry.tint }}">
+            <span class="text-xs font-semibold uppercase tracking-wide text-white/80">
+                {% blocktranslate count counter=entry.count %}{{ counter }} place{% plural %}{{ counter }} places{% endblocktranslate %}
+            </span>
+            <span class="mt-1 text-xl font-semibold">{{ entry.category.name }}</span>
+        </a>
+        {% endfor %}
+    </div>
+</section>
+{% endif %}
+
+{% if featured_destinations %}
+<section class="mt-16">
+    <h2 class="text-2xl font-bold text-balance text-ink sm:text-3xl">{% translate "Featured destinations" %}</h2>
+    <div class="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:grid-rows-2">
+        {% for destination in featured_destinations %}
+            {% if forloop.first %}
+            <div class="sm:col-span-2 lg:col-span-2 lg:row-span-2">
+                {% include "components/tourism/destination_card.html" with destination=destination %}
+            </div>
+            {% else %}
+            <div>
+                {% include "components/tourism/destination_card.html" with destination=destination %}
+            </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+</section>
+{% endif %}
+
+{% if seasonal_destinations %}
+<section class="mt-16 rounded-3xl bg-primary-subtle p-6 sm:p-8">
+    <h2 class="text-2xl font-bold text-balance text-ink sm:text-3xl">{% translate "Good to visit right now" %}</h2>
+    <p class="mt-1 text-sm text-ink-muted">
+        {% translate "Based on the season Nepal is in today." %}
+    </p>
+    <div class="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        {% for destination in seasonal_destinations %}
+            {% include "components/tourism/destination_card.html" with destination=destination %}
+        {% endfor %}
+    </div>
+</section>
+{% endif %}
+
+<section class="relative mt-16 overflow-hidden rounded-3xl bg-gradient-to-br from-brand-700 to-brand-900 p-8 text-white sm:p-12">
+    <div class="max-w-xl">
+        <h2 class="text-2xl font-bold text-balance sm:text-3xl">{% translate "Plan your own trip" %}</h2>
+        <p class="mt-3 text-pretty text-white/80">
+            {% translate "Save the places you want to see and put them in order. A trip is just a list you can actually use." %}
+        </p>
+        {% if user_trips %}
+        <div class="mt-6 space-y-2">
+            {% for trip in user_trips %}
+            <a href="{% url 'tourism:trip_detail' pk=trip.pk %}"
+               class="block rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-sm font-medium backdrop-blur-sm transition hover:bg-white/20 focus-visible:focus-ring">
+                {{ trip.title }}
+            </a>
+            {% endfor %}
+        </div>
+        {% translate "View all trips" as view_trips_label %}
+        {% url 'tourism:trip_list' as trips_url %}
+        {% include "components/ui/button.html" with href=trips_url label=view_trips_label tone="outline" extra_class="mt-6 !border-white !bg-transparent !text-white hover:!bg-white/10" only %}
+        {% else %}
+        {% translate "Start a trip" as start_trip_label %}
+        {% url 'tourism:trip_list' as trips_url %}
+        {% include "components/ui/button.html" with href=trips_url label=start_trip_label extra_class="mt-6" only %}
+        {% endif %}
+    </div>
+</section>
+
+<section class="mt-16">
+    <h2 class="text-2xl font-bold text-balance text-ink sm:text-3xl">{% translate "Before you go" %}</h2>
+    <p class="mt-1 max-w-lg text-sm text-ink-muted">
+        {% translate "Passports, permits, and paperwork, handled the same honest way as everything else on HamroNepal." %}
+    </p>
+    <div class="mt-5 flex flex-wrap gap-3">
+        {% url 'processes:process_list' as browse_url %}
+        {% translate "Browse travel documents & permits" as browse_label %}
+        {% include "components/ui/button.html" with href=browse_url label=browse_label tone="outline" only %}
+    </div>
+</section>
+
+<section class="mt-16 flex flex-col items-start gap-4 rounded-3xl border border-border bg-surface p-8 sm:flex-row sm:items-center sm:justify-between">
+    <div>
+        <h2 class="text-xl font-bold text-balance text-ink sm:text-2xl">{% translate "Ready to explore Nepal?" %}</h2>
+        <p class="mt-1 text-sm text-ink-muted">{% translate "Every destination is verified and dated, just like the rest of HamroNepal." %}</p>
+    </div>
+    {% url 'tourism:destination_list' as all_destinations_url %}
+    {% translate "See all destinations" as all_destinations_label %}
+    {% include "components/ui/button.html" with href=all_destinations_url label=all_destinations_label only %}
+</section>
+{% endblock %}

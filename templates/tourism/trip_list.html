@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% translate "My Trips" %}{% endblock %}
+
+{% block content %}
+{% include "tourism/_subnav.html" %}
+
+<h1 class="text-2xl font-bold text-balance text-ink sm:text-3xl">{% translate "My Trips" %}</h1>
+
+<form method="post" action="{% url 'tourism:trip_create' %}" class="mt-6 max-w-md space-y-3 rounded-2xl border border-border bg-surface p-5">
+    {% csrf_token %}
+    {% include "components/ui/form_field.html" with field=trip_form.title %}
+    <div class="grid grid-cols-2 gap-3">
+        {% include "components/ui/form_field.html" with field=trip_form.start_date %}
+        {% include "components/ui/form_field.html" with field=trip_form.end_date %}
+    </div>
+    {% translate "Create trip" as create_trip_label %}
+    {% include "components/ui/button.html" with type="submit" label=create_trip_label %}
+</form>
+
+{% if trips %}
+<div class="mt-8 space-y-3">
+    {% for trip in trips %}
+    <a href="{% url 'tourism:trip_detail' pk=trip.pk %}"
+       class="block rounded-2xl border border-border bg-surface p-5 transition hover:border-primary/40 hover:shadow-sm focus-visible:focus-ring">
+        <p class="text-base font-semibold text-ink">{{ trip.title }}</p>
+        <p class="mt-1 text-sm text-ink-muted">
+            {% blocktranslate count counter=trip.stops.count %}{{ counter }} stop{% plural %}{{ counter }} stops{% endblocktranslate %}
+            {% if trip.start_date %}&middot; {{ trip.start_date }}{% if trip.end_date %} - {{ trip.end_date }}{% endif %}{% endif %}
+        </p>
+    </a>
+    {% endfor %}
+</div>
+{% else %}
+<p class="mt-8 text-sm text-ink-muted">{% translate "No trips yet. Create one above to start planning." %}</p>
+{% endif %}
+{% endblock %}

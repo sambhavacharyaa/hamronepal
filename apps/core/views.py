@@ -41,7 +41,16 @@ def home_view(request):
 @require_GET
 def robots_txt_view(request):
     sitemap_url = request.build_absolute_uri(reverse("sitemap"))
-    lines = ["User-agent: *", "Disallow: /admin/", "Disallow: /accounts/", "Disallow: /dashboard/", "", f"Sitemap: {sitemap_url}"]
+    lines = [
+        "User-agent: *",
+        "Disallow: /admin/",
+        "Disallow: /accounts/",
+        "Disallow: /dashboard/",
+        "Disallow: /tourism/trips/",
+        "Disallow: /tourism/saved/",
+        "",
+        f"Sitemap: {sitemap_url}",
+    ]
     return HttpResponse("\n".join(lines), content_type="text/plain")
 
 

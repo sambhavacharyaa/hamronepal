@@ -1,0 +1,33 @@
+{% load i18n %}
+<div id="trip-itinerary">
+    <div>
+        <h2 class="text-sm font-semibold uppercase tracking-wide text-ink-muted">{% translate "Itinerary" %}</h2>
+        <div class="mt-3">
+            {% include "components/tourism/trip_stop_list.html" with trip=trip stops=stops %}
+        </div>
+    </div>
+
+    {% if available_destinations %}
+    <div class="mt-8">
+        <h2 class="text-sm font-semibold uppercase tracking-wide text-ink-muted">{% translate "Add a destination" %}</h2>
+        <div class="mt-3 grid gap-2 sm:grid-cols-2">
+            {% for destination in available_destinations %}
+            <form method="post" action="{% url 'tourism:trip_add_destination' pk=trip.pk destination_slug=destination.slug %}"
+                  hx-post="{% url 'tourism:trip_add_destination' pk=trip.pk destination_slug=destination.slug %}"
+                  hx-target="#trip-itinerary" hx-swap="outerHTML"
+                  class="flex items-center justify-between gap-2 rounded-xl border border-border bg-surface p-3">
+                {% csrf_token %}
+                <div class="min-w-0">
+                    <p class="truncate text-sm font-medium text-ink">{{ destination.title }}</p>
+                    <p class="truncate text-xs text-ink-muted">{{ destination.region }}</p>
+                </div>
+                <button type="submit" hx-disabled-elt="this" aria-label="{% translate 'Add to trip' %}"
+                        class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-border text-ink-muted transition hover:border-primary hover:text-primary disabled:cursor-wait disabled:opacity-50 focus-visible:focus-ring">
+                    +
+                </button>
+            </form>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+</div>

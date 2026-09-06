@@ -22,6 +22,9 @@
             <a href="{% url 'processes:process_list' %}" class="rounded-sm text-ink hover:text-primary focus-visible:focus-ring">
                 {% translate "Browse" %}
             </a>
+            <a href="{% url 'tourism:home' %}" class="rounded-sm text-ink hover:text-primary focus-visible:focus-ring">
+                {% translate "Explore Nepal" %}
+            </a>
             {% if request.user.is_authenticated %}
                 <a href="{% url 'core:dashboard' %}" class="rounded-sm text-ink hover:text-primary focus-visible:focus-ring">
                     {% translate "Dashboard" %}
@@ -87,6 +90,9 @@
         <nav class="flex-1 space-y-1 overflow-y-auto p-3 text-sm">
             <a href="{% url 'processes:process_list' %}" class="block rounded-xl px-3 py-2.5 text-ink hover:bg-primary/5 focus-visible:focus-ring">
                 {% translate "Browse" %}
+            </a>
+            <a href="{% url 'tourism:home' %}" class="block rounded-xl px-3 py-2.5 text-ink hover:bg-primary/5 focus-visible:focus-ring">
+                {% translate "Explore Nepal" %}
             </a>
             {% if request.user.is_authenticated %}
                 <a href="{% url 'core:dashboard' %}" class="block rounded-xl px-3 py-2.5 text-ink hover:bg-primary/5 focus-visible:focus-ring">
