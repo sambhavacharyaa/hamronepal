@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: HamroNepal 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-06 16:35+0545\n"
+"POT-Creation-Date: 2026-09-06 17:32+0545\n"
 "PO-Revision-Date: 2026-09-01 21:00+0545\n"
 "Last-Translator: HamroNepal\n"
 "Language-Team: Nepali\n"
@@ -470,6 +470,14 @@ msgstr ""
 #: templates/base.html:21
 msgid "Skip to content"
 msgstr "सामग्रीमा जानुहोस्"
+
+#: templates/components/announcement_banner.html:4
+msgid "Try all features for free"
+msgstr "सबै सुविधाहरू निःशुल्क प्रयोग गर्नुहोस्"
+
+#: templates/components/announcement_banner.html:7
+msgid "Get started"
+msgstr "सुरु गर्नुहोस्"
 
 #: templates/components/dashboard/deadline_item.html:21
 #: templates/core/dashboard.html:203
