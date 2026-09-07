@@ -28,3 +28,6 @@ theme/static_src/node_modules/
 .DS_Store
 .idea/
 .vscode/
+
+# Internal planning doc, not meant to be public
+ROADMAP.md
