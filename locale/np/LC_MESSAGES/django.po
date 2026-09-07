@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: HamroNepal 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-06 19:58+0545\n"
+"POT-Creation-Date: 2026-09-08 00:37+0545\n"
 "PO-Revision-Date: 2026-09-01 21:00+0545\n"
 "Last-Translator: HamroNepal\n"
 "Language-Team: Nepali\n"
@@ -20,75 +20,90 @@ msgstr ""
 msgid "You must agree to the Terms and Privacy Policy to create an account."
 msgstr "खाता सिर्जना गर्न तपाईंले सर्तहरू र गोपनीयता नीतिमा सहमत हुनुपर्छ।"
 
-#: apps/accounts/views.py:26
+#: apps/accounts/views.py:27
 msgid "Verify your HamroNepal email"
 msgstr "आफ्नो HamroNepal इमेल प्रमाणित गर्नुहोस्"
 
-#: apps/accounts/views.py:44
+#: apps/accounts/views.py:45
 msgid "Account created. Check your email to verify your address."
 msgstr "खाता सिर्जना भयो। आफ्नो ठेगाना प्रमाणित गर्न इमेल जाँच्नुहोस्।"
 
-#: apps/accounts/views.py:62
+#: apps/accounts/views.py:63
 msgid "Your email address has been verified."
 msgstr "तपाईंको इमेल ठेगाना प्रमाणित भयो।"
 
-#: apps/accounts/views.py:64
+#: apps/accounts/views.py:65
 msgid "This verification link is invalid or has expired."
 msgstr "यो प्रमाणीकरण लिङ्क अमान्य छ वा म्याद सकिएको छ।"
 
-#: apps/accounts/views.py:112
+#: apps/accounts/views.py:75
+msgid "Your email address is already verified."
+msgstr "तपाईंको इमेल ठेगाना पहिले नै प्रमाणित भइसकेको छ।"
+
+#: apps/accounts/views.py:78
+msgid "Verification email sent. Check your inbox."
+msgstr "प्रमाणीकरण इमेल पठाइयो। आफ्नो इनबक्स जाँच्नुहोस्।"
+
+#: apps/accounts/views.py:125
 msgid "Profile updated."
 msgstr "प्रोफाइल अपडेट भयो।"
 
-#: apps/dashboard/models.py:43
+#: apps/core/validators.py:11
+#, python-format
+msgid ""
+"This file is too large (%(size)s). The maximum allowed size is %(max_size)s."
+msgstr ""
+"यो फाइल धेरै ठूलो छ (%(size)s)। अधिकतम अनुमति दिइएको आकार %(max_size)s हो।"
+
+#: apps/dashboard/models.py:44
 msgid "Citizenship certificate"
 msgstr "नागरिकता प्रमाणपत्र"
 
-#: apps/dashboard/models.py:44
+#: apps/dashboard/models.py:45
 msgid "Passport"
 msgstr "राहदानी"
 
-#: apps/dashboard/models.py:45
+#: apps/dashboard/models.py:46
 msgid "Driving license"
 msgstr "सवारी चालक अनुमतिपत्र"
 
-#: apps/dashboard/models.py:46
+#: apps/dashboard/models.py:47
 msgid "PAN card"
 msgstr "PAN कार्ड"
 
-#: apps/dashboard/models.py:47 apps/organizations/models.py:13
+#: apps/dashboard/models.py:48 apps/organizations/models.py:13
 msgid "Other"
 msgstr "अन्य"
 
-#: apps/dashboard/models.py:69
+#: apps/dashboard/models.py:75
 msgid "Info"
 msgstr "जानकारी"
 
-#: apps/dashboard/models.py:70
+#: apps/dashboard/models.py:76
 msgid "Warning"
 msgstr "चेतावनी"
 
-#: apps/dashboard/models.py:71
+#: apps/dashboard/models.py:77
 msgid "Danger"
 msgstr "खतरा"
 
-#: apps/dashboard/models.py:74
+#: apps/dashboard/models.py:80
 msgid "Document expiry"
 msgstr "कागजातको म्याद सकिने"
 
-#: apps/dashboard/models.py:75
+#: apps/dashboard/models.py:81
 msgid "Task due"
 msgstr "कार्यको म्याद"
 
-#: apps/dashboard/models.py:76
+#: apps/dashboard/models.py:82
 msgid "Process progress"
 msgstr "प्रक्रिया प्रगति"
 
-#: apps/dashboard/models.py:77
+#: apps/dashboard/models.py:83
 msgid "Process stalled"
 msgstr "प्रक्रिया रोकिएको"
 
-#: apps/dashboard/models.py:78
+#: apps/dashboard/models.py:84
 msgid "Process update"
 msgstr "प्रक्रिया अपडेट"
 
@@ -176,7 +191,7 @@ msgstr "व्यक्तिगत"
 msgid "Business"
 msgstr "व्यवसाय"
 
-#: apps/processes/models.py:33 apps/tourism/models.py:40
+#: apps/processes/models.py:33 apps/tourism/models.py:41
 msgid "Draft"
 msgstr "मस्यौदा"
 
@@ -184,7 +199,7 @@ msgstr "मस्यौदा"
 msgid "In Review"
 msgstr "समीक्षामा"
 
-#: apps/processes/models.py:35 apps/tourism/models.py:41
+#: apps/processes/models.py:35 apps/tourism/models.py:42
 msgid "Published"
 msgstr "प्रकाशित"
 
@@ -248,35 +263,35 @@ msgstr "कार्य थपियो।"
 msgid "Could not add task. Please check the form."
 msgstr "कार्य थप्न सकिएन। कृपया फारम जाँच्नुहोस्।"
 
-#: apps/tourism/models.py:24
+#: apps/tourism/models.py:25
 msgid "Autumn (Sep-Nov)"
 msgstr "शरद (सेप्टेम्बर-नोभेम्बर)"
 
-#: apps/tourism/models.py:25
+#: apps/tourism/models.py:26
 msgid "Winter (Dec-Feb)"
 msgstr "जाडो (डिसेम्बर-फेब्रुअरी)"
 
-#: apps/tourism/models.py:26
+#: apps/tourism/models.py:27
 msgid "Spring (Mar-May)"
 msgstr "बसन्त (मार्च-मे)"
 
-#: apps/tourism/models.py:27
+#: apps/tourism/models.py:28
 msgid "Monsoon (Jun-Aug)"
 msgstr "वर्षा (जुन-अगस्ट)"
 
-#: apps/tourism/models.py:72
+#: apps/tourism/models.py:73
 msgid "Thing to do"
 msgstr "गर्नुपर्ने कुरा"
 
-#: apps/tourism/models.py:73
+#: apps/tourism/models.py:74
 msgid "Food & experience"
 msgstr "खाना र अनुभव"
 
-#: apps/tourism/models.py:74
+#: apps/tourism/models.py:75
 msgid "Where to stay"
 msgstr "बस्ने ठाउँ"
 
-#: apps/tourism/models.py:75
+#: apps/tourism/models.py:76
 msgid "Getting around"
 msgstr "यातायात"
 
@@ -344,7 +359,7 @@ msgstr ""
 
 #: templates/accounts/login.html:4 templates/accounts/login.html:14
 #: templates/accounts/login.html:28 templates/components/navbar.html:43
-#: templates/components/navbar.html:112
+#: templates/components/navbar.html:111
 #: templates/processes/process_detail.html:156
 msgid "Log in"
 msgstr "लग इन गर्नुहोस्"
@@ -428,26 +443,30 @@ msgstr "प्रमाणित"
 msgid "not verified"
 msgstr "प्रमाणित छैन"
 
-#: templates/accounts/profile.html:52
+#: templates/accounts/profile.html:39
+msgid "Resend verification email"
+msgstr "प्रमाणीकरण इमेल पुनः पठाउनुहोस्"
+
+#: templates/accounts/profile.html:60
 msgid "Preferences"
 msgstr "प्राथमिकताहरू"
 
-#: templates/accounts/profile.html:60 templates/components/navbar.html:33
-#: templates/components/navbar.html:102
+#: templates/accounts/profile.html:68 templates/components/navbar.html:33
+#: templates/components/navbar.html:101
 msgid "Profile"
 msgstr "प्रोफाइल"
 
-#: templates/accounts/profile.html:69
+#: templates/accounts/profile.html:77
 msgid "Save changes"
 msgstr "परिवर्तनहरू सुरक्षित गर्नुहोस्"
 
-#: templates/accounts/profile.html:76 templates/components/navbar.html:38
-#: templates/components/navbar.html:107
+#: templates/accounts/profile.html:84 templates/components/navbar.html:38
+#: templates/components/navbar.html:106
 msgid "Log out"
 msgstr "लग आउट गर्नुहोस्"
 
 #: templates/accounts/register.html:4 templates/accounts/register.html:51
-#: templates/components/navbar.html:46 templates/components/navbar.html:115
+#: templates/components/navbar.html:46 templates/components/navbar.html:114
 msgid "Register"
 msgstr "दर्ता गर्नुहोस्"
 
@@ -596,7 +615,7 @@ msgid "My Dashboard"
 msgstr "मेरो ड्यासबोर्ड"
 
 #: templates/components/dashboard/sidebar.html:15
-#: templates/components/navbar.html:86
+#: templates/components/navbar.html:85
 msgid "Close menu"
 msgstr "मेनु बन्द गर्नुहोस्"
 
@@ -684,21 +703,21 @@ msgstr "फिर्ता नीति"
 msgid "HamroNepal. Not an official government service."
 msgstr "हाम्रोनेपाल। यो आधिकारिक सरकारी सेवा होइन।"
 
-#: templates/components/navbar.html:23 templates/components/navbar.html:92
+#: templates/components/navbar.html:23 templates/components/navbar.html:91
 msgid "Browse"
 msgstr "ब्राउज गर्नुहोस्"
 
-#: templates/components/navbar.html:26 templates/components/navbar.html:95
+#: templates/components/navbar.html:26 templates/components/navbar.html:94
 #: templates/tourism/home.html:4
 msgid "Explore Nepal"
 msgstr "नेपाल अन्वेषण गर्नुहोस्"
 
-#: templates/components/navbar.html:30 templates/components/navbar.html:99
+#: templates/components/navbar.html:30 templates/components/navbar.html:98
 #: templates/core/dashboard.html:4
 msgid "Dashboard"
 msgstr "ड्यासबोर्ड"
 
-#: templates/components/navbar.html:70
+#: templates/components/navbar.html:69
 msgid "Menu"
 msgstr "मेनु"
 
@@ -2161,7 +2180,7 @@ msgstr "अहिलेसम्म केही सुरक्षित गर
 msgid "Browse destinations."
 msgstr "गन्तव्यहरू ब्राउज गर्नुहोस्।"
 
-#: templates/tourism/trip_detail.html:17
+#: templates/tourism/trip_detail.html:16
 msgid "Delete this trip?"
 msgstr "यो यात्रा मेटाउने हो?"
 

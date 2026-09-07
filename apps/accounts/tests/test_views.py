@@ -83,6 +83,60 @@ class RegistrationTests(TestCase):
 
 
 @override_settings(CACHES=LOCMEM_CACHE)
+class ResendVerificationTests(TestCase):
+    def setUp(self):
+        cache.clear()
+
+    def test_requires_login(self):
+        response = self.client.post("/en/accounts/verify-email/resend/")
+        self.assertEqual(response.status_code, 302)
+        self.assertIn("/login/", response.url)
+
+    def test_get_not_allowed(self):
+        self.client.force_login(UserFactory(email_verified=False))
+        response = self.client.get("/en/accounts/verify-email/resend/")
+        self.assertEqual(response.status_code, 405)
+
+    def test_sends_a_new_verification_email_for_unverified_user(self):
+        user = UserFactory(email="unverified@example.com", email_verified=False)
+        self.client.force_login(user)
+
+        response = self.client.post("/en/accounts/verify-email/resend/", follow=True)
+
+        self.assertRedirects(response, reverse("accounts:profile"))
+        self.assertEqual(len(mail.outbox), 1)
+        self.assertIn(user.email, mail.outbox[0].to)
+
+    def test_new_link_still_verifies_the_user(self):
+        user = UserFactory(email="unverified2@example.com", email_verified=False)
+        self.client.force_login(user)
+        self.client.post("/en/accounts/verify-email/resend/")
+        verify_path = _extract_url(mail.outbox[0].body).split("testserver", 1)[1]
+
+        self.client.get(verify_path)
+
+        user.refresh_from_db()
+        self.assertTrue(user.email_verified)
+
+    def test_already_verified_user_does_not_get_another_email(self):
+        user = UserFactory(email="already@example.com", email_verified=True)
+        self.client.force_login(user)
+
+        self.client.post("/en/accounts/verify-email/resend/")
+
+        self.assertEqual(len(mail.outbox), 0)
+
+    def test_resend_is_rate_limited(self):
+        user = UserFactory(email_verified=False)
+        self.client.force_login(user)
+
+        for i in range(6):
+            response = self.client.post("/en/accounts/verify-email/resend/")
+
+        self.assertEqual(response.status_code, 403)
+
+
+@override_settings(CACHES=LOCMEM_CACHE)
 class LoginTests(TestCase):
     def setUp(self):
         cache.clear()

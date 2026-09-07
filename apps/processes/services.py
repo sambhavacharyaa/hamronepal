@@ -104,7 +104,7 @@ def publish_new_version(process, user, changelog=""):
 
     process.status = Process.Status.PUBLISHED
     process.current_version_number = next_number
-    process.last_verified_at = now.date()
+    process.last_verified_at = timezone.localdate()
     process.last_verified_by = user
     process.save(
         update_fields=[

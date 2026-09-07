@@ -1,6 +1,5 @@
-from datetime import date
-
 from django.test import TestCase
+from django.utils import timezone
 
 from apps.accounts.tests.factories import UserFactory
 from apps.processes import services
@@ -33,7 +32,7 @@ class PublishNewVersionTests(TestCase):
         self.process.refresh_from_db()
         self.assertEqual(self.process.status, self.process.Status.PUBLISHED)
         self.assertEqual(self.process.current_version_number, "1")
-        self.assertEqual(self.process.last_verified_at, date.today())
+        self.assertEqual(self.process.last_verified_at, timezone.localdate())
         self.assertEqual(version.version_number, "1")
         self.assertEqual(version.snapshot["title"], self.process.title)
         self.assertEqual(len(version.snapshot["steps"]), 1)
