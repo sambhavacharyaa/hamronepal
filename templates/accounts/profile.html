@@ -32,6 +32,14 @@
                         {% include "components/ui/badge.html" with label=not_verified_label tone="warning" extra_class="ml-1" only %}
                     {% endif %}
                 </p>
+                {% if not request.user.email_verified %}
+                <form method="post" action="{% url 'accounts:resend_verification' %}" class="mt-1">
+                    {% csrf_token %}
+                    <button type="submit" class="rounded-sm text-xs font-medium text-primary hover:underline focus-visible:focus-ring">
+                        {% translate "Resend verification email" %}
+                    </button>
+                </form>
+                {% endif %}
             </div>
         </div>
 

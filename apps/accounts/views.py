@@ -10,6 +10,7 @@ from django.utils.decorators import method_decorator
 from django.utils.encoding import force_bytes, force_str
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.utils.translation import gettext_lazy as _
+from django.views.decorators.http import require_POST
 from django_ratelimit.decorators import ratelimit
 
 from .forms import LoginForm, PasswordResetRequestForm, ProfileForm, RegisterForm, SetPasswordForm, UserPreferencesForm
@@ -64,6 +65,18 @@ def verify_email_view(request, uidb64, token):
         messages.error(request, _("This verification link is invalid or has expired."))
 
     return redirect("accounts:profile" if request.user.is_authenticated else "accounts:login")
+
+
+@login_required
+@require_POST
+@ratelimit(key="user", rate="5/m", method="POST", block=True)
+def resend_verification_view(request):
+    if request.user.email_verified:
+        messages.info(request, _("Your email address is already verified."))
+    else:
+        _send_verification_email(request, request.user)
+        messages.success(request, _("Verification email sent. Check your inbox."))
+    return redirect("accounts:profile")
 
 
 @method_decorator(ratelimit(key="ip", rate="10/m", method="POST", block=True), name="dispatch")
