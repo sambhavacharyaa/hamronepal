@@ -4,6 +4,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from apps.core.models import TimeStampedModel
+from apps.core.validators import validate_image_file_size
 
 private_document_storage = FileSystemStorage(location=settings.PRIVATE_MEDIA_ROOT)
 
@@ -52,7 +53,12 @@ class UserDocument(TimeStampedModel):
     )
     document_type = models.CharField(max_length=20, choices=DocumentType.choices, default=DocumentType.OTHER)
     title = models.CharField(max_length=220)
-    image = models.ImageField(upload_to=document_upload_path, storage=private_document_storage, blank=True)
+    image = models.ImageField(
+        upload_to=document_upload_path,
+        storage=private_document_storage,
+        blank=True,
+        validators=[validate_image_file_size],
+    )
     issued_date = models.DateField(null=True, blank=True)
     expiry_date = models.DateField(null=True, blank=True)
     notes = models.TextField(blank=True)

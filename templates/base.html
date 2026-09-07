@@ -42,12 +42,24 @@
 
     {% include "components/footer.html" %}
 
-    <script>
+    <script nonce="{{ request.csp_nonce }}">
+        document.addEventListener("DOMContentLoaded", () => {
+            htmx.config.allowEval = false;
+        });
+
         document.body.addEventListener("htmx:configRequest", (event) => {
             event.detail.headers["X-CSRFToken"] = document.cookie
                 .split("; ")
                 .find((row) => row.startsWith("csrftoken="))
                 ?.split("=")[1];
+        });
+
+        document.querySelectorAll("form[data-confirm]").forEach((form) => {
+            form.addEventListener("submit", (event) => {
+                if (!confirm(form.dataset.confirm)) {
+                    event.preventDefault();
+                }
+            });
         });
     </script>
     {% block extra_js %}{% endblock %}

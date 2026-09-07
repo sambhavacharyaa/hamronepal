@@ -1,11 +1,13 @@
 asgiref==3.12.1
 Django==5.1.15
+django-csp==4.0
 django-environ==0.14.0
 django-htmx==1.27.0
 django-modeltranslation==0.20.3
 django-ratelimit==4.1.0
 django-redis==6.0.0
 django-tailwind==4.5.0
+packaging==26.3
 pillow==12.3.0
 psycopg==3.3.4
 psycopg-binary==3.3.4

@@ -3,6 +3,7 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 from apps.core.models import TimeStampedModel
+from apps.core.validators import validate_image_file_size
 
 
 class UserManager(BaseUserManager):
@@ -57,7 +58,7 @@ class Profile(TimeStampedModel):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile")
     display_name = models.CharField(max_length=150, blank=True)
     bio = models.TextField(blank=True)
-    avatar = models.ImageField(upload_to="avatars/", blank=True)
+    avatar = models.ImageField(upload_to="avatars/", blank=True, validators=[validate_image_file_size])
     municipality = models.ForeignKey(
         "locations.Municipality",
         null=True,

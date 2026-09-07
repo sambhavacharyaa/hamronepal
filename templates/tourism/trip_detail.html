@@ -13,8 +13,8 @@
         <p class="mt-1 text-sm text-ink-muted">{{ trip.start_date }}{% if trip.end_date %} - {{ trip.end_date }}{% endif %}</p>
         {% endif %}
     </div>
-    <form method="post" action="{% url 'tourism:trip_delete' pk=trip.pk %}"
-          onsubmit="return confirm('{% translate "Delete this trip?" %}')">
+    {% translate "Delete this trip?" as delete_trip_confirm %}
+    <form method="post" action="{% url 'tourism:trip_delete' pk=trip.pk %}" data-confirm="{{ delete_trip_confirm }}">
         {% csrf_token %}
         {% translate "Delete trip" as delete_trip_label %}
         {% include "components/ui/button.html" with type="submit" label=delete_trip_label tone="outline" size="sm" %}
