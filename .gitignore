@@ -34,3 +34,4 @@ ROADMAP.md
 
 # Claude Code local tooling, not part of the app
 .claude/
+.agents/
