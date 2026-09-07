@@ -31,3 +31,6 @@ theme/static_src/node_modules/
 
 # Internal planning doc, not meant to be public
 ROADMAP.md
+
+# Claude Code local tooling, not part of the app
+.claude/
