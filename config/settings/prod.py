@@ -1,3 +1,5 @@
+from csp.constants import NONCE, SELF, UNSAFE_INLINE
+
 from .base import *  # noqa: F401,F403
 from .base import env
 
@@ -23,6 +25,22 @@ SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_HSTS_PRELOAD = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
 X_FRAME_OPTIONS = "DENY"
+
+CONTENT_SECURITY_POLICY = {
+    "DIRECTIVES": {
+        "default-src": [SELF],
+        "script-src": [SELF, NONCE],
+        "style-src": [SELF, UNSAFE_INLINE],
+        "img-src": [SELF, "data:"],
+        "font-src": [SELF],
+        "connect-src": [SELF],
+        "object-src": ["'none'"],
+        "frame-src": ["'none'"],
+        "frame-ancestors": ["'none'"],
+        "base-uri": [SELF],
+        "form-action": [SELF],
+    }
+}
 
 # These are Django's real email settings (the old "MAILERS" dict here was
 # never actually read by send_mail/EmailMessage, so production email was

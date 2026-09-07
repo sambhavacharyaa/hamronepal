@@ -92,7 +92,7 @@
     </div>
 </aside>
 
-<script>
+<script nonce="{{ request.csp_nonce }}">
     document.addEventListener("DOMContentLoaded", function () {
         var sidebar = document.getElementById("dashboard-sidebar");
         var backdrop = document.getElementById("dashboard-sidebar-backdrop");

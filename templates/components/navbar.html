@@ -53,8 +53,7 @@
                 {% get_current_language as LANGUAGE_CODE %}
                 {% get_available_languages as LANGUAGES %}
                 {% get_language_info_list for LANGUAGES as languages %}
-                <select name="language" onchange="hamroNepalSwitchLanguage(this)"
-                        class="rounded-md border border-outline bg-surface py-1.5 pl-2 pr-6 text-ink focus-visible:focus-ring">
+                <select name="language" class="hamronepal-language-select rounded-md border border-outline bg-surface py-1.5 pl-2 pr-6 text-ink focus-visible:focus-ring">
                     {% for language in languages %}
                         <option value="{{ language.code }}" {% if language.code == LANGUAGE_CODE %}selected{% endif %}>
                             {{ language.name_local }}
@@ -122,8 +121,7 @@
                 {% get_current_language as LANGUAGE_CODE %}
                 {% get_available_languages as LANGUAGES %}
                 {% get_language_info_list for LANGUAGES as languages %}
-                <select name="language" onchange="hamroNepalSwitchLanguage(this)"
-                        class="w-full rounded-md border border-outline bg-surface py-1.5 pl-2 pr-6 text-ink focus-visible:focus-ring">
+                <select name="language" class="hamronepal-language-select w-full rounded-md border border-outline bg-surface py-1.5 pl-2 pr-6 text-ink focus-visible:focus-ring">
                     {% for language in languages %}
                         <option value="{{ language.code }}" {% if language.code == LANGUAGE_CODE %}selected{% endif %}>
                             {{ language.name_local }}
@@ -134,7 +132,7 @@
         </nav>
     </aside>
 
-    <script>
+    <script nonce="{{ request.csp_nonce }}">
         function hamroNepalSwitchLanguage(select) {
             var currentPrefix = "/{{ LANGUAGE_CODE }}/";
             var path = window.location.pathname;
@@ -171,6 +169,12 @@
                 if (event.key === "Escape") {
                     setDrawerOpen(false);
                 }
+            });
+
+            document.querySelectorAll(".hamronepal-language-select").forEach(function (select) {
+                select.addEventListener("change", function () {
+                    hamroNepalSwitchLanguage(select);
+                });
             });
         });
     </script>

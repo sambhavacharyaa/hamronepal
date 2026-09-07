@@ -3,6 +3,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from apps.core.models import TimeStampedModel
+from apps.core.validators import validate_image_file_size
 
 
 class DestinationCategory(TimeStampedModel):
@@ -49,7 +50,7 @@ class Destination(TimeStampedModel):
     highlights_intro = models.CharField(max_length=255, blank=True)
     best_season = models.CharField(max_length=20, choices=Season.choices, blank=True)
     budget_note = models.CharField(max_length=255, blank=True)
-    image = models.ImageField(upload_to="destinations/", blank=True)
+    image = models.ImageField(upload_to="destinations/", blank=True, validators=[validate_image_file_size])
     status = models.CharField(max_length=20, choices=Status.choices, default=Status.DRAFT)
     source_url = models.URLField(blank=True)
     source_note = models.CharField(max_length=255, blank=True)
