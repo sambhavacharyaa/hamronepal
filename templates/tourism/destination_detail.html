@@ -13,8 +13,12 @@
 {% block content %}
 <script type="application/ld+json">{{ destination_json_ld }}</script>
 
-<div class="relative -mx-4 -mt-8 overflow-hidden rounded-b-3xl {{ tint }} px-4 pb-10 pt-10 text-white sm:-mx-6 sm:px-6 sm:pb-14 sm:pt-14">
-    <div class="mx-auto flex max-w-4xl items-start justify-between gap-4">
+<div class="relative -mx-4 -mt-8 overflow-hidden rounded-b-3xl {% if not destination.image %}{{ tint }}{% endif %} px-4 pb-10 pt-10 text-white sm:-mx-6 sm:px-6 sm:pb-14 sm:pt-14">
+    {% if destination.image %}
+    <img src="{{ destination.image.url }}" alt="" class="absolute inset-0 h-full w-full object-cover">
+    <div class="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/20 to-transparent"></div>
+    {% endif %}
+    <div class="relative mx-auto flex max-w-4xl items-start justify-between gap-4">
         <div>
             <span class="text-xs font-semibold uppercase tracking-wide text-white/80">{{ destination.region }}</span>
             <h1 class="mt-1 text-3xl font-bold text-balance sm:text-4xl">{{ destination.title }}</h1>
