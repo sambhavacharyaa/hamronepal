@@ -11,6 +11,7 @@ class DestinationCategory(TimeStampedModel):
     slug = models.SlugField(max_length=140, unique=True)
     icon = models.CharField(max_length=50, blank=True)
     description = models.TextField(blank=True)
+    image = models.ImageField(upload_to="categories/", blank=True, validators=[validate_image_file_size])
     order = models.PositiveIntegerField(default=0)
 
     class Meta:

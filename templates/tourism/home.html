@@ -48,11 +48,17 @@
     <div class="-mx-4 mt-5 flex snap-x gap-3 overflow-x-auto px-4 pb-2 sm:-mx-6 sm:px-6">
         {% for entry in categories %}
         <a href="{{ entry.url }}"
-           class="group relative flex h-40 w-64 shrink-0 snap-start flex-col justify-end overflow-hidden rounded-3xl p-5 text-white shadow-sm transition hover:-translate-y-1 hover:shadow-xl focus-visible:focus-ring {{ entry.tint }}">
-            <span class="text-xs font-semibold uppercase tracking-wide text-white/80">
+           class="group relative flex h-40 w-64 shrink-0 snap-start flex-col justify-end overflow-hidden rounded-3xl p-5 text-white shadow-sm transition hover:-translate-y-1 hover:shadow-xl focus-visible:focus-ring">
+            {% if entry.category.image %}
+            <img src="{{ entry.category.image.url }}" alt="" class="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-105">
+            <div class="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/20 to-transparent"></div>
+            {% else %}
+            <div class="absolute inset-0 {{ entry.tint }} transition duration-500 group-hover:scale-105"></div>
+            {% endif %}
+            <span class="relative text-xs font-semibold uppercase tracking-wide text-white/80">
                 {% blocktranslate count counter=entry.count %}{{ counter }} place{% plural %}{{ counter }} places{% endblocktranslate %}
             </span>
-            <span class="mt-1 text-xl font-semibold">{{ entry.category.name }}</span>
+            <span class="relative mt-1 text-xl font-semibold">{{ entry.category.name }}</span>
         </a>
         {% endfor %}
     </div>
