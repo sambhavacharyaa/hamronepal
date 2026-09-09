@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: HamroNepal 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-08 00:37+0545\n"
+"POT-Creation-Date: 2026-09-09 12:43+0545\n"
 "PO-Revision-Date: 2026-09-01 21:00+0545\n"
 "Last-Translator: HamroNepal\n"
 "Language-Team: Nepali\n"
@@ -191,7 +191,7 @@ msgstr "व्यक्तिगत"
 msgid "Business"
 msgstr "व्यवसाय"
 
-#: apps/processes/models.py:33 apps/tourism/models.py:41
+#: apps/processes/models.py:33 apps/tourism/models.py:42
 msgid "Draft"
 msgstr "मस्यौदा"
 
@@ -199,7 +199,7 @@ msgstr "मस्यौदा"
 msgid "In Review"
 msgstr "समीक्षामा"
 
-#: apps/processes/models.py:35 apps/tourism/models.py:42
+#: apps/processes/models.py:35 apps/tourism/models.py:43
 msgid "Published"
 msgstr "प्रकाशित"
 
@@ -263,35 +263,35 @@ msgstr "कार्य थपियो।"
 msgid "Could not add task. Please check the form."
 msgstr "कार्य थप्न सकिएन। कृपया फारम जाँच्नुहोस्।"
 
-#: apps/tourism/models.py:25
+#: apps/tourism/models.py:26
 msgid "Autumn (Sep-Nov)"
 msgstr "शरद (सेप्टेम्बर-नोभेम्बर)"
 
-#: apps/tourism/models.py:26
+#: apps/tourism/models.py:27
 msgid "Winter (Dec-Feb)"
 msgstr "जाडो (डिसेम्बर-फेब्रुअरी)"
 
-#: apps/tourism/models.py:27
+#: apps/tourism/models.py:28
 msgid "Spring (Mar-May)"
 msgstr "बसन्त (मार्च-मे)"
 
-#: apps/tourism/models.py:28
+#: apps/tourism/models.py:29
 msgid "Monsoon (Jun-Aug)"
 msgstr "वर्षा (जुन-अगस्ट)"
 
-#: apps/tourism/models.py:73
+#: apps/tourism/models.py:74
 msgid "Thing to do"
 msgstr "गर्नुपर्ने कुरा"
 
-#: apps/tourism/models.py:74
+#: apps/tourism/models.py:75
 msgid "Food & experience"
 msgstr "खाना र अनुभव"
 
-#: apps/tourism/models.py:75
+#: apps/tourism/models.py:76
 msgid "Where to stay"
 msgstr "बस्ने ठाउँ"
 
-#: apps/tourism/models.py:76
+#: apps/tourism/models.py:77
 msgid "Getting around"
 msgstr "यातायात"
 
@@ -426,44 +426,69 @@ msgstr "आफ्नो पासवर्ड रिसेट गर्नुह
 msgid "Send reset link"
 msgstr "रिसेट लिङ्क पठाउनुहोस्"
 
-#: templates/accounts/profile.html:4 templates/accounts/profile.html:24
+#: templates/accounts/profile.html:4 templates/accounts/profile.html:10
 #: templates/components/dashboard/sidebar.html:71
 msgid "Settings"
 msgstr "सेटिङ"
 
-#: templates/accounts/profile.html:16
-msgid "Your profile photo"
-msgstr "तपाईंको प्रोफाइल फोटो"
+#: templates/accounts/profile.html:11
+msgid "Manage your profile, preferences, and account."
+msgstr "आफ्नो प्रोफाइल, प्राथमिकता, र खाता व्यवस्थापन गर्नुहोस्।"
 
-#: templates/accounts/profile.html:28
-msgid "verified"
-msgstr "प्रमाणित"
-
-#: templates/accounts/profile.html:31
-msgid "not verified"
-msgstr "प्रमाणित छैन"
-
-#: templates/accounts/profile.html:39
-msgid "Resend verification email"
-msgstr "प्रमाणीकरण इमेल पुनः पठाउनुहोस्"
-
-#: templates/accounts/profile.html:60
-msgid "Preferences"
-msgstr "प्राथमिकताहरू"
-
-#: templates/accounts/profile.html:68 templates/components/navbar.html:33
-#: templates/components/navbar.html:101
-msgid "Profile"
-msgstr "प्रोफाइल"
-
-#: templates/accounts/profile.html:77
-msgid "Save changes"
-msgstr "परिवर्तनहरू सुरक्षित गर्नुहोस्"
-
-#: templates/accounts/profile.html:84 templates/components/navbar.html:38
+#: templates/accounts/profile.html:15 templates/components/navbar.html:38
 #: templates/components/navbar.html:106
 msgid "Log out"
 msgstr "लग आउट गर्नुहोस्"
+
+#: templates/accounts/profile.html:37
+msgid "Your profile photo"
+msgstr "तपाईंको प्रोफाइल फोटो"
+
+#: templates/accounts/profile.html:48
+msgid "Change photo"
+msgstr "फोटो परिवर्तन गर्नुहोस्"
+
+#: templates/accounts/profile.html:54
+msgid "Remove photo"
+msgstr "फोटो हटाउनुहोस्"
+
+#: templates/accounts/profile.html:58
+msgid "PNG or JPG, up to 5MB."
+msgstr "PNG वा JPG, अधिकतम ५ MB सम्म।"
+
+#: templates/accounts/profile.html:75
+msgid "verified"
+msgstr "प्रमाणित"
+
+#: templates/accounts/profile.html:78
+msgid "not verified"
+msgstr "प्रमाणित छैन"
+
+#: templates/accounts/profile.html:84
+msgid "Resend verification email"
+msgstr "प्रमाणीकरण इमेल पुनः पठाउनुहोस्"
+
+#: templates/accounts/profile.html:92
+msgid "Personal information"
+msgstr "व्यक्तिगत जानकारी"
+
+#: templates/accounts/profile.html:93
+msgid "This is how your name appears across HamroNepal."
+msgstr "यसरी नै तपाईंको नाम HamroNepal भर देखिन्छ।"
+
+#: templates/accounts/profile.html:102
+msgid "Preferences"
+msgstr "प्राथमिकताहरू"
+
+#: templates/accounts/profile.html:103
+msgid "Control how HamroNepal reaches you and which language you see."
+msgstr ""
+"HamroNepal ले तपाईंलाई कसरी सम्पर्क गर्छ र तपाईंले कुन भाषा देख्नुहुन्छ "
+"नियन्त्रण गर्नुहोस्।"
+
+#: templates/accounts/profile.html:111
+msgid "Save changes"
+msgstr "परिवर्तनहरू सुरक्षित गर्नुहोस्"
 
 #: templates/accounts/register.html:4 templates/accounts/register.html:51
 #: templates/components/navbar.html:46 templates/components/navbar.html:114
@@ -717,6 +742,10 @@ msgstr "नेपाल अन्वेषण गर्नुहोस्"
 msgid "Dashboard"
 msgstr "ड्यासबोर्ड"
 
+#: templates/components/navbar.html:33 templates/components/navbar.html:101
+msgid "Profile"
+msgstr "प्रोफाइल"
+
 #: templates/components/navbar.html:69
 msgid "Menu"
 msgstr "मेनु"
@@ -753,7 +782,7 @@ msgstr[1] "%(counter)s कागजात"
 
 #: templates/components/process_card.html:63
 #: templates/components/process_card.html:71
-#: templates/tourism/destination_detail.html:76
+#: templates/tourism/destination_detail.html:80
 #, python-format
 msgid "Last verified %(date)s"
 msgstr "पछिल्लो पटक प्रमाणित %(date)s"
@@ -2012,43 +2041,43 @@ msgstr "अन्वेषण"
 msgid "My Trips"
 msgstr "मेरा यात्राहरू"
 
-#: templates/tourism/destination_detail.html:31
+#: templates/tourism/destination_detail.html:35
 msgid "Category"
 msgstr "श्रेणी"
 
-#: templates/tourism/destination_detail.html:32
+#: templates/tourism/destination_detail.html:36
 msgid "Best season"
 msgstr "उत्तम मौसम"
 
-#: templates/tourism/destination_detail.html:33
+#: templates/tourism/destination_detail.html:37
 msgid "Budget"
 msgstr "बजेट"
 
-#: templates/tourism/destination_detail.html:44
+#: templates/tourism/destination_detail.html:48
 msgid "Things to do"
 msgstr "गर्नुपर्ने कुराहरू"
 
-#: templates/tourism/destination_detail.html:60
+#: templates/tourism/destination_detail.html:64
 msgid "Travel requirements"
 msgstr "यात्रा आवश्यकताहरू"
 
-#: templates/tourism/destination_detail.html:61
+#: templates/tourism/destination_detail.html:65
 msgid "What you may need to arrange before you go."
 msgstr "जानुअघि तपाईंले मिलाउनुपर्ने कुराहरू।"
 
-#: templates/tourism/destination_detail.html:79
+#: templates/tourism/destination_detail.html:83
 msgid "Source"
 msgstr "स्रोत"
 
-#: templates/tourism/destination_detail.html:88
+#: templates/tourism/destination_detail.html:92
 msgid "Add to a trip"
 msgstr "यात्रामा थप्नुहोस्"
 
-#: templates/tourism/destination_detail.html:101
+#: templates/tourism/destination_detail.html:105
 msgid "You don't have a trip yet."
 msgstr "तपाईंसँग अहिलेसम्म कुनै यात्रा छैन।"
 
-#: templates/tourism/destination_detail.html:102
+#: templates/tourism/destination_detail.html:106
 msgid "Start one"
 msgstr "एउटा सुरु गर्नुहोस्"
 
@@ -2100,30 +2129,30 @@ msgstr "जस्तै: पोखरा, तालहरू, सम्पदा
 msgid "Explore by experience"
 msgstr "अनुभवअनुसार अन्वेषण गर्नुहोस्"
 
-#: templates/tourism/home.html:53
+#: templates/tourism/home.html:59
 #, python-format
 msgid "%(counter)s place"
 msgid_plural "%(counter)s places"
 msgstr[0] "%(counter)s ठाउँ"
 msgstr[1] "%(counter)s ठाउँ"
 
-#: templates/tourism/home.html:64
+#: templates/tourism/home.html:70
 msgid "Featured destinations"
 msgstr "विशेष गन्तव्यहरू"
 
-#: templates/tourism/home.html:83
+#: templates/tourism/home.html:89
 msgid "Good to visit right now"
 msgstr "अहिले घुम्न उपयुक्त"
 
-#: templates/tourism/home.html:85
+#: templates/tourism/home.html:91
 msgid "Based on the season Nepal is in today."
 msgstr "आज नेपाल रहेको मौसमका आधारमा।"
 
-#: templates/tourism/home.html:97
+#: templates/tourism/home.html:103
 msgid "Plan your own trip"
 msgstr "आफ्नै यात्रा योजना बनाउनुहोस्"
 
-#: templates/tourism/home.html:99
+#: templates/tourism/home.html:105
 msgid ""
 "Save the places you want to see and put them in order. A trip is just a list"
 " you can actually use."
@@ -2131,19 +2160,19 @@ msgstr ""
 "तपाईंले हेर्न चाहनुभएका ठाउँहरू सुरक्षित गर्नुहोस् र क्रममा मिलाउनुहोस्। "
 "यात्रा भनेको तपाईंले साँच्चै प्रयोग गर्न सक्ने सूची मात्र हो।"
 
-#: templates/tourism/home.html:110
+#: templates/tourism/home.html:116
 msgid "View all trips"
 msgstr "सबै यात्राहरू हेर्नुहोस्"
 
-#: templates/tourism/home.html:114
+#: templates/tourism/home.html:120
 msgid "Start a trip"
 msgstr "यात्रा सुरु गर्नुहोस्"
 
-#: templates/tourism/home.html:122
+#: templates/tourism/home.html:128
 msgid "Before you go"
 msgstr "जानुअघि"
 
-#: templates/tourism/home.html:124
+#: templates/tourism/home.html:130
 msgid ""
 "Passports, permits, and paperwork, handled the same honest way as everything"
 " else on HamroNepal."
@@ -2151,20 +2180,20 @@ msgstr ""
 "राहदानी, अनुमतिपत्र, र कागजी कार्य, HamroNepal मा अरू सबै कुराजस्तै उही "
 "इमानदार तरिकाले व्यवस्थित।"
 
-#: templates/tourism/home.html:128
+#: templates/tourism/home.html:134
 msgid "Browse travel documents & permits"
 msgstr "यात्रा कागजात र अनुमतिपत्रहरू ब्राउज गर्नुहोस्"
 
-#: templates/tourism/home.html:135
+#: templates/tourism/home.html:141
 msgid "Ready to explore Nepal?"
 msgstr "नेपाल अन्वेषण गर्न तयार हुनुहुन्छ?"
 
-#: templates/tourism/home.html:136
+#: templates/tourism/home.html:142
 msgid ""
 "Every destination is verified and dated, just like the rest of HamroNepal."
 msgstr "प्रत्येक गन्तव्य प्रमाणित र मितिसहित छ, HamroNepal का बाँकी सबैजस्तै।"
 
-#: templates/tourism/home.html:139
+#: templates/tourism/home.html:145
 msgid "See all destinations"
 msgstr "सबै गन्तव्यहरू हेर्नुहोस्"
 

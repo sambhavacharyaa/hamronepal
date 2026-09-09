@@ -1,13 +1,24 @@
+import io
 import re
+import shutil
+import tempfile
 
 from django.core import mail
 from django.core.cache import cache
+from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase, override_settings
 from django.urls import reverse
+from PIL import Image
 
-from apps.accounts.models import User
+from apps.accounts.models import Profile, User
 
 from .factories import UserFactory
+
+
+def make_test_png(name="avatar.png"):
+    buffer = io.BytesIO()
+    Image.new("RGB", (2, 2), color="blue").save(buffer, format="PNG")
+    return SimpleUploadedFile(name, buffer.getvalue(), content_type="image/png")
 
 LOCMEM_CACHE = {"default": {"BACKEND": "django.core.cache.backends.locmem.LocMemCache"}}
 
@@ -225,3 +236,61 @@ class ProfileTests(TestCase):
         self.user.refresh_from_db()
         self.assertEqual(self.user.phone_number, "9811111111")
         self.assertEqual(self.user.profile.display_name, "Test User")
+
+
+class ProfileAvatarTests(TestCase):
+    def setUp(self):
+        self.user = UserFactory(email="avatar-owner@example.com", password="Str0ngPass!1")
+        self.client.force_login(self.user)
+        self.tmp_dir = tempfile.mkdtemp()
+        self.override = override_settings(MEDIA_ROOT=self.tmp_dir)
+        self.override.enable()
+        self.addCleanup(self.override.disable)
+        self.addCleanup(shutil.rmtree, self.tmp_dir, True)
+
+    def _base_payload(self, **overrides):
+        payload = {
+            "preferences-phone_number": "",
+            "preferences-preferred_language": "en",
+            "profile-display_name": "",
+            "profile-bio": "",
+        }
+        payload.update(overrides)
+        return payload
+
+    def test_uploading_an_avatar_saves_it(self):
+        response = self.client.post(
+            "/en/accounts/profile/",
+            self._base_payload(**{"profile-avatar": make_test_png()}),
+        )
+        self.assertRedirects(response, reverse("core:dashboard"))
+        self.user.profile.refresh_from_db()
+        self.assertTrue(self.user.profile.avatar)
+
+    def test_saving_without_a_new_file_keeps_the_existing_avatar(self):
+        Profile.objects.create(user=self.user, avatar=make_test_png())
+
+        self.client.post("/en/accounts/profile/", self._base_payload(**{"profile-display_name": "Someone"}))
+
+        self.user.profile.refresh_from_db()
+        self.assertTrue(self.user.profile.avatar)
+
+    def test_remove_photo_clears_the_avatar(self):
+        Profile.objects.create(user=self.user, avatar=make_test_png())
+
+        self.client.post("/en/accounts/profile/", self._base_payload(**{"profile-remove_avatar": "on"}))
+
+        self.user.profile.refresh_from_db()
+        self.assertFalse(self.user.profile.avatar)
+
+    def test_uploading_a_new_file_wins_over_a_stray_remove_flag(self):
+        Profile.objects.create(user=self.user, avatar=make_test_png("old.png"))
+
+        self.client.post(
+            "/en/accounts/profile/",
+            self._base_payload(**{"profile-remove_avatar": "on", "profile-avatar": make_test_png("new.png")}),
+        )
+
+        self.user.profile.refresh_from_db()
+        self.assertTrue(self.user.profile.avatar)
+        self.assertIn("new", self.user.profile.avatar.name)

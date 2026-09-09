@@ -4,86 +4,128 @@
 {% block title %}{% translate "Settings" %}{% endblock %}
 
 {% block content %}
-<section class="relative flex min-h-[65vh] items-center justify-center py-6">
-    <div class="pointer-events-none absolute inset-x-0 top-0 -z-10 flex justify-center overflow-hidden" aria-hidden="true">
-        <div class="h-[380px] w-[380px] rounded-full bg-primary/15 blur-3xl"></div>
-        <div class="-ml-32 mt-16 h-[300px] w-[300px] rounded-full bg-accent/15 blur-3xl"></div>
+<div class="mx-auto max-w-3xl">
+    <div class="flex flex-wrap items-start justify-between gap-4">
+        <div>
+            <h1 class="text-2xl font-bold text-ink sm:text-3xl">{% translate "Settings" %}</h1>
+            <p class="mt-1 text-sm text-ink-muted">{% translate "Manage your profile, preferences, and account." %}</p>
+        </div>
+        <form method="post" action="{% url 'accounts:logout' %}">
+            {% csrf_token %}
+            {% translate "Log out" as logout_label %}
+            {% include "components/ui/button.html" with type="submit" label=logout_label tone="outline" size="sm" only %}
+        </form>
     </div>
 
-    <div class="w-full max-w-lg rounded-3xl border border-border/70 bg-surface/70 p-8 shadow-lg shadow-ink/5 backdrop-blur-xl">
-        <div class="flex items-center gap-4">
-            {% if profile_form.instance.avatar %}
-                {% translate "Your profile photo" as avatar_alt %}
-                <img src="{{ profile_form.instance.avatar.url }}" alt="{{ avatar_alt }}" class="h-14 w-14 shrink-0 rounded-full object-cover">
-            {% else %}
-                <span class="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-primary/10 text-lg font-semibold text-primary">
-                    {{ user_initial }}
-                </span>
-            {% endif %}
-            <div class="min-w-0">
-                <h1 class="text-2xl font-semibold text-ink">{% translate "Settings" %}</h1>
-                <p class="mt-0.5 truncate text-sm text-ink-muted">
-                    {{ request.user.email }}
-                    {% if request.user.email_verified %}
-                        {% translate "verified" as verified_label %}
-                        {% include "components/ui/badge.html" with label=verified_label extra_class="ml-1" only %}
+    <form method="post" enctype="multipart/form-data" class="mt-8 space-y-6">
+        {% csrf_token %}
+        {% if preferences_form.non_field_errors or profile_form.non_field_errors %}
+        <ul class="space-y-0.5 rounded-lg bg-danger/10 p-3 text-xs text-danger">
+            {% for error in preferences_form.non_field_errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+            {% for error in profile_form.non_field_errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+        <section class="rounded-2xl border border-border bg-surface p-6 shadow-sm">
+            <div class="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+                <div class="flex items-center gap-4">
+                    {% if profile_form.instance.avatar %}
+                        {% translate "Your profile photo" as avatar_alt %}
+                        <img src="{{ profile_form.instance.avatar.url }}" alt="{{ avatar_alt }}" class="h-20 w-20 shrink-0 rounded-full object-cover ring-4 ring-primary/10">
                     {% else %}
-                        {% translate "not verified" as not_verified_label %}
-                        {% include "components/ui/badge.html" with label=not_verified_label tone="warning" extra_class="ml-1" only %}
+                        <span class="flex h-20 w-20 shrink-0 items-center justify-center rounded-full bg-primary/10 text-2xl font-semibold text-primary ring-4 ring-primary/10">
+                            {{ user_initial }}
+                        </span>
                     {% endif %}
-                </p>
-                {% if not request.user.email_verified %}
-                <form method="post" action="{% url 'accounts:resend_verification' %}" class="mt-1">
-                    {% csrf_token %}
-                    <button type="submit" class="rounded-sm text-xs font-medium text-primary hover:underline focus-visible:focus-ring">
+                    <div>
+                        <div class="flex flex-wrap items-center gap-3">
+                            <label for="{{ profile_form.avatar.id_for_label }}"
+                                   class="inline-block cursor-pointer rounded-full border-2 border-border bg-surface px-3.5 py-1.5 text-sm font-semibold text-ink shadow-sm transition hover:-translate-y-0.5 hover:border-primary hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+                                {% translate "Change photo" %}
+                            </label>
+                            {{ profile_form.avatar }}
+                            {% if profile_form.instance.avatar %}
+                            <label for="{{ profile_form.remove_avatar.id_for_label }}" class="cursor-pointer text-sm font-medium text-danger hover:underline">
+                                {{ profile_form.remove_avatar }}
+                                {% translate "Remove photo" %}
+                            </label>
+                            {% endif %}
+                        </div>
+                        <p class="mt-1.5 text-xs text-ink-muted" id="avatar-filename">{% translate "PNG or JPG, up to 5MB." %}</p>
+                        {% if profile_form.avatar.errors %}
+                        <ul class="mt-1 space-y-0.5 text-xs text-danger">
+                            {% for error in profile_form.avatar.errors %}
+                            <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="sm:text-right">
+                    {% if profile_form.instance.display_name %}
+                    <p class="text-lg font-semibold text-balance text-ink">{{ profile_form.instance.display_name }}</p>
+                    {% endif %}
+                    <p class="mt-0.5 flex flex-wrap items-center gap-2 text-sm sm:justify-end {% if profile_form.instance.display_name %}text-ink-muted{% else %}text-lg font-semibold text-ink{% endif %}">
+                        {{ request.user.email }}
+                        {% if request.user.email_verified %}
+                            {% translate "verified" as verified_label %}
+                            {% include "components/ui/badge.html" with label=verified_label only %}
+                        {% else %}
+                            {% translate "not verified" as not_verified_label %}
+                            {% include "components/ui/badge.html" with label=not_verified_label tone="warning" only %}
+                        {% endif %}
+                    </p>
+                    {% if not request.user.email_verified %}
+                    <button type="submit" form="resend-verification-form" class="mt-1 rounded-sm text-xs font-medium text-primary hover:underline focus-visible:focus-ring">
                         {% translate "Resend verification email" %}
                     </button>
-                </form>
-                {% endif %}
-            </div>
-        </div>
-
-        <form method="post" enctype="multipart/form-data" class="mt-8 space-y-6">
-            {% csrf_token %}
-            {% if preferences_form.non_field_errors or profile_form.non_field_errors %}
-            <ul class="space-y-0.5 rounded-lg bg-danger/10 p-3 text-xs text-danger">
-                {% for error in preferences_form.non_field_errors %}
-                <li>{{ error }}</li>
-                {% endfor %}
-                {% for error in profile_form.non_field_errors %}
-                <li>{{ error }}</li>
-                {% endfor %}
-            </ul>
-            {% endif %}
-
-            <div>
-                <p class="text-xs font-semibold uppercase tracking-wide text-ink-muted">{% translate "Preferences" %}</p>
-                <div class="mt-3 space-y-4">
-                    {% include "components/ui/form_field.html" with field=preferences_form.phone_number only %}
-                    {% include "components/ui/form_field.html" with field=preferences_form.preferred_language only %}
+                    {% endif %}
                 </div>
             </div>
+        </section>
 
-            <div class="border-t border-border/60 pt-6">
-                <p class="text-xs font-semibold uppercase tracking-wide text-ink-muted">{% translate "Profile" %}</p>
-                <div class="mt-3 space-y-4">
-                    {% include "components/ui/form_field.html" with field=profile_form.display_name only %}
-                    {% include "components/ui/form_field.html" with field=profile_form.bio only %}
-                    {% include "components/ui/form_field.html" with field=profile_form.avatar only %}
-                    {% include "components/ui/form_field.html" with field=profile_form.municipality only %}
-                </div>
+        <section class="rounded-2xl border border-border bg-surface p-6 shadow-sm">
+            <h2 class="text-base font-semibold text-ink">{% translate "Personal information" %}</h2>
+            <p class="mt-1 text-sm text-ink-muted">{% translate "This is how your name appears across HamroNepal." %}</p>
+            <div class="mt-5 space-y-5">
+                {% include "components/ui/form_field.html" with field=profile_form.display_name only %}
+                {% include "components/ui/form_field.html" with field=profile_form.bio only %}
+                {% include "components/ui/form_field.html" with field=profile_form.municipality only %}
             </div>
+        </section>
 
+        <section class="rounded-2xl border border-border bg-surface p-6 shadow-sm">
+            <h2 class="text-base font-semibold text-ink">{% translate "Preferences" %}</h2>
+            <p class="mt-1 text-sm text-ink-muted">{% translate "Control how HamroNepal reaches you and which language you see." %}</p>
+            <div class="mt-5 grid gap-5 sm:grid-cols-2">
+                {% include "components/ui/form_field.html" with field=preferences_form.phone_number only %}
+                {% include "components/ui/form_field.html" with field=preferences_form.preferred_language only %}
+            </div>
+        </section>
+
+        <div class="flex justify-end">
             {% translate "Save changes" as save_changes_label %}
-            {% include "components/ui/button.html" with type="submit" label=save_changes_label extra_class="w-full" only %}
-        </form>
+            {% include "components/ui/button.html" with type="submit" label=save_changes_label only %}
+        </div>
+    </form>
 
-        <form method="post" action="{% url 'accounts:logout' %}" class="mt-5 text-center">
-            {% csrf_token %}
-            <button type="submit" class="rounded-sm text-sm text-ink-muted hover:text-ink focus-visible:focus-ring">
-                {% translate "Log out" %}
-            </button>
-        </form>
-    </div>
-</section>
+    <form method="post" action="{% url 'accounts:resend_verification' %}" id="resend-verification-form" class="sr-only">
+        {% csrf_token %}
+    </form>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script nonce="{{ request.csp_nonce }}">
+    document.getElementById("{{ profile_form.avatar.id_for_label }}").addEventListener("change", function (event) {
+        var filenameEl = document.getElementById("avatar-filename");
+        if (event.target.files.length) {
+            filenameEl.textContent = event.target.files[0].name;
+        }
+    });
+</script>
 {% endblock %}
