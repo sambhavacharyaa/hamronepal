@@ -39,6 +39,26 @@ class UserPreferencesForm(TailwindFormMixin, forms.ModelForm):
 
 
 class ProfileForm(TailwindFormMixin, forms.ModelForm):
+    remove_avatar = forms.BooleanField(required=False)
+
     class Meta:
         model = Profile
         fields = ("display_name", "bio", "avatar", "municipality")
+        widgets = {
+            "avatar": forms.FileInput(attrs={"accept": "image/png,image/jpeg,image/webp"}),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["avatar"].widget.attrs["class"] = "sr-only"
+        self.fields["remove_avatar"].widget.attrs["class"] = "sr-only"
+
+    def save(self, commit=True):
+        instance = super().save(commit=False)
+        new_file_uploaded = self.files.get(self.add_prefix("avatar"))
+        if self.cleaned_data.get("remove_avatar") and not new_file_uploaded:
+            instance.avatar.delete(save=False)
+            instance.avatar = None
+        if commit:
+            instance.save()
+        return instance
