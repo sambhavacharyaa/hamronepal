@@ -35,7 +35,7 @@ def home_view(request):
             "location_sample": location_services.get_homepage_location_sample(),
             "categories": process_services.get_homepage_categories(),
             "saved_process_ids": dashboard_services.get_saved_process_ids(request.user),
-            "page_title": _("HamroNepal: Nepal's government processes, explained"),
+            "page_title": _("HamroNepal: Nepal's Digital Life & Services Platform"),
             "meta_description": _(
                 "Search Nepal government processes: company registration, PAN, passport, "
                 "driving license. Every step cited to an official source, with a verification date."
