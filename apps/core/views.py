@@ -2,13 +2,14 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.urls import reverse
+from django.utils.translation import gettext_lazy as _
 from django.views.decorators.http import require_GET
 
+from apps.core.seo import build_website_json_ld, to_json_ld_script
 from apps.dashboard import services as dashboard_services
 from apps.dashboard.forms import UserDocumentForm
 from apps.locations import services as location_services
 from apps.processes import services as process_services
-from apps.processes.seo import build_website_json_ld, to_json_ld_script
 from apps.tasks.forms import TaskForm
 
 
@@ -34,6 +35,11 @@ def home_view(request):
             "location_sample": location_services.get_homepage_location_sample(),
             "categories": process_services.get_homepage_categories(),
             "saved_process_ids": dashboard_services.get_saved_process_ids(request.user),
+            "page_title": _("HamroNepal: Nepal's government processes, explained"),
+            "meta_description": _(
+                "Search Nepal government processes: company registration, PAN, passport, "
+                "driving license. Every step cited to an official source, with a verification date."
+            ),
         },
     )
 
@@ -44,10 +50,6 @@ def robots_txt_view(request):
     lines = [
         "User-agent: *",
         "Disallow: /admin/",
-        "Disallow: /accounts/",
-        "Disallow: /dashboard/",
-        "Disallow: /tourism/trips/",
-        "Disallow: /tourism/saved/",
         "",
         f"Sitemap: {sitemap_url}",
     ]
@@ -55,19 +57,35 @@ def robots_txt_view(request):
 
 
 def privacy_policy_view(request):
-    return render(request, "core/legal/privacy_policy.html")
+    return render(
+        request,
+        "core/legal/privacy_policy.html",
+        {"meta_description": _("How HamroNepal collects, uses, and protects your information.")},
+    )
 
 
 def terms_view(request):
-    return render(request, "core/legal/terms.html")
+    return render(
+        request,
+        "core/legal/terms.html",
+        {"meta_description": _("The terms that govern your use of HamroNepal.")},
+    )
 
 
 def cookie_policy_view(request):
-    return render(request, "core/legal/cookie_policy.html")
+    return render(
+        request,
+        "core/legal/cookie_policy.html",
+        {"meta_description": _("Which cookies HamroNepal uses, and why.")},
+    )
 
 
 def refund_policy_view(request):
-    return render(request, "core/legal/refund_policy.html")
+    return render(
+        request,
+        "core/legal/refund_policy.html",
+        {"meta_description": _("HamroNepal's refund policy.")},
+    )
 
 
 @login_required

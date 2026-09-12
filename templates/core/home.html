@@ -1,11 +1,7 @@
 {% extends "base.html" %}
 {% load i18n %}
 
-{% block title %}{% translate "HamroNepal: Nepal's government processes, explained" %}{% endblock %}
-
-{% block meta %}
-<meta name="description" content="{% translate 'Search Nepal government processes: company registration, PAN, passport, driving license. Every step cited to an official source, with a verification date.' %}">
-{% endblock %}
+{% block title %}{{ page_title }}{% endblock %}
 
 {% block content %}
 <script type="application/ld+json">{{ website_json_ld }}</script>

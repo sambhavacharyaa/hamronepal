@@ -1,11 +1,4 @@
-import json
 from decimal import Decimal
-
-from django.utils.safestring import mark_safe
-
-
-def to_json_ld_script(data):
-    return mark_safe(json.dumps(data).replace("</", "<\\/"))
 
 
 def build_howto_json_ld(process, steps):
@@ -38,20 +31,6 @@ def build_howto_json_ld(process, steps):
         }
 
     return data
-
-
-def build_website_json_ld(base_url, search_url):
-    return {
-        "@context": "https://schema.org",
-        "@type": "WebSite",
-        "name": "HamroNepal",
-        "url": base_url,
-        "potentialAction": {
-            "@type": "SearchAction",
-            "target": f"{search_url}?q={{search_term_string}}",
-            "query-input": "required name=search_term_string",
-        },
-    }
 
 
 def build_faq_json_ld(faqs):

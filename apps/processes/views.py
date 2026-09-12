@@ -1,19 +1,19 @@
-from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.postgres.search import SearchQuery, SearchRank
 from django.db.models import F
 from django.shortcuts import get_object_or_404, redirect, render
-from django.urls import translate_url
+from django.urls import reverse
 from django.utils.translation import get_language
 from django.utils.translation import gettext_lazy as _
 from django.views.decorators.http import require_POST
 
+from apps.core.seo import build_breadcrumb_json_ld, to_json_ld_script
 from apps.dashboard import services as dashboard_services
 
 from . import services
 from .models import Process, ProcessCategory, ProcessVariant, UserProcessProgress
-from .seo import build_faq_json_ld, build_howto_json_ld, to_json_ld_script
+from .seo import build_faq_json_ld, build_howto_json_ld
 
 SEARCH_CONFIG_BY_LANGUAGE = {"en": "english", "np": "simple"}
 
@@ -48,6 +48,8 @@ def search_view(request):
         "category_slug": category_slug,
         "results": results[:20],
         "saved_process_ids": dashboard_services.get_saved_process_ids(request.user),
+        "meta_description": _("Search every government process on HamroNepal by name."),
+        "noindex": bool(query or category_slug),
     }
     template_name = "processes/partials/_search_results.html" if request.htmx else "processes/search_results.html"
     return render(request, template_name, context)
@@ -69,6 +71,11 @@ def process_list_view(request):
             "categories": categories,
             "category_slug": category_slug,
             "saved_process_ids": dashboard_services.get_saved_process_ids(request.user),
+            "page_title": _("Browse government processes in Nepal"),
+            "meta_description": _(
+                "Every government process on HamroNepal, with real steps, fees, and an "
+                "official source cited for each one."
+            ),
         },
     )
 
@@ -94,11 +101,15 @@ def process_detail_view(request, slug):
 
     howto_json_ld = to_json_ld_script(build_howto_json_ld(process, steps)) if steps else None
     faq_json_ld = to_json_ld_script(build_faq_json_ld(faqs)) if faqs else None
-
-    hreflang_urls = {
-        code: request.build_absolute_uri(translate_url(request.path, code))
-        for code, _label in settings.LANGUAGES
-    }
+    breadcrumb_json_ld = to_json_ld_script(
+        build_breadcrumb_json_ld(
+            [
+                (_("Home"), request.build_absolute_uri(reverse("core:home"))),
+                (_("Browse processes"), request.build_absolute_uri(reverse("processes:process_list"))),
+                (process.title, request.build_absolute_uri(request.path)),
+            ]
+        )
+    )
 
     return render(
         request,
@@ -114,7 +125,9 @@ def process_detail_view(request, slug):
             "is_saved": is_saved,
             "howto_json_ld": howto_json_ld,
             "faq_json_ld": faq_json_ld,
-            "hreflang_urls": hreflang_urls,
+            "breadcrumb_json_ld": breadcrumb_json_ld,
+            "page_title": process.meta_title or process.title,
+            "meta_description": process.meta_description or process.summary,
         },
     )
 

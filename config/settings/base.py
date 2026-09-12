@@ -58,6 +58,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django_htmx.middleware.HtmxMiddleware",
+    "apps.core.middleware.RobotsHeaderMiddleware",
 ]
 
 ROOT_URLCONF = "config.urls"
@@ -75,6 +76,7 @@ TEMPLATES = [
                 "django.contrib.messages.context_processors.messages",
                 "django.template.context_processors.i18n",
                 "apps.dashboard.context_processors.notifications",
+                "apps.core.context_processors.seo",
             ],
         },
     },

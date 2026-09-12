@@ -1,15 +1,6 @@
 {% extends "base.html" %}
 {% load i18n %}
 
-{% block title %}{{ process.meta_title|default:process.title }}{% endblock %}
-
-{% block meta %}
-<meta name="description" content="{{ process.meta_description|default:process.summary }}">
-{% for code, url in hreflang_urls.items %}
-<link rel="alternate" hreflang="{{ code }}" href="{{ url }}">
-{% endfor %}
-{% endblock %}
-
 {% block content %}
 {% if howto_json_ld %}
 <script type="application/ld+json">{{ howto_json_ld }}</script>
