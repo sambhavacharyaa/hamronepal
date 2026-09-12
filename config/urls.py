@@ -4,7 +4,9 @@ from django.conf import settings
 from django.conf.urls.i18n import i18n_patterns
 from django.contrib import admin
 from django.contrib.sitemaps.views import sitemap
+from django.templatetags.static import static
 from django.urls import include, path, re_path
+from django.views.generic import RedirectView
 from django.views.static import serve
 from django_ratelimit.decorators import ratelimit
 
@@ -30,6 +32,10 @@ urlpatterns = [
     path("i18n/", include("django.conf.urls.i18n")),
     path("sitemap.xml", sitemap, {"sitemaps": sitemaps}, name="sitemap"),
     path("robots.txt", robots_txt_view, name="robots_txt"),
+    path(
+        "favicon.ico",
+        RedirectView.as_view(url=static("img/favicon/favicon.ico"), permanent=True),
+    ),
 ]
 
 if settings.DEBUG:

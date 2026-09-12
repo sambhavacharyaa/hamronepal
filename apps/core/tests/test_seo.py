@@ -6,6 +6,19 @@ from apps.processes import services
 from apps.processes.tests.factories import ProcessFactory, ProcessSourceFactory
 
 
+class FaviconTests(TestCase):
+    def test_home_links_the_favicon_files(self):
+        response = self.client.get("/en/")
+        self.assertContains(response, '<link rel="icon" href="/static/img/favicon/favicon.ico" sizes="any">')
+        self.assertContains(response, 'rel="apple-touch-icon"')
+        self.assertContains(response, 'rel="manifest" href="/static/img/favicon/site.webmanifest"')
+
+    def test_root_favicon_ico_redirects_to_the_static_file(self):
+        response = self.client.get("/favicon.ico")
+        self.assertEqual(response.status_code, 301)
+        self.assertEqual(response.url, "/static/img/favicon/favicon.ico")
+
+
 class SitemapTests(TestCase):
     def test_sitemap_lists_published_processes_only(self):
         publisher = UserFactory()
