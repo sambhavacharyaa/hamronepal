@@ -1,14 +1,13 @@
-from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
-from django.urls import reverse, translate_url
+from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from django.views.decorators.http import require_POST
 
+from apps.core.seo import build_breadcrumb_json_ld, to_json_ld_script
 from apps.processes.models import Process
-from apps.processes.seo import to_json_ld_script
 
 from . import services
 from .forms import TripForm
@@ -23,6 +22,11 @@ def tourism_home_view(request):
         "seasonal_destinations": services.get_destinations_in_season(),
         "current_season": services.current_season(),
         "saved_destination_ids": services.get_saved_destination_ids(request.user),
+        "page_title": _("Explore Nepal"),
+        "meta_description": _(
+            "Discover Nepal, plan your route, and organize your trip in one place, "
+            "from heritage cities to Himalayan trails."
+        ),
     }
     if request.user.is_authenticated:
         context["user_trips"] = list(services.get_user_trips(request.user)[:3])
@@ -42,6 +46,12 @@ def destination_list_view(request):
             "categories": DestinationCategory.objects.all(),
             "results": results,
             "saved_destination_ids": services.get_saved_destination_ids(request.user),
+            "page_title": _("Nepal travel destinations"),
+            "meta_description": _(
+                "Real, verified travel destinations across Nepal, from heritage cities to "
+                "national parks and Himalayan trekking regions."
+            ),
+            "noindex": bool(query),
         },
     )
 
@@ -62,12 +72,17 @@ def destination_detail_view(request, slug):
         services.record_destination_view(request.user, destination)
         user_trips = list(services.get_user_trips(request.user))
 
-    destination_json_ld = to_json_ld_script(build_tourist_destination_json_ld(destination))
-
-    hreflang_urls = {
-        code: request.build_absolute_uri(translate_url(request.path, code))
-        for code, _label in settings.LANGUAGES
-    }
+    image_url = request.build_absolute_uri(destination.image.url) if destination.image else None
+    destination_json_ld = to_json_ld_script(build_tourist_destination_json_ld(destination, image_url=image_url))
+    breadcrumb_json_ld = to_json_ld_script(
+        build_breadcrumb_json_ld(
+            [
+                (_("Home"), request.build_absolute_uri(reverse("core:home"))),
+                (_("Explore Nepal"), request.build_absolute_uri(reverse("tourism:home"))),
+                (destination.title, request.build_absolute_uri(request.path)),
+            ]
+        )
+    )
 
     return render(
         request,
@@ -79,8 +94,11 @@ def destination_detail_view(request, slug):
             "is_saved": is_saved,
             "user_trips": user_trips,
             "destination_json_ld": destination_json_ld,
-            "hreflang_urls": hreflang_urls,
+            "breadcrumb_json_ld": breadcrumb_json_ld,
             "tint": services.get_category_tint(destination.category.slug),
+            "page_title": destination.meta_title or destination.title,
+            "meta_description": destination.meta_description or destination.summary,
+            "og_image": image_url,
         },
     )
 

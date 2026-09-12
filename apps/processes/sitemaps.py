@@ -7,6 +7,9 @@ from .models import Process
 class ProcessSitemap(Sitemap):
     changefreq = "weekly"
     priority = 0.8
+    i18n = True
+    alternates = True
+    x_default = True
 
     def items(self):
         return Process.objects.filter(status=Process.Status.PUBLISHED).order_by("slug")
@@ -21,6 +24,9 @@ class ProcessSitemap(Sitemap):
 class StaticViewSitemap(Sitemap):
     changefreq = "weekly"
     priority = 0.6
+    i18n = True
+    alternates = True
+    x_default = True
 
     def items(self):
         return ["core:home", "processes:process_list", "tourism:home", "tourism:destination_list"]

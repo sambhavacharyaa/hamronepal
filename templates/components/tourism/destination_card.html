@@ -2,7 +2,7 @@
 <div class="group relative flex flex-col overflow-hidden rounded-3xl border border-border/60 bg-surface shadow-sm transition hover:-translate-y-1 hover:shadow-xl hover:shadow-ink/10">
     <div class="relative aspect-[4/3] overflow-hidden">
         {% if destination.image %}
-        <img src="{{ destination.image.url }}" alt="" class="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-105">
+        <img src="{{ destination.image.url }}" alt="{{ destination.title }}" loading="lazy" class="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-105">
         {% else %}
         <div class="absolute inset-0 {{ destination.tint }} transition duration-500 group-hover:scale-105"></div>
         {% endif %}

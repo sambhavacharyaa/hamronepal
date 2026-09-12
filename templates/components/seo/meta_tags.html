@@ -1,0 +1,34 @@
+{% load i18n %}
+{% translate "Understand, prepare for, and track everyday processes in Nepal." as default_description %}
+{% translate "HamroNepal" as default_title %}
+<meta name="description" content="{{ meta_description|default:default_description }}">
+<link rel="canonical" href="{{ canonical_url }}">
+{% for code, url in hreflang_alternates.items %}
+<link rel="alternate" hreflang="{{ code }}" href="{{ url }}">
+{% endfor %}
+{% if hreflang_alternates %}
+<link rel="alternate" hreflang="x-default" href="{{ hreflang_alternates.en }}">
+{% endif %}
+{% if noindex %}
+<meta name="robots" content="noindex, nofollow">
+{% else %}
+<meta name="robots" content="index, follow">
+{% endif %}
+
+<meta property="og:site_name" content="HamroNepal">
+<meta property="og:type" content="{{ og_type|default:"website" }}">
+<meta property="og:title" content="{{ page_title|default:default_title }}">
+<meta property="og:description" content="{{ meta_description|default:default_description }}">
+<meta property="og:url" content="{{ canonical_url }}">
+<meta property="og:image" content="{{ og_image|default:default_og_image }}">
+<meta property="og:locale" content="{{ LANGUAGE_CODE }}">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ page_title|default:default_title }}">
+<meta name="twitter:description" content="{{ meta_description|default:default_description }}">
+<meta name="twitter:image" content="{{ og_image|default:default_og_image }}">
+
+<script type="application/ld+json">{{ organization_json_ld }}</script>
+{% if breadcrumb_json_ld %}
+<script type="application/ld+json">{{ breadcrumb_json_ld }}</script>
+{% endif %}

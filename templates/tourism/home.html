@@ -1,11 +1,7 @@
 {% extends "base.html" %}
 {% load i18n %}
 
-{% block title %}{% translate "Explore Nepal" %}{% endblock %}
-
-{% block meta %}
-<meta name="description" content="{% translate 'Discover Nepal, plan your route, and organize your trip in one place, from heritage cities to Himalayan trails.' %}">
-{% endblock %}
+{% block title %}{{ page_title }}{% endblock %}
 
 {% block content %}
 <section class="relative -mx-4 -mt-8 overflow-hidden px-4 pb-16 pt-16 sm:-mx-6 sm:px-6 sm:pt-20">
@@ -50,7 +46,7 @@
         <a href="{{ entry.url }}"
            class="group relative flex h-40 w-64 shrink-0 snap-start flex-col justify-end overflow-hidden rounded-3xl p-5 text-white shadow-sm transition hover:-translate-y-1 hover:shadow-xl focus-visible:focus-ring">
             {% if entry.category.image %}
-            <img src="{{ entry.category.image.url }}" alt="" class="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-105">
+            <img src="{{ entry.category.image.url }}" alt="{{ entry.category.name }}" loading="lazy" class="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-105">
             <div class="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/20 to-transparent"></div>
             {% else %}
             <div class="absolute inset-0 {{ entry.tint }} transition duration-500 group-hover:scale-105"></div>

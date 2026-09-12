@@ -7,6 +7,9 @@ from .models import Destination
 class DestinationSitemap(Sitemap):
     changefreq = "weekly"
     priority = 0.7
+    i18n = True
+    alternates = True
+    x_default = True
 
     def items(self):
         return Destination.objects.filter(status=Destination.Status.PUBLISHED).order_by("slug")

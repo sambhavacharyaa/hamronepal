@@ -3,10 +3,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{% block title %}{% translate "HamroNepal" %}{% endblock %}</title>
-    {% block meta %}
-    <meta name="description" content="{% translate 'Understand, prepare for, and track everyday processes in Nepal.' %}">
-    {% endblock %}
+    {% translate "HamroNepal" as default_title %}
+    <title>{% block title %}{{ page_title|default:default_title }}{% endblock %}</title>
+    {% include "components/seo/meta_tags.html" %}
     <meta name="theme-color" content="#fdfcfa">
     {% if LANGUAGE_CODE == "np" %}
     <link rel="preload" href="{% static 'fonts/NotoSansDevanagari-Variable.woff2' %}" as="font" type="font/woff2" crossorigin>
